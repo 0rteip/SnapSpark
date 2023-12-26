@@ -44,7 +44,7 @@ create table posts (
      file char(20) not null,
      id int not null,
      descrizione varchar(100) not null,
-     data int not null,
+     data date not null,
      spark int not null,
      constraint ID_posts_ID primary key (username, id));
 
