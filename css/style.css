@@ -5,7 +5,7 @@ body {
     background-color: #f4f4f4;
 }
 
-header {
+body>header {
     background-color: #333;
     color: #fff;
     padding: 1em 0;
@@ -13,13 +13,69 @@ header {
     width: 100%;
 }
 
-section {
+body>section {
     max-width: 800px;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body>main {
+    text-align: center;
+    font-size: 16px;
+}
+
+article {
+    background-color: rgb(229, 223, 169);
+    border: #cacaca 1px solid;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+}
+
+article>header>img {
+    max-height: 200px;
+    max-width: 100%;
+    padding: 10px 0;
+}
+
+article>header {
+    text-align: center;
+}
+
+article>header>h2,
+article>header>p {
+    text-align: left;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 0 5%;
+}
+
+article>section {
+    margin: 0 5%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+article>footer {
+    text-align: right;
+    padding: 1rem;
+}
+
+article>footer>p {
+    margin: 0;
+}
+
+article>footer>a,
+form input[type="submit"] {
+    text-decoration: none;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: black;
+    background-color: #e4e4e4;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
 }
 
 .post {
@@ -46,7 +102,7 @@ button:hover {
     background-color: #555;
 }
 
-footer {
+body>footer {
     text-align: center;
     background-color: #333;
     color: #fff;
