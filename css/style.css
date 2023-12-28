@@ -1,3 +1,8 @@
 article>header>img {
     max-height: 2rem;
 }
+
+article .fa-star:hover,
+article .fa-comment:hover {
+    cursor: pointer;
+}

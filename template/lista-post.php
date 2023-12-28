@@ -1,5 +1,5 @@
 <?php foreach ($templateparams["posts"] as $post) : ?>
-    <article class="card col-10 mx-auto">
+    <article class="card col-11 mx-auto">
 
         <header class="card-header">
             <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="me-2" alt="">
@@ -14,9 +14,12 @@
         </div>
 
         <footer class="card-footer">
-            <p class="card-text">
-                <?php echo $post["spark"], " spark"; ?>
+            <p class="card-text mx-auto">
+                <?php echo $post["spark"]; ?>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-comment"></i>
             </p>
         </footer>
+
     </article>
 <?php endforeach; ?>
