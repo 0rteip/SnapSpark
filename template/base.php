@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        <?= $templateparams["titolo"];  ?>
+        <?= $templateParams["titolo"];  ?>
     </title>
     <meta charset="UTF-8" />
     <link href="css/style.css" type="text/css" rel="stylesheet" />
@@ -25,7 +25,7 @@
     <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
 
         <main>
-            <?php include_once $templateparams["nome"]; ?>
+            <?php require($templateParams["nome"]); ?>
         </main>
 
     </div>
@@ -34,6 +34,7 @@
             <p>SnapSpark</p>
             <p>Carabini Luca, Ventrucci Pietro</p>
         </div>
+        <a href="login.php"><button>Log Out</button></a>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
