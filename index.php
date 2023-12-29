@@ -1,8 +1,8 @@
 <?php
 require_once "bootstrap.php";
 
-$templateparams["titolo"] = "SnapSpark - Home";
-$templateparams["nome"] = "template/lista-post.php";
-$templateparams["posts"] = $dbh->getRandomPosts(10);
+$templateParams["titolo"] = "SnapSpark - Home";
+$templateParams["nome"] = "template/lista-post.php";
+$templateParams["posts"] = $dbh->getRandomPosts(10);
 
 require_once "template/base.php";
