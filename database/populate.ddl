@@ -52,11 +52,9 @@ INSERT INTO follow (follower, following) VALUES
 ('john_doe', 'sam_wilson'),
 ('sam_wilson', 'olivia_taylor'),
 ('olivia_taylor', 'grace_anderson'),
-('grace_anderson', 'daniel_carter'),
 ('daniel_carter', 'ryan_nguyen'),
 ('ryan_nguyen', 'mary_jones'),
 ('mary_jones', 'emily_wang'),
-('emily_wang', 'alex_smith'),
 ('alex_smith', 'will_miller'),
 ('will_miller', 'sophia_garcia'),
 ('sophia_garcia', 'john_doe');

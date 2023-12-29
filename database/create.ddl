@@ -65,7 +65,7 @@ create table utenti (
      cognome char(20) not null,
      sesso char(1) not null,
      password char(30) not null,
-     data_nascita int not null,
+     data_nascita date not null,
      mail char(40) not null,
      numero bigint not null,
      biografia varchar(100) not null,
