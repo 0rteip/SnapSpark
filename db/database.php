@@ -9,7 +9,7 @@ final class DatabaseHelper
         if ($this->db->connect_error) {
             die("Connection failed: " . $this->db->connect_error);
         }
-        
+
         $this->db->set_charset("utf8mb4");
     }
 
@@ -88,12 +88,23 @@ final class DatabaseHelper
     {
         $query = "SELECT mail
                   FROM utenti
-                  WHERE mail=? AND password=?" ; // ? is a placeholder
+                  WHERE mail=? AND password=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ss", $mail, $pwd);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function insertNewUser($username, $nome, $cognome, $sesso, $password, $data_nascita, $mail, $numero, $biografia)
+    {
+        $nome_social = "SnapSpark";
+        $query = "INSERT INTO utenti (username, nome, cognome, sesso, password, data_nascita, mail, numero, biografia, nome_social) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sssssssiss', $username, $nome, $cognome, $sesso, $password, $data_nascita, $mail, $numero, $biografia, $nome_social);
+        $stmt->execute();
+        echo "ciaoo";
+        return $stmt->insert_id;
     }
 }

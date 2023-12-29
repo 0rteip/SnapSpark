@@ -15,8 +15,7 @@ if(isset($_POST["mail"]) && isset($_POST["password"])){
 }
 
 if(isUserLoggedIn()){
-    require("index.php");
-    exit;
+    header("location:index.php");
 }
 
 else{
