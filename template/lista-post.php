@@ -1,4 +1,4 @@
-<?php foreach ($templateparams["posts"] as $post) : ?>
+<?php foreach ($templateParams["posts"] as $post) : ?>
     <article class="card">
 
         <header class="card-header">
