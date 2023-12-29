@@ -83,4 +83,17 @@ final class DatabaseHelper
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function checkLogin($mail, $pwd)
+    {
+        $query = "SELECT mail
+                  FROM utenti
+                  WHERE mail=? AND password=?" ; // ? is a placeholder
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ss", $mail, $pwd);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
