@@ -2,8 +2,10 @@
     <article class="card">
 
         <header class="card-header">
-            <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="me-2" alt="">
-            <?php echo $post["username"]; ?> - <?php echo $post["data"] ?>
+            <a href="user.php?username=<?php echo $post["username"]; ?>">
+                <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="me-2" alt="" id="avatar">
+                <?php echo $post["username"]; ?> - <?php echo $post["data"] ?>
+            </a>
         </header>
 
         <img src="<?php echo POST_FOLDER . $post["file"]; ?>" alt="">

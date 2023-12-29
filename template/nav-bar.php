@@ -14,7 +14,7 @@
                     <a class="nav-link" href="#"><i class="fa fa-heart"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-user"></i></a>
+                    <a class="nav-link" href="user.php"><i class="fa fa-user"></i></a>
                 </li>
             </ul>
         </div>
