@@ -1,5 +1,5 @@
 <?php foreach ($templateparams["posts"] as $post) : ?>
-    <article class="card col-11 mx-auto">
+    <article class="card">
 
         <header class="card-header">
             <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="me-2" alt="">

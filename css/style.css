@@ -6,3 +6,7 @@ article .fa-star:hover,
 article .fa-comment:hover {
     cursor: pointer;
 }
+
+footer p {
+    text-align: center;
+}
