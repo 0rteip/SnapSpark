@@ -10,3 +10,7 @@ article .fa-comment:hover {
 footer p {
     text-align: center;
 }
+
+a.active {
+    color: #ff0000 !important;
+}
