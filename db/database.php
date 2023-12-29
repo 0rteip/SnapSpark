@@ -72,12 +72,12 @@ final class DatabaseHelper
 
     public function getPostsByAuthor($username)
     {
-
+        
         $query = "SELECT username, file, id, descrizione, data, spark
-                  FROM posts, utenti
+                  FROM posts
                   WHERE username=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("c", $username);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -86,7 +86,7 @@ final class DatabaseHelper
 
     public function checkLogin($mail, $pwd)
     {
-        $query = "SELECT mail
+        $query = "SELECT username
                   FROM utenti
                   WHERE mail=? AND password=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
@@ -104,7 +104,33 @@ final class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sssssssiss', $username, $nome, $cognome, $sesso, $password, $data_nascita, $mail, $numero, $biografia, $nome_social);
         $stmt->execute();
-        echo "ciaoo";
         return $stmt->insert_id;
     }
+
+    public function getFollower($username)
+    {
+        $query = "SELECT following
+                  FROM follow
+                  WHERE following=?"; // ? is a placeholder
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getSeguiti($username)
+    {
+        $query = "SELECT following
+                  FROM follow
+                  WHERE follower=?"; // ? is a placeholder
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
