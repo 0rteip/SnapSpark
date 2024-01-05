@@ -1,9 +1,8 @@
 <?php
-
 function isUserLoggedIn() {
-    return !empty($_SESSION["mail"]);
+    return !empty($_SESSION["username"]);
 }
 
 function registerLoggedUser($user) {
-    $_SESSION["mail"] = $user["mail"];
+    $_SESSION["username"] = $user["username"];
 }

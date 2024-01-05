@@ -1,7 +1,12 @@
-article>header>img {
+/* article>header>a>img {
+    max-height: 2rem;
+} */
+img#avatar {
     max-height: 2rem;
 }
-
+div#profile {
+    margin: 0 2% 0 2%
+}
 article .fa-star:hover,
 article .fa-comment:hover {
     cursor: pointer;
@@ -13,4 +18,12 @@ footer p {
 
 a.active {
     color: #ff0000 !important;
+}
+article > img {
+    width:  100px;
+    height: 100px;
+}
+
+ul {
+    list-style: none;
 }
