@@ -8,7 +8,8 @@
             </a>
         </header>
 
-        <img src="<?php echo POST_FOLDER . $post["file"]; ?>" alt="">
+        <img class="card-img rounded-0" src="<?php echo POST_FOLDER . $post["file"]; ?>" alt="">
+
         <div class="card-body">
             <p class="card-text">
                 <?php echo $post["descrizione"]; ?>
@@ -24,4 +25,5 @@
         </footer>
 
     </article>
+
 <?php endforeach; ?>

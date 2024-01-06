@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        <?= $templateParams["titolo"];?>
+        <?= $templateParams["titolo"]; ?>
     </title>
     <meta charset="UTF-8" />
     <link href="css/style.css" type="text/css" rel="stylesheet" />
@@ -15,22 +15,22 @@
     <nav class="navbar bd-navbar sticky-top bg-info" aria-label="User-navbar">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="index.php">SnapSpark</a>
-            <?php   if($templateParams["nome"] == "template/lista-post.php") { 
-                        require("search-bar.php");
-                    }
+            <?php if ($templateParams["nome"] == "template/lista-post.php") {
+                require("search-bar.php");
+            }
             ?>
         </div>
     </nav>
 
-    <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+    <div class="container-xl bd-gutter mt-3 my-md-4 bd-layout">
         <main>
             <?php require($templateParams["nome"]); ?>
         </main>
     </div>
 
-    <?php   if($templateParams["nome"] == "template/lista-post.php") { 
-                require("nav-bar.php");
-            }
+    <?php if ($templateParams["nome"] == "template/lista-post.php") {
+        require("nav-bar.php");
+    }
     ?>
 
     <footer class="bd-footer py-4 py-md-5 bg-body-tertiary">
