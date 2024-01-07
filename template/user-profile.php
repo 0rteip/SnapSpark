@@ -32,7 +32,7 @@
         </ul>
     </div>
     <div class="col">
-        <a href="index.php">
+        <a href="info-follower.php?username=<?php echo $templateParams['username']?>&info=follow">
             <ul>
                 <li>
                     <label><?php echo count($templateParams['seguiti']) ?></label>

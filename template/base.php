@@ -21,14 +21,16 @@
             ?>
         </div>
     </nav>
-
+    <?php if(isset($templateParams["errore"])) { 
+        echo $templateParams["errore"]; }
+    ?>
     <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
         <main>
             <?php require($templateParams["nome"]); ?>
         </main>
     </div>
 
-    <?php   if($templateParams["nome"] == "template/lista-post.php") { 
+    <?php   if($templateParams["nome"] != "template/login-form.php") { 
                 require("nav-bar.php");
             }
     ?>

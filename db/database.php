@@ -109,7 +109,7 @@ final class DatabaseHelper
 
     public function getFollower($username)
     {
-        $query = "SELECT following
+        $query = "SELECT follower as info
                   FROM follow
                   WHERE following=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
@@ -120,9 +120,9 @@ final class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getSeguiti($username)
+    public function getFollow($username)
     {
-        $query = "SELECT following
+        $query = "SELECT following as info
                   FROM follow
                   WHERE follower=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
