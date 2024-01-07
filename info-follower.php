@@ -7,7 +7,7 @@ if(isset($_GET['username'])) {
     $username = $_GET['username'];
     $templateParams['noUser'] = "noUser";
     $templateParams["follower"] = $dbh->getFollower($username);
-    $templateParams["follow"] = $dbh->getFollow($username);
+    $templateParams["follow"] = $dbh->getFollowed($username);
     if(isset($_GET['info'])) {
         $templateParams['info'] = $_GET['info'];
     }
