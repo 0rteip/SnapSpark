@@ -111,7 +111,7 @@ final class DatabaseHelper {
     }
 
     public function getFollower($username) {
-        $query = "SELECT follower
+        $query = "SELECT follower as user
                   FROM follow
                   WHERE user=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
