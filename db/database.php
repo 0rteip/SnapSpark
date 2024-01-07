@@ -68,9 +68,9 @@ final class DatabaseHelper {
     public function checkLogin($mail, $pwd) {
         $query = "SELECT username
                   FROM utenti
-                  WHERE mail=? AND password=?"; // ? is a placeholder
+                  WHERE mail=? OR username=? AND password=?"; 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ss", $mail, $pwd);
+        $stmt->bind_param("sss", $mail, $mail, $pwd);
         $stmt->execute();
         $result = $stmt->get_result();
 
