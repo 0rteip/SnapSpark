@@ -113,7 +113,7 @@ final class DatabaseHelper {
     public function getFollower($username) {
         $query = "SELECT follower
                   FROM follow
-                  WHERE following=?"; // ? is a placeholder
+                  WHERE user=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -123,7 +123,7 @@ final class DatabaseHelper {
     }
 
     public function getFollowed($username) {
-        $query = "SELECT following
+        $query = "SELECT user
                   FROM follow
                   WHERE follower=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
