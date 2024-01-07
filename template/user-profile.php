@@ -21,17 +21,19 @@
             </ul>
         </div>
         <div class="col">
-            <ul>
-                <li>
-                    <label><?php echo count($templateParams['follower']) ?></label>
-                </li>
-                <li>
-                    <label> Follower</label>
-                </li>
-            </ul>
+            <a href="info-follower.php?username=<?php echo $templateParams["username"]?>&action=follower">
+                <ul>
+                    <li>
+                        <label><?php echo count($templateParams['follower']) ?></label>
+                    </li>
+                    <li>
+                        <label> Follower</label>
+                    </li>
+                </ul>
+            </a>
         </div>
         <div class="col">
-            <a href="index.php">
+            <a href="info-follower.php?username=<?php echo $templateParams["username"]?>&action=followed">
                 <ul>
                     <li>
                         <label><?php echo count($templateParams['followed']) ?></label>

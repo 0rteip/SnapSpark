@@ -6,3 +6,28 @@ function isUserLoggedIn() {
 function registerLoggedUser($user) {
     $_SESSION["username"] = $user["username"];
 }
+
+function hideSection($action, $class) {
+    if ($action !== $class) {
+        return 'style="display: none;"';
+    }
+    return "";
+}
+
+function checkRadio($action, $id) {
+    if ($action === $id) {
+        return 'active';
+    }
+    return "";
+}
+
+function findUsers($string, $users) {
+    $result = [];
+    foreach($users as $user) :
+        if (strpos($user['user'], $string) !== false) {
+            array_push($result, $user);
+        }
+    endforeach;
+    echo count($result);
+    return $result;
+}
