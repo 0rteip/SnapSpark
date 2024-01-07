@@ -1,10 +1,8 @@
 <?php
-final class DatabaseHelper
-{
+final class DatabaseHelper {
     private $db;
 
-    public function __construct($serverName, $userName, $password, $dbName, $port)
-    {
+    public function __construct($serverName, $userName, $password, $dbName, $port) {
         $this->db = new mysqli($serverName, $userName, $password, $dbName, $port);
         if ($this->db->connect_error) {
             die("Connection failed: " . $this->db->connect_error);
@@ -13,8 +11,7 @@ final class DatabaseHelper
         $this->db->set_charset("utf8mb4");
     }
 
-    public function getRandomPosts($n)
-    {
+    public function getRandomPosts($n) {
         $query = "SELECT username, file, id, descrizione, data, spark
                   FROM posts
                   ORDER BY RAND()
@@ -27,8 +24,7 @@ final class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getHashtags()
-    {
+    public function getHashtags() {
 
         $query = "SELECT nome, descrizione
                   FROM hashtags";
@@ -39,8 +35,7 @@ final class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getPosts($n = -1)
-    {
+    public function getPosts($n = -1) {
         $query = "SELECT  idarticolo, titoloarticolo, imgarticolo, dataarticolo, anteprimaarticolo, nome
                   FROM articolo, autore
                   WHERE autore=idautore";
@@ -57,22 +52,8 @@ final class DatabaseHelper
         return $result->fetch_all((MYSQLI_ASSOC));
     }
 
-    public function getPost($n)
-    {
-        $query = "SELECT  idarticolo, titoloarticolo, imgarticolo, dataarticolo, testoarticolo, nome
-                  FROM articolo, autore
-                  WHERE autore=idautore AND idarticolo=?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("i", $n);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    public function getPostsByAuthor($username) {
 
-        return $result->fetch_all((MYSQLI_ASSOC));
-    }
-
-    public function getPostsByAuthor($username)
-    {
-        
         $query = "SELECT username, file, id, descrizione, data, spark
                   FROM posts
                   WHERE username=?"; // ? is a placeholder
@@ -84,8 +65,7 @@ final class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkLogin($mail, $pwd)
-    {
+    public function checkLogin($mail, $pwd) {
         $query = "SELECT username
                   FROM utenti
                   WHERE mail=? AND password=?"; // ? is a placeholder
@@ -97,21 +77,43 @@ final class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertNewUser($username, $nome, $cognome, $sesso, $password, $data_nascita, $mail, $numero, $biografia)
-    {
+    public function insertNewUser(
+        $username,
+        $nome,
+        $cognome,
+        $sesso,
+        $password,
+        $dataNascita,
+        $mail,
+        $numero,
+        $biografia
+    ) {
         $nome_social = "SnapSpark";
-        $query = "INSERT INTO utenti (username, nome, cognome, sesso, password, data_nascita, mail, numero, biografia, nome_social) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO utenti
+                  (username, nome, cognome, sesso, password, data_nascita, mail, numero, biografia, nome_social)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssssssiss', $username, $nome, $cognome, $sesso, $password, $data_nascita, $mail, $numero, $biografia, $nome_social);
+        $stmt->bind_param(
+            'sssssssiss',
+            $username,
+            $nome,
+            $cognome,
+            $sesso,
+            $password,
+            $dataNascita,
+            $mail,
+            $numero,
+            $biografia,
+            $nome_social
+        );
         $stmt->execute();
         return $stmt->insert_id;
     }
 
-    public function getFollower($username)
-    {
-        $query = "SELECT follower as info
+    public function getFollower($username) {
+        $query = "SELECT follower
                   FROM follow
-                  WHERE following=?"; // ? is a placeholder
+                  WHERE user=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -120,9 +122,8 @@ final class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getFollow($username)
-    {
-        $query = "SELECT following as info
+    public function getFollowed($username) {
+        $query = "SELECT user
                   FROM follow
                   WHERE follower=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
@@ -132,5 +133,4 @@ final class DatabaseHelper
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
 }

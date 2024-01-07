@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        <?= $templateParams["titolo"];?>
+        <?= $templateParams["titolo"]; ?>
     </title>
     <meta charset="UTF-8" />
     <link href="css/style.css" type="text/css" rel="stylesheet" />
@@ -12,27 +12,25 @@
 </head>
 
 <body>
-    <nav class="navbar bd-navbar sticky-top bg-info" aria-label="User-navbar">
+    <nav class="navbar bd-navbar sticky-top bg-info" aria-label="user-navbar">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="index.php">SnapSpark</a>
-            <?php   if($templateParams["nome"] == "template/lista-post.php") { 
-                        require("search-bar.php");
-                    }
+            <?php if ($templateParams["nome"] == "template/lista-post.php") {
+                require("search-bar.php");
+            }
             ?>
         </div>
     </nav>
-    <?php if(isset($templateParams["errore"])) { 
-        echo $templateParams["errore"]; }
-    ?>
-    <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+
+    <div class="container-xl bd-gutter mt-3 mb-3 my-md-4 bd-layout">
         <main>
             <?php require($templateParams["nome"]); ?>
         </main>
     </div>
 
-    <?php   if($templateParams["nome"] != "template/login-form.php") { 
-                require("nav-bar.php");
-            }
+    <?php if ($templateParams["showNavBar"]) {
+        require("nav-bar.php");
+    }
     ?>
 
     <footer class="bd-footer py-4 py-md-5 bg-body-tertiary">
@@ -40,7 +38,13 @@
             <p>SnapSpark</p>
             <p>Carabini Luca, Ventrucci Pietro</p>
         </div>
-        <a href="login.php"><button>Log Out</button></a>
+
+        <?php if ($_SESSION["username"] != null) : ?>
+            <div class="container py-4 py-md-5 px-4 px-md-3 d-flex justify-content-center">
+                <a class="btn btn-primary" href="login.php" role="button">Logout</a>
+            </div>
+        <?php endif; ?>
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

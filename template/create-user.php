@@ -48,7 +48,7 @@
   </div>
   <div class="col-md-3">
     <label for="password" class="form-label">password</label>
-    <input type="text" class="form-control" id="password" name="password" required>
+    <input type="password" class="form-control" id="password" name="password" required>
   </div>
   <div class="col-md-3">
     <label for="numero" class="form-label">telefono</label>
