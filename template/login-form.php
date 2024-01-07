@@ -1,17 +1,21 @@
 <?php if (isset($templateParams["errorelogin"])) : ?>
-  <p><?php echo $templateParams["errorelogin"]; ?></p>
+  <p class="text-danger"><?php echo $templateParams["errorelogin"]; ?></p>
 <?php endif; ?>
-<form action="#" method="POST">
+
+<form action="login.php" method="POST">
   <div class="col mb-4">
     <label for="mail" class="form-label">Email address</label>
     <input type="email" class="form-control" id="mail" name="mail" placeholder="name@example.com">
   </div>
 
-  <label for="password" class="form-label">Password</label>
-  <input type="password" id="password" class="form-control" name="password">
+  <div class="col mb-4">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" id="password" class="form-control" name="password">
+  </div>
 
   <div class="col-12">
-    <button class="btn btn-primary" type="submit">Submit form</button>
-    <a href="new-account.php">Iscriviti se non hai un account!</a>
+    <button class="btn btn-primary" type="submit">Login</button>
+    <a href="new-account.php">Iscriviti</a>
   </div>
+
 </form>
