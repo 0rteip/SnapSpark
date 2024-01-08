@@ -30,3 +30,8 @@ a.active {
 ul {
     list-style: none;
 }
+
+#commentArea {
+    resize: none;
+    height: 1rem;
+}

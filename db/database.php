@@ -133,4 +133,48 @@ final class DatabaseHelper {
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getComments($user, $postId) {
+        $query = "SELECT user, testo, upvote
+                  FROM commenti
+                  WHERE post_user=? AND post_id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si", $user, $postId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function addComment($postUser, $postId, $text) {
+        $zero = 0;
+        $nextId = $this->getLastId($postUser, $postId, $_SESSION["username"]) + 1;
+
+        $query = "INSERT INTO commenti
+                  (post_user, post_id, user, id, testo, upvote)
+                  VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "sisisi",
+            $postUser,
+            $postId,
+            $_SESSION["username"],
+            $nextId,
+            $text,
+            $zero
+        );
+        $stmt->execute();
+    }
+
+    private function getLastId($postUser, $postId, $user) {
+        $query = "SELECT MAX(id) as id
+                  FROM commenti
+                  WHERE post_user=? AND post_id=? AND user=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sis", $postUser, $postId, $user);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC)[0]["id"];
+    }
 }
