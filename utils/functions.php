@@ -24,7 +24,7 @@ function checkRadio($action, $id) {
 function findUsers($string, $users) {
     $result = [];
     foreach($users as $user) :
-        if (strpos($user['user'], $string) !== false) {
+        if (strpos($user['username'], $string) !== false) {
             array_push($result, $user);
         }
     endforeach;

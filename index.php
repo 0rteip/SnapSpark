@@ -8,14 +8,14 @@ if ($_SESSION["username"] == null) {
 $posts = [];
 
 foreach ($dbh->getFollowed($_SESSION["username"]) as $value) {
-    $posts += $dbh->getPostsByAuthor($value["user"]);
+    $posts += $dbh->getPostsByAuthor($value["username"]);
 }
 
 $templateParams["titolo"] = "SnapSpark - Home";
 if (isUserLoggedIn()) {
     $templateParams["nome"] = "template/lista-post.php";
     $templateParams["posts"] = $posts;
-$templateParams["showNavBar"] = true;
+    $templateParams["showNavBar"] = true;
 
 } else {
     $templateParams["errore"] = "You need logged in";
