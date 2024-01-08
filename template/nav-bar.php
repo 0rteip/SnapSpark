@@ -2,20 +2,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav nav-justified w-100">
             <li class="nav-item">
-                <a class="nav-link" href="index.php"><i class="fa fa-home"></i></a>
+                <a class="nav-link" href="index.php"><span class="fa fa-home"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
+                <a class="nav-link" href="#"><span class="fa fa-search"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-plus-square"></i></a>
+                <a class="nav-link" href="#"><span class="fa fa-plus-square"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-heart"></i></a>
+                <a class="nav-link" href="#"><span class="fa fa-heart"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="user.php?username=<?php echo $_SESSION["username"]; ?>">
-                    <i class="fa fa-user"></i>
+                    <span class="fa fa-user"></span>
                 </a>
             </li>
         </ul>
