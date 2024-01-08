@@ -7,10 +7,11 @@ $username = $_SESSION['username'];
 
 if (isset($_GET['username'])) {
     $username = $_GET['username'];
-    $templateParams["posts"] = $dbh->getPostsByAuthor($username);
-    $templateParams["follower"] = $dbh->getFollower($username);
-    $templateParams["followed"] = $dbh->getFollowed($username);
-    $templateParams["username"] = $username;
 }
+$templateParams["posts"] = $dbh->getPostsByAuthor($username);
+$templateParams["follower"] = $dbh->getFollower($username);
+$templateParams["followed"] = $dbh->getFollowed($username);
+$templateParams["bio"] = $dbh->getUserBio($username);
+$templateParams["username"] = $username;
 
 require_once "template/base.php";
