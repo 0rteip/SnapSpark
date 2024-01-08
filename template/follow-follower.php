@@ -41,8 +41,4 @@
     <a class="nav-link <?php echo checkRadio($templateParams['action'], 'followed') ?>" href="info-follower.php?username=<?php echo $username?>&action=followed">Flollowed</a>
   </li>
 </ul>
-<form class="d-flex" role="search" method="POST">
-    <input class="form-control bg-info-subtle" name="search" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-<?php require("list-username.php"); ?>
+<?php require("search-users.php");?>

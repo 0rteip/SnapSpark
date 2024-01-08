@@ -11,6 +11,15 @@ final class DatabaseHelper {
         $this->db->set_charset("utf8mb4");
     }
 
+    public function getAllUsers() {
+        $query = "SELECT username
+                  FROM utenti";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getRandomPosts($n) {
         $query = "SELECT username, file, id, descrizione, data, spark
                   FROM posts
@@ -111,7 +120,7 @@ final class DatabaseHelper {
     }
 
     public function getFollower($username) {
-        $query = "SELECT follower as user
+        $query = "SELECT follower as username
                   FROM follow
                   WHERE user=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
@@ -123,9 +132,21 @@ final class DatabaseHelper {
     }
 
     public function getFollowed($username) {
-        $query = "SELECT user
+        $query = "SELECT user as username
                   FROM follow
                   WHERE follower=?"; // ? is a placeholder
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getUserBio($username) {
+        $query = "SELECT biografia
+                  FROM utenti
+                  WHERE username=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
         $stmt->execute();
