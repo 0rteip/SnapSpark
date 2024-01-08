@@ -6,14 +6,18 @@
                     <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="me-2" alt="" id="avatar">
                 </li>
                 <li>
-                    <label> <?php echo $templateParams['username'] ?></label>
+                    <label>
+                        <?php echo $templateParams['username'] ?>
+                    </label>
                 </li>
             </ul>
         </div>
         <div class="col">
             <ul>
                 <li>
-                    <label><?php echo count($templateParams["posts"]) ?></label>
+                    <label>
+                        <?php echo count($templateParams["posts"]) ?>
+                    </label>
                 </li>
                 <li>
                     <label> Post</label>
@@ -21,10 +25,12 @@
             </ul>
         </div>
         <div class="col">
-            <a href="info-follower.php?username=<?php echo $templateParams["username"]?>&action=follower">
+            <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=follower">
                 <ul>
                     <li>
-                        <label><?php echo count($templateParams['follower']) ?></label>
+                        <label>
+                            <?php echo count($templateParams['follower']) ?>
+                        </label>
                     </li>
                     <li>
                         <label> Follower</label>
@@ -33,10 +39,12 @@
             </a>
         </div>
         <div class="col">
-            <a href="info-follower.php?username=<?php echo $templateParams["username"]?>&action=followed">
+            <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=followed">
                 <ul>
                     <li>
-                        <label><?php echo count($templateParams['followed']) ?></label>
+                        <label>
+                            <?php echo count($templateParams['followed']) ?>
+                        </label>
                     </li>
                     <li>
                         <label>Seguiti</label>
@@ -47,9 +55,23 @@
     </div>
 </div>
 
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    <?php if (count($templateParams['bio']) > 0) {
+                        echo $templateParams['bio'][0]['biografia'];
+                    } ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="d-flex justify-content-center">
-        <?php foreach ($templateParams["posts"] as $post) : ?>
+        <?php foreach ($templateParams["posts"] as $post): ?>
             <div class="card" style="width: 10rem;" id="profile">
                 <img src="<?php echo POST_FOLDER . $post["file"]; ?>" alt="">
                 <div class="card-body">
@@ -66,18 +88,5 @@
                 </footer>
             </div>
         <?php endforeach; ?>
-    </div>
-</div>
-
-
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
     </div>
 </div>
