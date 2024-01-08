@@ -28,7 +28,7 @@
         </main>
     </div>
 
-    <?php if ($templateParams["showNavBar"]) {
+    <?php if ($_SESSION["username"] != null) {
         require("nav-bar.php");
     }
     ?>

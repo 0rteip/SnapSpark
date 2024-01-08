@@ -4,8 +4,8 @@
 
 <form action="login.php" method="POST">
   <div class="col mb-4">
-    <label for="mail" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="mail" name="mail" placeholder="name@example.com">
+    <label for="mail" class="form-label">Email address Or Username</label>
+    <input type="text" class="form-control" id="mail" name="mail" placeholder="name@example.com or yourUserName">
   </div>
 
   <div class="col mb-4">

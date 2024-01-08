@@ -5,7 +5,7 @@
                 <a class="nav-link" href="index.php"><span class="fa fa-home"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><span class="fa fa-search"></span></a>
+                <a class="nav-link" href="search.php"><span class="fa fa-search"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><span class="fa fa-plus-square"></span></a>
@@ -14,7 +14,7 @@
                 <a class="nav-link" href="#"><span class="fa fa-heart"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="user.php?username=<?php echo $_SESSION["username"]; ?>">
+                <a class="nav-link" href="user.php">
                     <span class="fa fa-user"></span>
                 </a>
             </li>

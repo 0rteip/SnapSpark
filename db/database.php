@@ -11,6 +11,15 @@ final class DatabaseHelper {
         $this->db->set_charset("utf8mb4");
     }
 
+    public function getAllUsers() {
+        $query = "SELECT username
+                  FROM utenti";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getRandomPosts($n) {
         $query = "SELECT username, file, id, descrizione, data, spark
                   FROM posts
@@ -68,9 +77,9 @@ final class DatabaseHelper {
     public function checkLogin($mail, $pwd) {
         $query = "SELECT username
                   FROM utenti
-                  WHERE mail=? AND password=?"; // ? is a placeholder
+                  WHERE mail=? OR username=? AND password=?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ss", $mail, $pwd);
+        $stmt->bind_param("sss", $mail, $mail, $pwd);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -111,7 +120,7 @@ final class DatabaseHelper {
     }
 
     public function getFollower($username) {
-        $query = "SELECT follower
+        $query = "SELECT follower as username
                   FROM follow
                   WHERE user=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
@@ -123,7 +132,7 @@ final class DatabaseHelper {
     }
 
     public function getFollowed($username) {
-        $query = "SELECT user
+        $query = "SELECT user as username
                   FROM follow
                   WHERE follower=?"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
@@ -176,5 +185,17 @@ final class DatabaseHelper {
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC)[0]["id"];
+    }
+
+    public function getUserBio($username) {
+        $query = "SELECT biografia
+                  FROM utenti
+                  WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
