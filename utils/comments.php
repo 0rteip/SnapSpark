@@ -18,6 +18,15 @@ function postComments() {
     }
 }
 
+function likeComment() {
+    require_once '../bootstrap.php';
+
+    if (isset($_POST["cu"]) && isset($_POST["pu"]) && isset($_POST["pid"]) && isset($_POST["cid"])) {
+        $dbh->likeComment($_POST["cu"], $_POST["pu"], $_POST["pid"], $_POST["cid"]);
+        echo json_encode(array('success' => true));
+    }
+}
+
 // Controlla se la richiesta è una chiamata Ajax
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
     // Chiamata Ajax rilevata, esegui la funzione
@@ -29,6 +38,9 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 break;
             case 'post_comments':
                 postComments();
+                break;
+            case 'like_comment':
+                likeComment();
                 break;
             default:
                 break;

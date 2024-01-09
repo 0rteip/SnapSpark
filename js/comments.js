@@ -17,17 +17,34 @@ function getComments(user, post_id) {
             }
             else {
                 let comments = "";
+                let i = 1;
                 response.comments.forEach(comment => {
-                    comments += `
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="img/avatar/avatar.png" alt="Profile picture" class="rounded-circle" width="50px" height="50px">
+                    comments +=
+                        `
+                        <div class="container text-center m-0 mb-1">
+                            <div class="row align-items-center justify-content-center">
+
+                                <div class="col-1 p-0">
+                                    <img alt="" id="avatar" class="mx-auto" src="img/avatar/avatar.png">
+                                </div>
+
+                                <div class="col-11">
+                                    <div class="row align-items-center justify-content-center">
+
+                                        <div class="col-11 col-sm-11">
+                                            <p class="m-0 text-start"><strong>${comment.user}</strong> ${comment.testo}</p>
+                                        </div>
+                                        <div class="col-1 col-sm-1 p-0">
+                                            <span id="comment-star-${i}" class="comment-star mx-auto fa-${comment.like ? "solid liked-comment-star" : "regular"} fa-star" onclick="likeComment('${comment.user}','${comment.post_user}',${comment.post_id},${i})"></span>
+                                        </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-10">
-                            <p class="text-left"><strong>${comment.user}</strong> ${comment.testo}</p>
-                        </div>
-                    </div>
                     `;
+                    i += 1;
                 });
                 document.getElementsByClassName("modal-body")[0].innerHTML = comments;
             }
@@ -68,6 +85,26 @@ function postComment(user, post_id) {
     comment.value = "";
     const btn = document.getElementById("postButton");
     btn.setAttribute("disabled", "");
+}
+
+function likeComment(comment_user, post_user, post_id, comment_id) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/comments.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText);
+        }
+    };
+
+    xhr.send("action=like_comment" + "&cu=" + comment_user + "&pu=" + post_user + "&pid=" + post_id + "&cid=" + comment_id);
+
+    const star = document.getElementById("comment-star-" + comment_id);
+    star.classList.toggle("liked-comment-star");
+    star.classList.toggle("fa-regular");
+    star.classList.toggle("fa-solid");
 }
 
 const postModal = document.getElementById('postModal')

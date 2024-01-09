@@ -45,7 +45,7 @@
                 <div class="container text-center m-0">
                     <div class="row align-items-center justify-content-center">
 
-                        <div class="col-1 p-0 text-center">
+                        <div class="col-1 p-0">
                             <img alt="" id="avatar" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
                         </div>
 
@@ -56,7 +56,7 @@
                                 <div class="col-10 col-sm-10">
                                     <textarea class="form-control" id="commentArea" placeholder="Add a comment..." onkeyup="enablePost()"></textarea>
                                 </div>
-                                <button id="postButton" type="button" class="col-2 col-sm-2 px-2 btn btn-primary" onclick="postComment()" disabled>Post</button>
+                                <button id="postButton" type="submit" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" onclick="postComment()" disabled>Post</button>
 
                             </form>
                         </div>

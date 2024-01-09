@@ -144,7 +144,7 @@ final class DatabaseHelper {
     }
 
     public function getComments($user, $postId) {
-        $query = "SELECT user, testo, upvote
+        $query = "SELECT *
                   FROM commenti
                   WHERE post_user=? AND post_id=?";
         $stmt = $this->db->prepare($query);
@@ -152,7 +152,7 @@ final class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $this->checkLike($result->fetch_all(MYSQLI_ASSOC));
     }
 
     public function addComment($postUser, $postId, $text) {
@@ -173,6 +173,31 @@ final class DatabaseHelper {
             $zero
         );
         $stmt->execute();
+    }
+
+    private function checkLike($result) {
+        foreach ($result as $key => $value) {
+            $query = "SELECT *
+                      FROM like_post
+                      WHERE comment_username=? AND post_username=? AND post_id=? AND comment_id=? AND like_username=?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                "ssiis",
+                $value["user"],
+                $value["post_user"],
+                $value["post_id"],
+                $value["id"],
+                $_SESSION["username"]
+            );
+            $stmt->execute();
+
+            if (empty($stmt->get_result()->fetch_all(MYSQLI_ASSOC))) {
+                $result[$key]["like"] = false;
+            } else {
+                $result[$key]["like"] = true;
+            }
+        }
+        return $result;
     }
 
     private function getLastId($postUser, $postId, $user) {
@@ -197,5 +222,83 @@ final class DatabaseHelper {
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function likeComment($commentUser, $postUser, $postId, $commentId) {
+        $likeUser = $_SESSION["username"];
+
+        if ($this->isCommentPresent($commentUser, $postUser, $postId, $commentId, $likeUser)) {
+            $this->updateLike($postUser, $postId, $commentUser, $commentId, false);
+            $query = "DELETE FROM like_post
+                      WHERE comment_username=? AND post_username=? AND post_id=? AND comment_id=? AND like_username=?";
+        } else {
+            $this->updateLike($postUser, $postId, $commentUser, $commentId);
+            $query = "INSERT INTO like_post
+                      (comment_username, post_username, post_id, comment_id, like_username)
+                      VALUES (?, ?, ?, ?, ?)";
+        }
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "ssiis",
+            $commentUser,
+            $postUser,
+            $postId,
+            $commentId,
+            $likeUser
+        );
+        $stmt->execute();
+    }
+
+    private function isCommentPresent($commentUser, $postUser, $postId, $commentId, $likeUser) {
+        $query = "SELECT *
+        FROM like_post
+        WHERE comment_username=? AND post_username=? AND post_id=? AND comment_id=? AND like_username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "ssiis",
+            $commentUser,
+            $postUser,
+            $postId,
+            $commentId,
+            $likeUser
+        );
+        $stmt->execute();
+        return !empty($stmt->get_result()->fetch_all(MYSQLI_ASSOC));
+    }
+
+    private function updateLike($postUser, $postId, $user, $id, $like = true) {
+        $likes = $this->getLikesOf($postUser, $postId, $user, $id) + ($like ? 1 : -1);
+
+        $query = "UPDATE commenti
+                  SET upvote=?
+                  WHERE post_user=? AND post_id=? AND user=? AND id=?";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "isisi",
+            $likes,
+            $postUser,
+            $postId,
+            $user,
+            $id
+        );
+        $stmt->execute();
+    }
+
+    private function getLikesOf($postUser, $postId, $user, $id) {
+        $query = "SELECT upvote
+                  FROM commenti
+                  WHERE post_user=? AND post_id=? AND user=? AND id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "ssii",
+            $postUser,
+            $postId,
+            $user,
+            $id
+        );
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["upvote"];
     }
 }
