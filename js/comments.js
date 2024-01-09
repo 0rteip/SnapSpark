@@ -4,7 +4,6 @@ function getComments(user, post_id) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.responseText);
@@ -35,7 +34,7 @@ function getComments(user, post_id) {
                                             <p class="m-0 text-start"><strong>${comment.user}</strong> ${comment.testo}</p>
                                         </div>
                                         <div class="col-1 col-sm-1 p-0">
-                                            <span id="comment-star-${i}" class="comment-star mx-auto fa-${comment.like ? "solid liked-comment-star" : "regular"} fa-star" onclick="likeComment('${comment.user}','${comment.post_user}',${comment.post_id},${i})"></span>
+                                            <span id="comment-star-${i}" class="like-star mx-auto fa-${comment.like ? "solid liked-star" : "regular"} fa-star" onclick="likeComment('${comment.user}','${comment.post_user}',${comment.post_id},${i})"></span>
                                         </div>
 
                                         </form>
@@ -77,14 +76,14 @@ function postComment(user, post_id) {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             getComments(user, post_id);
+
+            comment.value = "";
+            const btn = document.getElementById("postButton");
+            btn.setAttribute("disabled", "");
         }
     };
 
     xhr.send("action=post_comments" + "&u=" + user + "&i=" + post_id + "&c=" + comment.value);
-
-    comment.value = "";
-    const btn = document.getElementById("postButton");
-    btn.setAttribute("disabled", "");
 }
 
 function likeComment(comment_user, post_user, post_id, comment_id) {
@@ -95,16 +94,14 @@ function likeComment(comment_user, post_user, post_id, comment_id) {
 
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText);
+            const star = document.getElementById("comment-star-" + comment_id);
+            star.classList.toggle("liked-star");
+            star.classList.toggle("fa-regular");
+            star.classList.toggle("fa-solid");
         }
     };
 
     xhr.send("action=like_comment" + "&cu=" + comment_user + "&pu=" + post_user + "&pid=" + post_id + "&cid=" + comment_id);
-
-    const star = document.getElementById("comment-star-" + comment_id);
-    star.classList.toggle("liked-comment-star");
-    star.classList.toggle("fa-regular");
-    star.classList.toggle("fa-solid");
 }
 
 const postModal = document.getElementById('postModal')

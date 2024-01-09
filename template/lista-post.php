@@ -17,11 +17,10 @@
         </div>
 
         <footer class="card-footer">
-            <p class="card-text mx-auto">
+            <span user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span>
+            <span class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>" onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span>
+            <p id="sparks-<?php echo $post['username'] . '-' . $post['id'] ?>" class="card-text mx-auto">
                 <?php echo $post["spark"]; ?>
-                <span class="fa-regular fa-star"></span>
-                <span class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>" onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)">
-                </span>
             </p>
         </footer>
     </article>
@@ -69,3 +68,4 @@
 </div>
 
 <script src="js/comments.js"></script>
+<script src="js/post.js"></script>

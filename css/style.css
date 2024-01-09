@@ -9,22 +9,28 @@ div#profile {
     margin: 0 2% 0 2%
 }
 
+article footer {
+    font-size: larger;
+}
+
 article .fa-star:hover,
 article .fa-comment:hover {
     cursor: pointer;
 }
 
-.liked-comment-star {
+
+
+.liked-star {
     color: #ff0000;
 }
 
-.comment-star:hover {
+.like-star:hover {
     cursor: pointer;
     color: #5d5a5a;
     font-size: 120%;
 }
 
-.comment-star.liked-comment-star:hover {
+.liked-star:hover {
     color: #ff0000;
     font-size: 120%;
 }
@@ -50,4 +56,15 @@ ul {
 #commentArea {
     resize: none;
     height: 1rem;
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fbc2eb;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
 }

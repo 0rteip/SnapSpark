@@ -175,6 +175,49 @@ final class DatabaseHelper {
         $stmt->execute();
     }
 
+    public function likePost($postUser, $postId) {
+        $likeUser = $_SESSION["username"];
+
+        if ($this->isLikeToPostPresent($postUser, $postId, $likeUser)) {
+            $like = $this->updatePostLike($postUser, $postId, false);
+            $query = "DELETE FROM likes
+                      WHERE post_username=? AND post_id=? AND username=?";
+            echo json_encode(array('like' => false, 'likes' => $like));
+        } else {
+            $like = $this->updatePostLike($postUser, $postId);
+            $query = "INSERT INTO likes
+                      (post_username, post_id, username)
+                      VALUES (?, ?, ?)";
+            echo json_encode(array('like' => true, 'likes' => $like));
+        }
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "sis",
+            $postUser,
+            $postId,
+            $likeUser
+        );
+        $stmt->execute();
+    }
+
+    private function updatePostLike($postUser, $postId, $like = true) {
+        $likes = $this->getLikesOfPost($postUser, $postId) + ($like ? 1 : -1);
+        $query = "UPDATE posts
+                  SET spark=?
+                  WHERE username=? AND id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "isi",
+            $likes,
+            $postUser,
+            $postId
+        );
+        $stmt->execute();
+
+        return $likes;
+    }
+
     private function checkLike($result) {
         foreach ($result as $key => $value) {
             $query = "SELECT *
@@ -227,12 +270,12 @@ final class DatabaseHelper {
     public function likeComment($commentUser, $postUser, $postId, $commentId) {
         $likeUser = $_SESSION["username"];
 
-        if ($this->isCommentPresent($commentUser, $postUser, $postId, $commentId, $likeUser)) {
-            $this->updateLike($postUser, $postId, $commentUser, $commentId, false);
+        if ($this->isLikeToCommentPresent($commentUser, $postUser, $postId, $commentId, $likeUser)) {
+            $this->updateCommentLike($postUser, $postId, $commentUser, $commentId, false);
             $query = "DELETE FROM like_post
                       WHERE comment_username=? AND post_username=? AND post_id=? AND comment_id=? AND like_username=?";
         } else {
-            $this->updateLike($postUser, $postId, $commentUser, $commentId);
+            $this->updateCommentLike($postUser, $postId, $commentUser, $commentId);
             $query = "INSERT INTO like_post
                       (comment_username, post_username, post_id, comment_id, like_username)
                       VALUES (?, ?, ?, ?, ?)";
@@ -250,10 +293,10 @@ final class DatabaseHelper {
         $stmt->execute();
     }
 
-    private function isCommentPresent($commentUser, $postUser, $postId, $commentId, $likeUser) {
+    private function isLikeToCommentPresent($commentUser, $postUser, $postId, $commentId, $likeUser) {
         $query = "SELECT *
-        FROM like_post
-        WHERE comment_username=? AND post_username=? AND post_id=? AND comment_id=? AND like_username=?";
+                  FROM like_post
+                  WHERE comment_username=? AND post_username=? AND post_id=? AND comment_id=? AND like_username=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param(
             "ssiis",
@@ -267,8 +310,25 @@ final class DatabaseHelper {
         return !empty($stmt->get_result()->fetch_all(MYSQLI_ASSOC));
     }
 
-    private function updateLike($postUser, $postId, $user, $id, $like = true) {
-        $likes = $this->getLikesOf($postUser, $postId, $user, $id) + ($like ? 1 : -1);
+    private function isLikeToPostPresent($postUser, $postId, $likeUser) {
+        $query = "SELECT *
+                  FROM likes
+                  WHERE post_username=? AND post_id=? AND username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "sis",
+            $postUser,
+            $postId,
+            $likeUser
+        );
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return !empty($result);
+    }
+
+    private function updateCommentLike($postUser, $postId, $user, $id, $like = true) {
+        $likes = $this->getLikesOfComment($postUser, $postId, $user, $id) + ($like ? 1 : -1);
 
         $query = "UPDATE commenti
                   SET upvote=?
@@ -286,7 +346,39 @@ final class DatabaseHelper {
         $stmt->execute();
     }
 
-    private function getLikesOf($postUser, $postId, $user, $id) {
+    public function checkPostLike($postUser, $postId) {
+        $userLike = $_SESSION["username"];
+        $query = "SELECT *
+                  FROM likes
+                  WHERE post_username=? AND post_id=? AND username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "sis",
+            $postUser,
+            $postId,
+            $userLike
+        );
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        return !empty($result);
+    }
+
+    private function getLikesOfPost($postUser, $postId) {
+        $query = "SELECT spark
+                  FROM posts
+                  WHERE username=? AND id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "si",
+            $postUser,
+            $postId
+        );
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["spark"];
+    }
+
+    private function getLikesOfComment($postUser, $postId, $user, $id) {
         $query = "SELECT upvote
                   FROM commenti
                   WHERE post_user=? AND post_id=? AND user=? AND id=?";
