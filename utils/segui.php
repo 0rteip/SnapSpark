@@ -1,7 +1,7 @@
 <?php
 function getFollowed()
 {
-    require "bootstrap.php";
+    require_once '../bootstrap.php';
     $array = $dbh->getFollowed($_SESSION['username']);
     $result = array();
     foreach ($array as $follow):
@@ -12,9 +12,8 @@ function getFollowed()
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
     // Chiamata Ajax rilevata, esegui la funzione
-    if (isset($_POST["action"])) {
-        getFollowed();
-    }
-    
+    getFollowed();
+} else {
+    echo 'Accesso non consentito.';
 }
-?>
+

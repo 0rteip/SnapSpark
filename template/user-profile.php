@@ -6,9 +6,7 @@
                     <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="me-2" alt="" id="avatar">
                 </li>
                 <li>
-                    <label>
-                        <?php echo $templateParams['username'] ?>
-                    </label>
+                    <label id='currentUser'><?php echo $templateParams['username'] ?></label>
                 </li>
             </ul>
         </div>
@@ -55,7 +53,6 @@
     </div>
 </div>
 
-
 <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col">
         <div class="card">
@@ -68,6 +65,13 @@
             </div>
         </div>
     </div>
+    <?php if ($_SESSION['username'] !== $templateParams['username']) { ?>
+        <div class="col" id="follow-button">
+            <form action="" method="POST">
+                <input class="btn btn-primary" type="submit" value="" name="follow" id="follow-bt">
+            </form>
+        </div>
+    <?php } ?>
 </div>
 <div class="row">
     <div class="d-flex justify-content-center">
@@ -90,3 +94,5 @@
         <?php endforeach; ?>
     </div>
 </div>
+
+<script src="js/follow.js"></script>

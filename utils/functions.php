@@ -32,6 +32,14 @@ function findUsers($string, $users) {
             array_push($result, $user);
         }
     endforeach;
-    echo count($result);
     return $result;
+}
+
+function checkFollow($name, $array) {
+    foreach ($array as $user) :
+        if ($user['username'] === $name) {
+            return false;
+        }
+    endforeach;
+    return true;
 }
