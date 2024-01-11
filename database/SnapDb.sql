@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 09, 2024 at 03:05 PM
+-- Generation Time: Jan 11, 2024 at 04:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,10 +41,13 @@ CREATE TABLE `commenti` (
 --
 
 INSERT INTO `commenti` (`post_user`, `post_id`, `user`, `id`, `testo`, `upvote`) VALUES
-('john_doe', 1, 'pietro_v', 1, 'cioa', 1),
+('john_doe', 1, 'daniel_carter', 1, 'ciao', 0),
+('john_doe', 1, 'pietro_v', 1, 'cioa', 0),
 ('john_doe', 1, 'pietro_v', 2, 'pollo', 1),
 ('john_doe', 1, 'pietro_v', 3, 'asd', 0),
-('john_doe', 1, 'pietro_v', 4, 'as', 1);
+('john_doe', 1, 'pietro_v', 4, 'as', 1),
+('john_doe', 1, 'pietro_v', 5, 'ads', 0),
+('john_doe', 1, 'pietro_v', 6, 'pollo', 0);
 
 -- --------------------------------------------------------
 
@@ -62,6 +65,7 @@ CREATE TABLE `follow` (
 --
 
 INSERT INTO `follow` (`follower`, `user`) VALUES
+('daniel_carter', 'john_doe'),
 ('pietro_v', 'john_doe'),
 ('pietro_v', 'sam_wilson');
 
@@ -105,6 +109,13 @@ CREATE TABLE `likes` (
   `username` char(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`post_username`, `post_id`, `username`) VALUES
+('john_doe', 1, 'pietro_v');
+
 -- --------------------------------------------------------
 
 --
@@ -124,9 +135,22 @@ CREATE TABLE `like_post` (
 --
 
 INSERT INTO `like_post` (`comment_username`, `post_username`, `post_id`, `comment_id`, `like_username`) VALUES
-('pietro_v', 'john_doe', 1, 1, 'pietro_v'),
 ('pietro_v', 'john_doe', 1, 2, 'pietro_v'),
 ('pietro_v', 'john_doe', 1, 4, 'pietro_v');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messaggio`
+--
+
+CREATE TABLE `messaggio` (
+  `sen_username` char(1) NOT NULL,
+  `rec_unsername` char(1) NOT NULL,
+  `testo` char(100) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `data` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -148,7 +172,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`username`, `file`, `id`, `descrizione`, `data`, `spark`) VALUES
-('john_doe', 'image1.jpg', 1, 'Enjoying a sunny day!', '2023-12-26', 0);
+('john_doe', 'image1.jpg', 1, 'Enjoying a sunny day!', '2023-12-26', 1);
 
 -- --------------------------------------------------------
 
@@ -184,27 +208,28 @@ CREATE TABLE `utenti` (
   `mail` char(40) NOT NULL,
   `numero` bigint(20) NOT NULL,
   `biografia` varchar(100) NOT NULL,
-  `nome_social` char(15) NOT NULL
+  `nome_social` char(15) NOT NULL,
+  `profile_img` char(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `utenti`
 --
 
-INSERT INTO `utenti` (`username`, `nome`, `cognome`, `sesso`, `password`, `data_nascita`, `mail`, `numero`, `biografia`, `nome_social`) VALUES
-('alex_smith', 'Alex', 'Smith', 'M', 'alexpass', '1997-05-18', 'alex.smith@example.com', 4567788990, 'Exploring the world one photo at a time.', 'SnapSpark'),
-('daniel_carter', 'Daniel', 'Carter', 'M', 'danielpass', '1985-11-08', 'daniel.carter@example.com', 5566778899, 'Photography enthusiast and positivity spreader.', 'SnapSpark'),
-('emily_wang', 'Emily', 'Wang', 'F', 'emilypass', '1992-12-05', 'emily.wang@example.com', 1234455667, 'Chasing dreams and capturing moments.', 'SnapSpark'),
-('grace_anderson', 'Grace', 'Anderson', 'F', 'gracepass', '1996-07-25', 'grace.anderson@example.com', 3344556677, 'Every day is a gift.', 'SnapSpark'),
-('jane_smith', 'Jane', 'Smith', 'F', 'pass123', '1988-05-15', 'jane.smith@example.com', 9876543210, 'Enjoying life one moment at a time.', 'SnapSpark'),
-('john_doe', 'John', 'Doe', 'M', 'password123', '1990-01-01', 'john.doe@example.com', 1234567890, 'I love sharing positive moments!', 'SnapSpark'),
-('mary_jones', 'Mary', 'Jones', 'F', 'marypass', '1995-03-10', 'mary.jones@example.com', 5551112233, 'Spreading happiness every day!', 'SnapSpark'),
-('olivia_taylor', 'Olivia', 'Taylor', 'F', 'oliviapass', '1989-09-30', 'olivia.taylor@example.com', 7890011223, 'Making memories and sharing joy!', 'SnapSpark'),
-('pietro_v', 'Pietro', 'Ventrucci', 'M', 'pietro', '2002-10-22', 'pietro.sad@asd', 3458238201, 'QUalcosa da dire', 'SnapSpark'),
-('ryan_nguyen', 'Ryan', 'Nguyen', 'M', 'ryanpass', '1991-06-03', 'ryan.nguyen@example.com', 1122334455, 'Living the dream and inspiring others.', 'SnapSpark'),
-('sam_wilson', 'Sam', 'Wilson', 'M', 'samuelpass', '1983-08-22', 'sam.wilson@example.com', 9871122334, 'Living life to the fullest!', 'SnapSpark'),
-('sophia_garcia', 'Sophia', 'Garcia', 'F', 'sophiapass', '1994-02-14', 'sophia.garcia@example.com', 8899001122, 'Believe in the beauty of every moment.', 'SnapSpark'),
-('will_miller', 'Will', 'Miller', 'M', 'willpass', '1993-04-12', 'will.miller@example.com', 1122334455, 'Life is an adventure!', 'SnapSpark');
+INSERT INTO `utenti` (`username`, `nome`, `cognome`, `sesso`, `password`, `data_nascita`, `mail`, `numero`, `biografia`, `nome_social`, `profile_img`) VALUES
+('alex_smith', 'Alex', 'Smith', 'M', 'alexpass', '1997-05-18', 'alex.smith@example.com', 4567788990, 'Exploring the world one photo at a time.', 'SnapSpark', ''),
+('daniel_carter', 'Daniel', 'Carter', 'M', 'danielpass', '1985-11-08', 'daniel.carter@example.com', 5566778899, 'Photography enthusiast and positivity spreader.', 'SnapSpark', ''),
+('emily_wang', 'Emily', 'Wang', 'F', 'emilypass', '1992-12-05', 'emily.wang@example.com', 1234455667, 'Chasing dreams and capturing moments.', 'SnapSpark', ''),
+('grace_anderson', 'Grace', 'Anderson', 'F', 'gracepass', '1996-07-25', 'grace.anderson@example.com', 3344556677, 'Every day is a gift.', 'SnapSpark', ''),
+('jane_smith', 'Jane', 'Smith', 'F', 'pass123', '1988-05-15', 'jane.smith@example.com', 9876543210, 'Enjoying life one moment at a time.', 'SnapSpark', ''),
+('john_doe', 'John', 'Doe', 'M', 'password123', '1990-01-01', 'john.doe@example.com', 1234567890, 'I love sharing positive moments!', 'SnapSpark', ''),
+('mary_jones', 'Mary', 'Jones', 'F', 'marypass', '1995-03-10', 'mary.jones@example.com', 5551112233, 'Spreading happiness every day!', 'SnapSpark', ''),
+('olivia_taylor', 'Olivia', 'Taylor', 'F', 'oliviapass', '1989-09-30', 'olivia.taylor@example.com', 7890011223, 'Making memories and sharing joy!', 'SnapSpark', ''),
+('pietro_v', 'Pietro', 'Ventrucci', 'M', 'pietro', '2002-10-22', 'pietro.sad@asd', 3458238201, 'QUalcosa da dire', 'SnapSpark', ''),
+('ryan_nguyen', 'Ryan', 'Nguyen', 'M', 'ryanpass', '1991-06-03', 'ryan.nguyen@example.com', 1122334455, 'Living the dream and inspiring others.', 'SnapSpark', ''),
+('sam_wilson', 'Sam', 'Wilson', 'M', 'samuelpass', '1983-08-22', 'sam.wilson@example.com', 9871122334, 'Living life to the fullest!', 'SnapSpark', ''),
+('sophia_garcia', 'Sophia', 'Garcia', 'F', 'sophiapass', '1994-02-14', 'sophia.garcia@example.com', 8899001122, 'Believe in the beauty of every moment.', 'SnapSpark', ''),
+('will_miller', 'Will', 'Miller', 'M', 'willpass', '1993-04-12', 'will.miller@example.com', 1122334455, 'Life is an adventure!', 'SnapSpark', '');
 
 --
 -- Indexes for dumped tables
@@ -249,6 +274,14 @@ ALTER TABLE `like_post`
   ADD PRIMARY KEY (`comment_username`,`post_username`,`post_id`,`comment_id`,`like_username`),
   ADD UNIQUE KEY `ID_like_post_IND` (`comment_username`,`post_username`,`post_id`,`comment_id`,`like_username`),
   ADD KEY `FKlik_UTE_IND` (`like_username`);
+
+--
+-- Indexes for table `messaggio`
+--
+ALTER TABLE `messaggio`
+  ADD PRIMARY KEY (`sen_username`,`rec_unsername`,`id`),
+  ADD UNIQUE KEY `ID_messagio_IND` (`sen_username`,`rec_unsername`,`id`),
+  ADD KEY `FKscrive_IND` (`rec_unsername`);
 
 --
 -- Indexes for table `posts`
