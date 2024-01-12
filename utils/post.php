@@ -11,12 +11,8 @@ function checkLike() {
     require_once '../bootstrap.php';
 
     if (isset($_POST["u"]) && isset($_POST["id"])) {
-        $array = $dbh->getFollowed($_SESSION['username']);
-        $result = array();
-        foreach ($array as $follow):
-            array_push($result, $follow["username"]);
-        endforeach;
-        print json_encode(array('followed' => $result));
+        $likes = $dbh->checkPostLike($_POST["u"], $_POST["id"]);
+        print json_encode(array("liked" => $likes));
     }
 }
 
