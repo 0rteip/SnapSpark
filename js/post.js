@@ -8,6 +8,18 @@ function likePost(post_user, post_id) {
         if (this.readyState === 4 && this.status === 200) {
             const text = JSON.parse(this.responseText);
 
+            const sparks = document.getElementById("sparks-num");
+            if (text.likes > 0) {
+                sparks.innerHTML = `
+                <p id="sparks-${post_user}'-'${post_id}" class="card-text mx-auto text-start">
+                    ${text.likes} ${text.likes === 1 ? "spark" : "sparks"}
+                </p>
+                `;
+            } else {
+                sparks.innerHTML = "";
+            }
+
+
             console.log(text);
             const star = document.getElementById("post-star-" + post_user + "-" + post_id);
 

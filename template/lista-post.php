@@ -1,5 +1,5 @@
 <?php foreach ($templateParams["posts"] as $post) : ?>
-    <article class="card">
+    <article class="card mb-3">
 
         <header class="card-header">
             <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
@@ -17,11 +17,35 @@
         </div>
 
         <footer class="card-footer">
-            <span user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span>
-            <span class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>" onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span>
-            <p id="sparks-<?php echo $post['username'] . '-' . $post['id'] ?>" class="card-text mx-auto">
-                <?php echo $post["spark"]; ?>
-            </p>
+
+            <div class="container text-center p-0">
+                <div class="row">
+
+                    <div class="col-10 text-start">
+                        <div class="row">
+                            <div class="col-auto">
+                                <span user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span>
+
+                            </div>
+                            <div id="sparks-num" class="col-auto ps-0">
+                                <?php if ($post["spark"] > 0) : ?>
+                                    <p id="sparks-<?php echo $post['username'] . '-' . $post['id'] ?>" class="card-text mx-auto text-start">
+                                        <?php echo $post["spark"]; ?> <?php echo ($post["spark"] == 1) ? "spark" : "sparks"; ?>
+                                    </p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-2 text-end">
+                        <span class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>" onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
         </footer>
     </article>
 <?php endforeach; ?>

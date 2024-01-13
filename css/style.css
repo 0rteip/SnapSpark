@@ -9,7 +9,7 @@ div#profile {
     margin: 0 2% 0 2%
 }
 
-article footer {
+article footer span {
     font-size: larger;
 }
 
@@ -17,8 +17,6 @@ article .fa-star:hover,
 article .fa-comment:hover {
     cursor: pointer;
 }
-
-
 
 .liked-star {
     color: #ff0000;
@@ -53,7 +51,8 @@ ul {
     list-style: none;
 }
 
-#commentArea {
+#commentArea,
+#descArea {
     resize: none;
     height: 1rem;
 }
