@@ -8,7 +8,7 @@
                 <a class="nav-link" href="search.php"><span class="fa fa-search"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><span class="fa fa-plus-square"></span></a>
+                <a class="nav-link" href="upload-post.php"><span class="fa fa-plus-square"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><span class="fa fa-heart"></span></a>
