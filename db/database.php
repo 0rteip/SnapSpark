@@ -16,8 +16,9 @@ final class DatabaseHelper
     public function getAllUsers()
     {
         $query = "SELECT username
-                  FROM utenti";
+                  FROM utenti WHERE username!=? ";
         $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $_SESSION['username']);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -428,10 +429,55 @@ final class DatabaseHelper
 
     public function unfollowUser($follower, $user)
     {
-        echo "ccc";
         $query = "DELETE FROM follow WHERE follower=? AND user=? ";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ss", $follower, $user);
         $stmt->execute();
+    }
+
+    public function findExistingChat()
+    {
+        $query = "SELECT sen_username rec_username testo FROM messaggio";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    public function sendMessage($sender, $reciver, $testo)
+    {
+        $date = date('Y-m-d H:i:s');
+        $id = $this->getLastMessageId();
+        $query = "INSERT INTO messaggio(sen_username, rec_username, testo, id, data) VALUES (?,?,?,?,?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sssis', $sender, $reciver, $testo, $id, $date);
+        $stmt->execute();
+    }
+    private function getLastMessageId()
+    {
+        $query = "SELECT MAX(id) as id FROM messaggio";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        if (count($result) == 0) {
+            return 1;
+        } else {
+            return $result[0]['id']+1;
+        }
+    }
+
+    public function getMessages($sender, $reciver) {
+        $query = "SELECT sen_username as sender, testo, data FROM messaggio WHERE (sen_username=? AND rec_username=?) OR (rec_username=? AND sen_username=? ) ORDER BY data";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssss', $sender, $reciver, $sender, $reciver );
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getChats() {
+        $sender = $_SESSION['username'];
+        $query = "SELECT sen_username as sender, rec_username as reciver, testo, data FROM messaggio WHERE sen_username=? OR rec_username=? ORDER BY data";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ss', $sender,$sender );
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
