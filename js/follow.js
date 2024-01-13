@@ -8,7 +8,7 @@ function segui() {
         if (this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
             const info = JSON.parse(this.responseText);
-            init(info.followed, document.getElementById('currentUser').innerHTML, bt)
+            init(info.followed, document.getElementById('courrentUser').innerHTML, bt)
         }
     };
 
@@ -26,11 +26,13 @@ function init(array, username, bt) {
 }
 
 const bt = document.getElementById("follow-bt");
-bt.addEventListener("click", function () {
-    if (bt.getAttribute('value') === 'follow') {
-        bt.setAttribute('value', 'unfollow');
-    } else {
-        bt.setAttribute('value', 'follow');
-    }
-});
+if(bt !== null) {
+    bt.addEventListener("click", function () {
+        if (bt.getAttribute('value') === 'follow') {
+            bt.setAttribute('value', 'unfollow');
+        } else {
+            bt.setAttribute('value', 'follow');
+        }
+    });
+}
 segui();
