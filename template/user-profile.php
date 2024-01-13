@@ -6,7 +6,7 @@
                     <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="me-2" alt="" id="avatar">
                 </li>
                 <li>
-                    <label id='currentUser'><?php echo $templateParams['username'] ?></label>
+                    <label id='courrentUser'><?php echo $templateParams['username'] ?></label>
                 </li>
             </ul>
         </div>
@@ -53,8 +53,8 @@
     </div>
 </div>
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
+<div class="row">
+    <div class="col-4">
         <div class="card">
             <div class="card-body">
                 <p class="card-text">
@@ -66,10 +66,15 @@
         </div>
     </div>
     <?php if ($_SESSION['username'] !== $templateParams['username']) { ?>
-        <div class="col" id="follow-button">
-            <form action="" method="POST">
-                <input class="btn btn-primary" type="submit" value="" name="follow" id="follow-bt">
-            </form>
+                <div class="col-1" id="follow-button">
+                    <form action="" method="POST">
+                        <input class="btn btn-primary" type="submit" value="" name="follow" id="follow-bt">
+                    </form>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-primary" onclick="location.href='chat.php?reciver=<?php echo $templateParams['username'] ?>'" value="" name="message" id="message-bt">Messaggia</button>
+                </div>
+            </div>
         </div>
     <?php } ?>
 </div>

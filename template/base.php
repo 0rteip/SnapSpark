@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,10 +15,9 @@
     <nav class="navbar bd-navbar sticky-top bg-info" aria-label="user-navbar">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="index.php">SnapSpark</a>
-            <?php if ($templateParams["nome"] == "template/lista-post.php") {
-                require("search-bar.php");
-            }
-            ?>
+            <?php if ($templateParams["nome"] == "template/lista-post.php") { ?>
+              <button type="button" class="btn btn-primary" onclick="location.href = 'chat.php'">Chat</button>
+            <?php }?>
         </div>
     </nav>
 

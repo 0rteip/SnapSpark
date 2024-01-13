@@ -5,5 +5,5 @@ $(document).ready(function () {
 
     $('ul.navbar-nav a').filter(function() {
         return this.href == url;
-    }).addClass('active').attr("aria-current", "page");
+    }).addClass('active').attr("aria-courrent", "page");
 });
