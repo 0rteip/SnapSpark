@@ -1,11 +1,13 @@
 <?php
 require_once "bootstrap.php";
 
-if ($_SESSION["username"] == null) {
+if (!isUserLoggedIn()) {
     header("location:login.php");
 }
 
 $templateParams["titolo"] = "SnapSpark - Upload";
+$templateParams["hashtag"] = $dbh->getDailyHashtag();
+
 
 if (isUserLoggedIn()) {
     $templateParams["nome"] = "template/create-post.php";

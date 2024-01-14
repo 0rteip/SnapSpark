@@ -1,8 +1,13 @@
 <?php
 require_once "bootstrap.php";
 
-if ($_SESSION["username"] == null) {
+if (!isUserLoggedIn()) {
     header("location:login.php");
 }
-$templateParams['nome'] = 'search-users.php';
+
+$templateParams["titolo"] = "SnapSpark - Search users";
+$templateParams["hashtag"] = $dbh->getDailyHashtag();
+$templateParams["nome"] = "search-users.php";
+$templateParams["showNavBar"] = true;
+
 require_once "template/base.php";
