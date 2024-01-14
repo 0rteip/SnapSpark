@@ -67,7 +67,6 @@ ul {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
 }
-
 .user-card {
     display: flex;
     align-items: center;
@@ -77,21 +76,27 @@ ul {
     border-radius: 15px;
     margin: 10px;
   }
+  #chat-c {
+    max-width: auto;
+    border: none;
+  }
+
   .avatar {
     border-radius: 50%;
     width: 5%;
     height: 5%;
     margin-right: 15px;
   }
-  .user-info {
-    flex-grow: 1;
-  }
+
   .user-name {
     font-weight: bold;
     margin-bottom: 5px;
   }
-  .last-message {
+  .custom-card .card-text {
     color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
 a:link , a:visited{
