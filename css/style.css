@@ -9,6 +9,10 @@ div#profile {
     margin: 0 2% 0 2%
 }
 
+button:focus {
+    outline: 2px solid #007bff !important;
+}
+
 article footer span {
     font-size: larger;
 }
