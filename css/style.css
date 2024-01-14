@@ -1,6 +1,15 @@
 /* article>header>a>img {
     max-height: 2rem;
 } */
+
+body {
+    background-color: #070707;
+}
+
+.bg-main-color {
+    background-color: #F4E04D;
+}
+
 img#avatar {
     max-height: 2rem;
 }
@@ -23,7 +32,7 @@ article .fa-comment:hover {
 }
 
 .liked-star {
-    color: #ff0000;
+    color: #ffd364;
 }
 
 .like-star:hover {
@@ -33,7 +42,7 @@ article .fa-comment:hover {
 }
 
 .liked-star:hover {
-    color: #ff0000;
+    color: #FF3040;
     font-size: 120%;
 }
 
@@ -42,9 +51,36 @@ footer p {
     text-align: center;
 }
 
-a.active {
-    color: #ff0000 !important;
+/* if class nav-link and active */
+.nav-link.active {
+    color: whitez !important;
 }
+
+.nav-link {
+    color: #070707 !important;
+}
+
+.icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-link.active span::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    /* Altezza della sottolineatura */
+    background-color: #070707;
+    /* Colore della sottolineatura */
+    bottom: 0;
+    left: 0;
+    /* Posizione della sottolineatura */
+    /* z-index: 1 !important; */
+    border-radius: 10px;
+}
+
+
 
 /* article > img {
     width:  100px;
@@ -71,6 +107,7 @@ ul {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
 }
+
 .user-card {
     display: flex;
     align-items: center;
@@ -79,50 +116,52 @@ ul {
     border: 1px solid #ddd;
     border-radius: 15px;
     margin: 10px;
-  }
-  #chat-c {
+}
+
+#chat-c {
     max-width: auto;
     border: none;
-  }
+}
 
-  .avatar {
+.avatar {
     border-radius: 50%;
     width: 5%;
     height: 5%;
     margin-right: 15px;
-  }
+}
 
-  .user-name {
+.user-name {
     font-weight: bold;
     margin-bottom: 5px;
-  }
-  .custom-card .card-text {
+}
+
+.custom-card .card-text {
     color: black;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
+}
 
-a:link , a:visited{
+a:link,
+a:visited {
     text-decoration: none;
     color: black;
 }
-.text-center {
-    margin : 50px;
-}
 
-  .chat {
+.chat {
     max-height: 400px;
     overflow-y: auto;
     padding: 15px;
-  }
+}
+
 .msg {
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 15px;
     max-width: 80%;
     word-wrap: break-word;
-  }
+}
+
 .user-msg {
     background-color: #007bff;
     color: #fff;
@@ -134,6 +173,6 @@ a:link , a:visited{
     margin-right: auto;
 }
 
-.card {
-    margin-top: 1%;
+#drop-area {
+    cursor: pointer;
 }

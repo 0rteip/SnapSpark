@@ -111,17 +111,16 @@ function previewFile(file) {
     reader.readAsDataURL(file);
     reader.onloadend = function () {
         let img = document.createElement('img');
-        img.classList.add('card-img');
+        img.classList.add('card-img-top');
         img.src = reader.result;
         img.alt = "preview";
         gallery.appendChild(img);
 
-        document.getElementById('drop-area').style.cssText = 'display:none !important';
+        document.getElementsByClassName('card-body')[0].style.cssText = 'display:none !important';
 
-        const drop_area = document.getElementsByClassName('card-body')[0];
-        const div = document.createElement('div');
-        div.classList.add('card-footer');
-        div.innerHTML = `
+        const card_footer = document.createElement('div');
+        card_footer.classList.add('card-footer');
+        card_footer.innerHTML = `
         <div class="container">
                 <form aria-label="post form" method="get" action="create-post.php" role="form" class="row align-items-center justify-content-center">
                     <label for="descArea" class="form-label visually-hidden">Description</label>
@@ -134,6 +133,6 @@ function previewFile(file) {
                 </form>
             </div>
         `;
-        insertAfter(div, drop_area);
+        insertAfter(card_footer, gallery);
     }
 }

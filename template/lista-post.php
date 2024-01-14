@@ -18,40 +18,40 @@
 
         <footer class="card-footer">
 
-            <div class="container text-center p-0">
-                <div class="row">
+            <!-- <div class="container text-center p-0 m-0"> -->
+            <div class="row">
 
-                    <div class="col-10 text-start">
-                        <div class="row">
-                            <div class="col-auto">
-                                <button type="button" class="btn p-0" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)">
-                                    <span aria-hidden="true" user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star"></span>
+                <div class="col-10 text-start">
+                    <div class="row">
+                        <div class="col-auto">
+                            <button type="button" class="btn p-0" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)">
+                                <span aria-hidden="true" user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star"></span>
 
-                                    <span class="visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
-                                </button>
-                                <!-- <span user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span> -->
+                                <span class="visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
+                            </button>
+                            <!-- <span user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span> -->
 
-                            </div>
-                            <div id="sparks-num" class="col-auto ps-0">
-                                <?php if ($post["spark"] > 0) : ?>
-                                    <p id="sparks-<?php echo $post['username'] . '-' . $post['id'] ?>" class="card-text mx-auto text-start">
-                                        <?php echo $post["spark"]; ?> <?php echo ($post["spark"] == 1) ? "spark" : "sparks"; ?>
-                                    </p>
-                                <?php endif; ?>
-                            </div>
+                        </div>
+                        <div id="sparks-num" class="col-auto ps-0">
+                            <?php if ($post["spark"] > 0) : ?>
+                                <p id="sparks-<?php echo $post['username'] . '-' . $post['id'] ?>" class="card-text mx-auto text-start">
+                                    <?php echo $post["spark"]; ?> <?php echo ($post["spark"] == 1) ? "spark" : "sparks"; ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-2 text-end">
-                        <button id="tr" type="button" class="btn p-0" onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)">
-                            <span aria-hidden="true" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>">
-                            </span>
+                <div class="col-2 text-end">
+                    <button id="tr" type="button" class="btn p-0" onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)">
+                        <span aria-hidden="true" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>">
+                        </span>
 
-                            <span class=" visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
-                        </button>
-                    </div>
+                        <span class=" visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
+                    </button>
                 </div>
             </div>
+            <!-- </div> -->
 
 
 

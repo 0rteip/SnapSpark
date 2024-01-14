@@ -402,8 +402,7 @@ final class DatabaseHelper {
         $stmt->execute();
     }
 
-    public function unfollowUser($follower, $user)
-    {
+    public function unfollowUser($follower, $user) {
         $query = "DELETE FROM follow WHERE follower=? AND user=? ";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ss", $follower, $user);
@@ -441,15 +440,13 @@ final class DatabaseHelper {
         $stmt->execute();
     }
 
-    public function findExistingChat()
-    {
+    public function findExistingChat() {
         $query = "SELECT sen_username rec_username testo FROM messaggio";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-    public function sendMessage($sender, $reciver, $testo)
-    {
+    public function sendMessage($sender, $reciver, $testo) {
         $date = date('Y-m-d H:i:s');
         $id = $this->getLastMessageId();
         $query = "INSERT INTO messaggio(sen_username, rec_username, testo, id, data) VALUES (?,?,?,?,?)";
@@ -457,33 +454,47 @@ final class DatabaseHelper {
         $stmt->bind_param('sssis', $sender, $reciver, $testo, $id, $date);
         $stmt->execute();
     }
-    private function getLastMessageId()
-    {
+    private function getLastMessageId() {
         $query = "SELECT MAX(id) as id FROM messaggio";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        if (count($result) == 0) {
+        if (empty($result)) {
             return 1;
         } else {
-            return $result[0]['id']+1;
+            return $result[0]['id'] + 1;
         }
     }
 
     public function getMessages($sender, $reciver) {
-        $query = "SELECT sen_username as sender, testo, data FROM messaggio WHERE (sen_username=? AND rec_username=?) OR (rec_username=? AND sen_username=? ) ORDER BY data";
+        $query = "SELECT sen_username as sender, testo, data
+                  FROM messaggio
+                  WHERE (sen_username=? AND rec_username=?) OR (rec_username=? AND sen_username=? ) ORDER BY data";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssss', $sender, $reciver, $sender, $reciver );
+        $stmt->bind_param('ssss', $sender, $reciver, $sender, $reciver);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getChats() {
         $sender = $_SESSION['username'];
-        $query = "SELECT sen_username as sender, rec_username as reciver, testo, data FROM messaggio WHERE sen_username=? OR rec_username=? ORDER BY data";
+        $query = "SELECT sen_username as sender, rec_username as reciver, testo, data
+                  FROM messaggio
+                  WHERE sen_username=? OR rec_username=? ORDER BY data";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ss', $sender,$sender );
+        $stmt->bind_param('ss', $sender, $sender);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDailyHashtag() {
+        $query = "SELECT nome, descrizione
+                  FROM hashtags
+                  ORDER BY RAND(CONVERT(CURDATE(), UNSIGNED))
+                  LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
     }
 }
