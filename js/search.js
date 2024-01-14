@@ -53,38 +53,6 @@ function followerSearch(string, type, courrent, action) {
     xhr.send("string=" + string + "&type=" + type + "&courrent=" + courrent + "&action=" + action);
 }
 
-function chatSearch(string, type) {
-    if(string.length === 0) {
-        window.location.reload(true);
-        return;
-    }
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "utils/search.php");
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function () {
-        console.log(this.responseText);
-        let result = JSON.parse(this.responseText);
-        let chats =""
-        result.chats.forEach(chat => {
-            chats += 
-            `
-            <a href="chat.php?reciver=${chat.user}">
-                <div class="user-card">
-                    <img alt="" class="avatar" id="chat-avatar" src="${result.avatar}avatar.png">
-                    <div class="user-info">
-                        <div class="user-name">${chat.user}</div>
-                        <div class="last-message">${chat.testo}</div>
-                    </div>
-                </div>
-            </a>
-            `
-        })
-        document.getElementById('chat-container').innerHTML = chats;
-    }
-    xhr.send("string=" + string + "&type=" + type );
-}
-
 function s() {
     if (location.hash.indexOf("create-chat")) {
         let links = document.getElementsByClassName("reciver");
