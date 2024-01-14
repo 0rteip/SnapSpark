@@ -51,7 +51,6 @@ function displayMessages() {
         }
     };
     xhr.send("sender=" + container.getAttribute('sender') + "&reciver=" + container.getAttribute('reciver') + "&action=update");
+    setTimeout('displayMessages()', 5000);
 }
-
 displayMessages();
-
