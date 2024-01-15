@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 15, 2024 at 03:11 AM
+-- Generation Time: Jan 15, 2024 at 09:20 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,10 +47,12 @@ INSERT INTO `commenti` (`post_user`, `post_id`, `user`, `id`, `testo`, `upvote`)
 ('john_doe', 1, 'pietro_v', 2, 'pollo', 4),
 ('john_doe', 1, 'pietro_v', 3, 'asd', 1),
 ('john_doe', 1, 'pietro_v', 4, 'as', 3),
-('john_doe', 1, 'pietro_v', 5, 'ads', 0),
+('john_doe', 1, 'pietro_v', 5, 'ads', 1),
 ('john_doe', 1, 'pietro_v', 6, 'pollo', 4),
 ('john_doe', 1, 'pietro_v', 7, 'as', 2),
-('john_doe', 1, 'pietro_v', 8, 's', 2);
+('john_doe', 1, 'pietro_v', 8, 's', 2),
+('john_doe', 1, 'pietro_v', 9, 'asd', 0),
+('pietro_v', 4, 'pietro_v', 1, 'brutto', 0);
 
 -- --------------------------------------------------------
 
@@ -70,6 +72,7 @@ CREATE TABLE `follow` (
 INSERT INTO `follow` (`follower`, `user`) VALUES
 ('daniel_carter', 'john_doe'),
 ('john_doe', 'pietro_v'),
+('pietro_v', 'asd'),
 ('pietro_v', 'john_doe'),
 ('pietro_v', 'sam_wilson');
 
@@ -146,6 +149,7 @@ INSERT INTO `like_post` (`comment_username`, `post_username`, `post_id`, `commen
 ('daniel_carter', 'john_doe', 1, 1, 'pietro_v'),
 ('pietro_v', 'john_doe', 1, 2, 'pietro_v'),
 ('pietro_v', 'john_doe', 1, 4, 'pietro_v'),
+('pietro_v', 'john_doe', 1, 5, 'pietro_v'),
 ('pietro_v', 'john_doe', 1, 6, 'pietro_v'),
 ('pietro_v', 'john_doe', 1, 8, 'pietro_v');
 
@@ -169,6 +173,7 @@ CREATE TABLE `messaggio` (
 
 INSERT INTO `messaggio` (`sen_username`, `rec_username`, `testo`, `id`, `data`) VALUES
 ('john_doe', 'pietro_v', 'come va', 2, '2024-01-14 13:26:10.0'),
+('pietro_v', 'asd', 'ciao', 5, '2024-01-15 21:18:07.0'),
 ('pietro_v', 'john_doe', 'ciao', 1, '2024-01-14 13:23:56.0'),
 ('pietro_v', 'john_doe', 'tutto bene grazie', 3, '2024-01-14 13:26:23.0'),
 ('pietro_v', 'sam_wilson', 'ciao sam', 4, '2024-01-14 19:39:24.0');
@@ -197,7 +202,8 @@ INSERT INTO `posts` (`username`, `file`, `id`, `descrizione`, `data`, `spark`) V
 ('pietro_v', 'ded3382d4f13b442dcf4bbca137878b05218d33f.png', 1, 'La bellezza dello schifo che ti rompe il cazzo', '2024-01-13 10:54:30', 2),
 ('pietro_v', '5275cf50ae058d423e0212871da5c742c07a84df.jpg', 2, 'asd', '2024-01-13 11:00:04', 1),
 ('pietro_v', '5275cf50ae058d423e0212871da5c742c07a84df.jpg', 3, 'la mia facciona', '2024-01-14 14:42:30', 1),
-('pietro_v', '3c9341202ff7326d58d7ea9d0a372b2e465e1f08.png', 4, 'Cure', '2024-01-14 19:43:50', 0);
+('pietro_v', '3c9341202ff7326d58d7ea9d0a372b2e465e1f08.png', 4, 'Cure', '2024-01-14 19:43:50', 0),
+('pietro_v', 'f21a2cb1bb13974de946a57d73b92a37627a60e8.png', 5, 'Un altra cura bellissima', '2024-01-15 10:26:24', 0);
 
 -- --------------------------------------------------------
 
@@ -243,6 +249,7 @@ CREATE TABLE `utenti` (
 
 INSERT INTO `utenti` (`username`, `nome`, `cognome`, `sesso`, `password`, `data_nascita`, `mail`, `numero`, `biografia`, `nome_social`, `profile_img`) VALUES
 ('alex_smith', 'Alex', 'Smith', 'M', 'alexpass', '1997-05-18', 'alex.smith@example.com', 4567788990, 'Exploring the world one photo at a time.', 'SnapSpark', ''),
+('asd', 'Mario', 'Rossi', 'M', '123', '2002-10-22', 'asdasd@gmail.com', 123, 'cia', 'SnapSpark', 'e44f8415a704958fe6790d9d79ec75a8d2ddf2a3.png'),
 ('daniel_carter', 'Daniel', 'Carter', 'M', 'danielpass', '1985-11-08', 'daniel.carter@example.com', 5566778899, 'Photography enthusiast and positivity spreader.', 'SnapSpark', ''),
 ('emily_wang', 'Emily', 'Wang', 'F', 'emilypass', '1992-12-05', 'emily.wang@example.com', 1234455667, 'Chasing dreams and capturing moments.', 'SnapSpark', ''),
 ('grace_anderson', 'Grace', 'Anderson', 'F', 'gracepass', '1996-07-25', 'grace.anderson@example.com', 3344556677, 'Every day is a gift.', 'SnapSpark', ''),
