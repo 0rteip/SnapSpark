@@ -1,7 +1,3 @@
-/* article>header>a>img {
-    max-height: 2rem;
-} */
-
 body {
     background-color: #070707;
 }
@@ -10,7 +6,7 @@ body {
     background-color: #F4E04D;
 }
 
-img#avatar {
+.card img#avatar {
     max-height: 2rem;
 }
 
@@ -69,23 +65,15 @@ footer p {
     content: '';
     position: absolute;
     width: 100%;
-    height: 2px;
+    height: 3px;
     /* Altezza della sottolineatura */
     background-color: #070707;
     /* Colore della sottolineatura */
     bottom: 0;
     left: 0;
     /* Posizione della sottolineatura */
-    /* z-index: 1 !important; */
     border-radius: 10px;
 }
-
-
-
-/* article > img {
-    width:  100px;
-    height: 100px;
-} */
 
 ul {
     list-style: none;
@@ -95,17 +83,6 @@ ul {
 #descArea {
     resize: none;
     height: 1rem;
-}
-
-.gradient-custom-2 {
-    /* fallback for old browsers */
-    background: #fbc2eb;
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
-
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
 }
 
 .user-card {
@@ -124,10 +101,10 @@ ul {
 }
 
 .avatar {
-    border-radius: 50%;
-    width: 5%;
-    height: 5%;
-    margin-right: 15px;
+    /* border-radius: 50%; */
+    /* width: 5%;z */
+    height: 4rem;
+    /* margin-right: 15px; */
 }
 
 .user-name {

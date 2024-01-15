@@ -265,7 +265,7 @@ final class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $result->fetch_all(MYSQLI_ASSOC)[0]["biografia"];
     }
 
     public function likeComment($commentUser, $postUser, $postId, $commentId) {
@@ -490,7 +490,7 @@ final class DatabaseHelper {
     public function getDailyHashtag() {
         $query = "SELECT nome, descrizione
                   FROM hashtags
-                  ORDER BY RAND(CONVERT(CURDATE(), UNSIGNED))
+                  ORDER BY RAND(CURDATE() * CURDATE())
                   LIMIT 1";
         $stmt = $this->db->prepare($query);
         $stmt->execute();

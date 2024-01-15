@@ -32,9 +32,9 @@
                             <!-- <span user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span> -->
 
                         </div>
-                        <div id="sparks-num" class="col-auto ps-0">
+                        <div id="sparks-num-<?php echo $post['username'] . '-' . $post['id']; ?>" class="col-auto ps-0">
                             <?php if ($post["spark"] > 0) : ?>
-                                <p id="sparks-<?php echo $post['username'] . '-' . $post['id'] ?>" class="card-text mx-auto text-start">
+                                <p id="sparks-<?php echo $post['username'] . '-' . $post['id']; ?>" class="card-text mx-auto text-start">
                                     <?php echo $post["spark"]; ?> <?php echo ($post["spark"] == 1) ? "spark" : "sparks"; ?>
                                 </p>
                             <?php endif; ?>

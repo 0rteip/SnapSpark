@@ -7,8 +7,8 @@ function likePost(post_user, post_id) {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const text = JSON.parse(this.responseText);
+            const sparks = document.getElementById("sparks-num-" + post_user + "-" + post_id);
 
-            const sparks = document.getElementById("sparks-num");
             if (text.likes > 0) {
                 sparks.innerHTML = `
                 <p id="sparks-${post_user}'-'${post_id}" class="card-text mx-auto text-start">
@@ -18,17 +18,11 @@ function likePost(post_user, post_id) {
             } else {
                 sparks.innerHTML = "";
             }
-
-
-            console.log(text);
             const star = document.getElementById("post-star-" + post_user + "-" + post_id);
 
             star.classList.toggle("liked-star");
             star.classList.toggle("fa-regular");
             star.classList.toggle("fa-solid");
-
-            const likes = document.getElementById("sparks-" + post_user + "-" + post_id);
-            likes.innerHTML = text.likes;
         }
     };
 

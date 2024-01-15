@@ -6,33 +6,30 @@ function segui() {
 
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText);
             const info = JSON.parse(this.responseText);
-            init(info.followed, document.getElementById('courrentUser').innerHTML, bt)
+            init(info.followed, document.getElementById('current-user').innerHTML)
         }
     };
 
     xhr.send();
 }
-function init(array, username, bt) {
-    console.log(username);
+
+function init(array, username) {
     if (array.includes(username)) {
-        bt.setAttribute('value', 'unfollow');
-        console.log('set follow');
+        bt.setAttribute('value', 'Unfollow');
     } else {
-        bt.setAttribute('value', 'follow');
-        console.log('set unfollow');
+        bt.setAttribute('value', 'Follow');
     }
 }
 
 const bt = document.getElementById("follow-bt");
-if(bt !== null) {
-    bt.addEventListener("click", function () {
-        if (bt.getAttribute('value') === 'follow') {
-            bt.setAttribute('value', 'unfollow');
-        } else {
-            bt.setAttribute('value', 'follow');
-        }
-    });
-}
+
+bt.addEventListener("click", function () {
+    if (bt.getAttribute('value') === 'Follow') {
+        bt.setAttribute('value', 'Unfollow');
+    } else {
+        bt.setAttribute('value', 'Follow');
+    }
+});
+
 segui();
