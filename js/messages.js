@@ -1,4 +1,7 @@
 function sendMessage() {
+    if (document.getElementById('message-text').value.length === 0) {
+        return;
+    }
     let container = document.getElementById('chat-container');
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/messages.php")
@@ -19,7 +22,7 @@ function getCurrentMessages() {
     let result = [];
     messages.forEach(msg => {
         text = msg.getElementsByClassName('text-message')[0].innerHTML;
-        date = msg.getElementsByClassName('date-message')[0].innerHTML;
+        date = msg.getElementsByClassName('date-message')[0].getAttribute('data');
         let tmp = {sender:msg.getAttribute("sender"),testo:text, data:date};
         result.push(tmp)
     })
@@ -39,6 +42,7 @@ function displayMessages() {
             let messages = info.messages;
             let msgs= "";
             if (JSON.stringify(messages) !== JSON.stringify(getCurrentMessages())) {
+                let data = "";
                 messages.forEach(msg => {
                     let class_extra = "";
                     if (msg.sender === container.getAttribute('sender')) {
@@ -46,18 +50,26 @@ function displayMessages() {
                     } else {
                         class_extra = "reciver-msg msg";
                     }
+                    console.log(msg.data.substring(0,10))
+                    if (data !== msg.data.substring(0,10)) {
+                        data =  msg.data.substring(0,10);
+                        msgs +=
+                        `
+                        <div class="new-day">${msg.data.substring(0,10)}</div>
+                        `
+                    }
                     msgs += 
                     `
                     <div class="message-box" sender="${msg.sender}">
                         <div class="${class_extra}">
                             <div class="text-message">${msg.testo}</div>
-                            <div class="date-message">${msg.data}</div>
+                            <div class="date-message" date="${msg.data}">${msg.data.substring(10, 16)}</div>
                         </div>
                     </div>
                     `
                 });
-                document.getElementById('chat').innerHTML = msgs;
-                let chatMessages = document.getElementById("chat");
+                document.getElementById('chat-box').innerHTML = msgs;
+                let chatMessages = document.getElementById("chat-box");
                 // Scrolla automaticamente verso l'ultimo messaggio al caricamento della pagina
                 chatMessages.scrollTop = chatMessages.scrollHeight;
                 console.log("entro");

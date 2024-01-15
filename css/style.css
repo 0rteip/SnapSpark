@@ -125,29 +125,50 @@ a:visited {
     color: black;
 }
 
+.new-day {
+    margin : 2%;
+    color: #9c9999;
+}
+#chat-container {
+    max-width: 50%;
+}
 .chat {
-    max-height: 400px;
-    overflow-y: auto;
     padding: 15px;
+    border : 2px solid black;
+}
+#user-information {
+    border: 2px solid black;
+    border-bottom: 0;
+    margin : 0px;
+}
+.chat-box {
+    max-height: 400px;
+    margin-bottom: 10px; 
+    overflow-y: auto;
 }
 
 .msg {
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 15px;
-    max-width: 80%;
+    margin-bottom: 20px;
+    max-width: 50%;
     word-wrap: break-word;
+    text-align: left;
 }
 
 .user-msg {
     background-color: #007bff;
     color: #fff;
     margin-left: auto;
+    
 }
 
 .reciver-msg {
     background-color: #f0f0f0;
     margin-right: auto;
+}
+.date-message {
+    text-align: right;
 }
 
 #drop-area {
