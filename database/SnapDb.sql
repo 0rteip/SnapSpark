@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 11, 2024 at 04:07 PM
+-- Generation Time: Jan 15, 2024 at 03:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,13 +41,16 @@ CREATE TABLE `commenti` (
 --
 
 INSERT INTO `commenti` (`post_user`, `post_id`, `user`, `id`, `testo`, `upvote`) VALUES
-('john_doe', 1, 'daniel_carter', 1, 'ciao', 0),
-('john_doe', 1, 'pietro_v', 1, 'cioa', 0),
-('john_doe', 1, 'pietro_v', 2, 'pollo', 1),
-('john_doe', 1, 'pietro_v', 3, 'asd', 0),
-('john_doe', 1, 'pietro_v', 4, 'as', 1),
+('john_doe', 1, 'daniel_carter', 1, 'ciao', 2),
+('pietro_v', 1, 'john_doe', 1, 'Gay', 0),
+('john_doe', 1, 'pietro_v', 1, 'cioa', 1),
+('john_doe', 1, 'pietro_v', 2, 'pollo', 4),
+('john_doe', 1, 'pietro_v', 3, 'asd', 1),
+('john_doe', 1, 'pietro_v', 4, 'as', 3),
 ('john_doe', 1, 'pietro_v', 5, 'ads', 0),
-('john_doe', 1, 'pietro_v', 6, 'pollo', 0);
+('john_doe', 1, 'pietro_v', 6, 'pollo', 4),
+('john_doe', 1, 'pietro_v', 7, 'as', 2),
+('john_doe', 1, 'pietro_v', 8, 's', 2);
 
 -- --------------------------------------------------------
 
@@ -66,6 +69,7 @@ CREATE TABLE `follow` (
 
 INSERT INTO `follow` (`follower`, `user`) VALUES
 ('daniel_carter', 'john_doe'),
+('john_doe', 'pietro_v'),
 ('pietro_v', 'john_doe'),
 ('pietro_v', 'sam_wilson');
 
@@ -114,7 +118,11 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`post_username`, `post_id`, `username`) VALUES
-('john_doe', 1, 'pietro_v');
+('john_doe', 1, 'pietro_v'),
+('pietro_v', 1, 'john_doe'),
+('pietro_v', 1, 'pietro_v'),
+('pietro_v', 2, 'john_doe'),
+('pietro_v', 3, 'pietro_v');
 
 -- --------------------------------------------------------
 
@@ -135,8 +143,11 @@ CREATE TABLE `like_post` (
 --
 
 INSERT INTO `like_post` (`comment_username`, `post_username`, `post_id`, `comment_id`, `like_username`) VALUES
+('daniel_carter', 'john_doe', 1, 1, 'pietro_v'),
 ('pietro_v', 'john_doe', 1, 2, 'pietro_v'),
-('pietro_v', 'john_doe', 1, 4, 'pietro_v');
+('pietro_v', 'john_doe', 1, 4, 'pietro_v'),
+('pietro_v', 'john_doe', 1, 6, 'pietro_v'),
+('pietro_v', 'john_doe', 1, 8, 'pietro_v');
 
 -- --------------------------------------------------------
 
@@ -145,12 +156,22 @@ INSERT INTO `like_post` (`comment_username`, `post_username`, `post_id`, `commen
 --
 
 CREATE TABLE `messaggio` (
-  `sen_username` char(1) NOT NULL,
-  `rec_unsername` char(1) NOT NULL,
+  `sen_username` char(30) NOT NULL,
+  `rec_username` char(30) NOT NULL,
   `testo` char(100) NOT NULL,
-  `id` bigint(20) NOT NULL,
-  `data` datetime NOT NULL
+  `id` bigint(255) NOT NULL,
+  `data` datetime(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `messaggio`
+--
+
+INSERT INTO `messaggio` (`sen_username`, `rec_username`, `testo`, `id`, `data`) VALUES
+('john_doe', 'pietro_v', 'come va', 2, '2024-01-14 13:26:10.0'),
+('pietro_v', 'john_doe', 'ciao', 1, '2024-01-14 13:23:56.0'),
+('pietro_v', 'john_doe', 'tutto bene grazie', 3, '2024-01-14 13:26:23.0'),
+('pietro_v', 'sam_wilson', 'ciao sam', 4, '2024-01-14 19:39:24.0');
 
 -- --------------------------------------------------------
 
@@ -160,10 +181,10 @@ CREATE TABLE `messaggio` (
 
 CREATE TABLE `posts` (
   `username` char(30) NOT NULL,
-  `file` char(20) NOT NULL,
+  `file` char(50) NOT NULL,
   `id` int(11) NOT NULL,
   `descrizione` varchar(100) NOT NULL,
-  `data` date NOT NULL,
+  `data` datetime NOT NULL,
   `spark` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -172,7 +193,11 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`username`, `file`, `id`, `descrizione`, `data`, `spark`) VALUES
-('john_doe', 'image1.jpg', 1, 'Enjoying a sunny day!', '2023-12-26', 1);
+('john_doe', 'image1.jpg', 1, 'Enjoying a sunny day!', '2023-12-26 09:40:34', 1),
+('pietro_v', 'ded3382d4f13b442dcf4bbca137878b05218d33f.png', 1, 'La bellezza dello schifo che ti rompe il cazzo', '2024-01-13 10:54:30', 2),
+('pietro_v', '5275cf50ae058d423e0212871da5c742c07a84df.jpg', 2, 'asd', '2024-01-13 11:00:04', 1),
+('pietro_v', '5275cf50ae058d423e0212871da5c742c07a84df.jpg', 3, 'la mia facciona', '2024-01-14 14:42:30', 1),
+('pietro_v', '3c9341202ff7326d58d7ea9d0a372b2e465e1f08.png', 4, 'Cure', '2024-01-14 19:43:50', 0);
 
 -- --------------------------------------------------------
 
@@ -279,9 +304,9 @@ ALTER TABLE `like_post`
 -- Indexes for table `messaggio`
 --
 ALTER TABLE `messaggio`
-  ADD PRIMARY KEY (`sen_username`,`rec_unsername`,`id`),
-  ADD UNIQUE KEY `ID_messagio_IND` (`sen_username`,`rec_unsername`,`id`),
-  ADD KEY `FKscrive_IND` (`rec_unsername`);
+  ADD PRIMARY KEY (`sen_username`,`rec_username`,`id`),
+  ADD UNIQUE KEY `ID_messagio_IND` (`sen_username`,`rec_username`,`id`),
+  ADD KEY `FKscrive_IND` (`rec_username`);
 
 --
 -- Indexes for table `posts`
