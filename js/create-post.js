@@ -45,8 +45,6 @@ fileElem.addEventListener('change', function (e) {
 });
 
 function handleFiles(files) {
-    // files = [...files];
-    // files.forEach(previewFile);
     document.getElementById('gallery').innerHTML = '';
     previewFile(files[0]);
 
@@ -55,7 +53,6 @@ function handleFiles(files) {
 function insertAfter(newNode, existingNode) {
     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
 }
-
 
 function enableShare() {
     const tarea = document.getElementById("descArea");
@@ -96,6 +93,9 @@ function sharePost() {
             if (this.status === 200) {
                 // Gestisci la risposta dal server se necessario
                 console.log(this.responseText);
+
+                window.location.href = "user.php";
+
             } else {
                 // Gestisci eventuali errori
                 console.error("Errore durante la condivisione del post.");
@@ -122,16 +122,15 @@ function previewFile(file) {
         card_footer.classList.add('card-footer');
         card_footer.innerHTML = `
         <div class="container">
-                <form aria-label="post form" method="get" action="create-post.php" role="form" class="row align-items-center justify-content-center">
-                    <label for="descArea" class="form-label visually-hidden">Description</label>
+            <form aria-label="post form" method="get" action="create-post.php" role="form" class="row align-items-center justify-content-center">
+                <label for="descArea" class="form-label visually-hidden">Description</label>
 
-                    <div class="col-10 col-sm-10 ps-0">
-                        <textarea class="form-control" id="descArea" placeholder="Add a description..." onkeyup="enableShare()"></textarea>
-                    </div>
-                    <button id="shareButton" type="button" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" onclick="sharePost()" disabled>Share</button>
-
-                </form>
-            </div>
+                <div class="col-10 col-sm-10 ps-0">
+                    <textarea class="form-control" id="descArea" placeholder="Add a description..." onkeyup="enableShare()" required></textarea>
+                </div>
+                <button id="shareButton" type="button" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" onclick="sharePost()" disabled>Share</button>
+            </form>
+        </div>
         `;
         insertAfter(card_footer, gallery);
     }

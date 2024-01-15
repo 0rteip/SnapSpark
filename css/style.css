@@ -100,11 +100,12 @@ ul {
     border: none;
 }
 
-.avatar {
-    /* border-radius: 50%; */
-    /* width: 5%;z */
-    height: 4rem;
-    /* margin-right: 15px; */
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border: solid 1px black;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .user-name {
@@ -173,4 +174,57 @@ a:visited {
 
 #drop-area {
     cursor: pointer;
+}
+
+img#av {
+    max-height: 2rem !important;
+}
+
+
+/* .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+} */
+
+.image-container input {
+    /* visibility: hidden; */
+    height: 0;
+    width: 0;
+}
+
+.image-container label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border: solid 1px black;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.image-container img {
+    width: 100px;
+    height: 100px;
+    border: solid 1px black;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.cropper-img {
+    display: block;
+    max-width: 100%;
+}
+
+.cropper-preview {
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
+    border-radius: 50%;
 }
