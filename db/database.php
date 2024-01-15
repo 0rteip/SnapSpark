@@ -64,9 +64,10 @@ final class DatabaseHelper {
 
     public function getPostsByAuthor($username) {
 
-        $query = "SELECT username, file, id, descrizione, data, spark
-                  FROM posts
-                  WHERE username=?"; // ? is a placeholder
+        $query = "SELECT p.username, file, id, descrizione, data, spark, profile_img
+                  FROM posts AS p, utenti AS u
+                  WHERE p.username=? AND p.username = u.username
+                  ORDER BY data DESC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -88,6 +89,7 @@ final class DatabaseHelper {
     }
 
     public function insertNewUser(
+        $profileImg,
         $username,
         $nome,
         $cognome,
@@ -100,11 +102,11 @@ final class DatabaseHelper {
     ) {
         $nome_social = "SnapSpark";
         $query = "INSERT INTO utenti
-                  (username, nome, cognome, sesso, password, data_nascita, mail, numero, biografia, nome_social)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                  (username, nome, cognome, sesso, password, data_nascita, mail, numero, biografia, nome_social, profile_img)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param(
-            'sssssssiss',
+            'sssssssisss',
             $username,
             $nome,
             $cognome,
@@ -114,7 +116,8 @@ final class DatabaseHelper {
             $mail,
             $numero,
             $biografia,
-            $nome_social
+            $nome_social,
+            $profileImg
         );
         $stmt->execute();
         return $stmt->insert_id;
@@ -256,8 +259,8 @@ final class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC)[0]["id"];
     }
 
-    public function getUserBio($username) {
-        $query = "SELECT biografia
+    public function getUserInfo($username) {
+        $query = "SELECT biografia, profile_img
                   FROM utenti
                   WHERE username=?";
         $stmt = $this->db->prepare($query);
@@ -265,7 +268,7 @@ final class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result->fetch_all(MYSQLI_ASSOC)[0]["biografia"];
+        return $result->fetch_all(MYSQLI_ASSOC)[0];
     }
 
     public function likeComment($commentUser, $postUser, $postId, $commentId) {

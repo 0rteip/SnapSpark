@@ -1,15 +1,23 @@
 <?php
 require_once "bootstrap.php";
 
-$templateParams["titolo"] = "SnapSpark - Home";
+$templateParams["titolo"] = "SnapSpark - Create User";
 $templateParams["nome"] = "create-user.php";
+$templateParams["showNavBar"] = false;
 
 if (
-    isset($_POST["username"]) && isset($_POST["nome"]) && isset($_POST["cognome"])
-    && isset($_POST["sesso"]) && isset($_POST["password"]) && isset($_POST["data_nascita"])
-    && isset($_POST["mail"]) && isset($_POST["numero"]) && isset($_POST["biografia"])
+    isset($_POST["profile-img"]) && isset($_POST["username"]) && isset($_POST["nome"]) &&
+    isset($_POST["cognome"]) && isset($_POST["sesso"]) && isset($_POST["password"]) &&
+    isset($_POST["data_nascita"]) && isset($_POST["mail"]) && isset($_POST["numero"]) &&
+    isset($_POST["biografia"])
 ) {
+
+    $img = sha1("C:\\fakepath\\" . $_POST["profile-img"]) . ".png";
+
+    echo $img;
+
     $id = $dbh->insertNewUser(
+        $img,
         $_POST["username"],
         $_POST["nome"],
         $_POST["cognome"],
@@ -26,6 +34,9 @@ if (
         $msg = "Errore in inserimento!";
     }
     $_SESSION['username'] = $_POST['username'];
+    echo "fatto";
+} else {
+    $templateParams["requireCropper"] = true;
 }
 
 if (isUserLoggedIn()) {

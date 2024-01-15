@@ -1,11 +1,32 @@
 <?php foreach ($templateParams["posts"] as $post) : ?>
     <article class="card mb-3">
 
-        <header class="card-header">
+        <header class="card-header pt-3">
+
+            <div class="container col-">
+                <div class="row row-cols-2">
+                    <div class="col text-start align-middle">
+                        <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
+                            <?php if ($post["profile_img"] == "") : ?>
+                                <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
+                            <?php else : ?>
+                                <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>">
+                            <?php endif; ?>
+                            <?php echo $post["username"]; ?>
+                        </a>
+                    </div>
+                    <div class="col text-end">
+                        <?php echo $post["data"] ?>
+                    </div>
+                </div>
+            </div>
+
+            <!--
             <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
                 <img alt="" class="me-2" id="avatar" src="<?php echo AVATAR_FOLDER . 'avatar.png'; ?>">
                 <?php echo $post["username"]; ?> - <?php echo $post["data"] ?>
-            </a>
+            </a> -->
+
         </header>
 
         <img alt="" class="card-img rounded-0" src="<?php echo POST_FOLDER . $post['file']; ?>">
@@ -24,13 +45,9 @@
                 <div class="col-10 text-start">
                     <div class="row">
                         <div class="col-auto">
-                            <button type="button" class="btn p-0" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)">
-                                <span aria-hidden="true" user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star"></span>
+                            <span onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)" tabindex="0" user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star"></span>
 
-                                <span class="visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
-                            </button>
-                            <!-- <span user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star" onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)"></span> -->
-
+                            <span class="visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
                         </div>
                         <div id="sparks-num-<?php echo $post['username'] . '-' . $post['id']; ?>" class="col-auto ps-0">
                             <?php if ($post["spark"] > 0) : ?>
@@ -43,15 +60,12 @@
                 </div>
 
                 <div class="col-2 text-end">
-                    <button id="tr" type="button" class="btn p-0" onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)">
-                        <span aria-hidden="true" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>">
-                        </span>
+                    <span onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)" tabindex="0" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>">
+                    </span>
 
-                        <span class=" visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
-                    </button>
+                    <span class=" visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
                 </div>
             </div>
-            <!-- </div> -->
 
 
 
@@ -79,7 +93,7 @@
                     <div class="row align-items-center justify-content-center">
 
                         <div class="col-1 p-0">
-                            <img alt="" id="avatar" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
+                            <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
                         </div>
 
                         <div class="col-11">

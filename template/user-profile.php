@@ -1,13 +1,13 @@
 <div class="container text-center mb-3">
     <div class="row row-cols-2">
-        <div class="col-3 text-start align-middle">
-            <img src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" class="avatar" alt="" id="avatar">
+        <div class="col-2 text-middle align-middle">
+            <img src="<?php echo AVATAR_FOLDER . $templateParams["info"]["profile_img"]; ?>" class="profile-avatar" alt="" />
         </div>
         <div class="col-9">
             <div class="container text-center">
                 <div class="row row-cols-1">
-                    <div id="current-user" class="col text-bold"><?php echo $templateParams["username"]; ?></div>
-                    <div class="col"><?php echo $templateParams['bio']; ?></div>
+                    <div id="current-user" class="col fw-bolder"><?php echo $templateParams["username"]; ?></div>
+                    <div class="col"><?php echo $templateParams['info']["biografia"]; ?></div>
                 </div>
             </div>
         </div>

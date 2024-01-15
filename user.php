@@ -7,7 +7,7 @@ if (!isUserLoggedIn()) {
 
 $templateParams["titolo"] = "SnapSpark - Profile";
 $templateParams["hashtag"] = $dbh->getDailyHashtag();
-$templateParams["nome"] = "user-profile.php";
+$templateParams["nome"] = "template/user-profile.php";
 
 if (isset($_GET['username'])) {
     $username = $_GET['username'];
@@ -18,7 +18,11 @@ if (isset($_GET['username'])) {
 $templateParams["posts"] = $dbh->getPostsByAuthor($username);
 $templateParams["follower"] = $dbh->getFollower($username);
 $templateParams["followed"] = $dbh->getFollowed($username);
-$templateParams["bio"] = $dbh->getUserBio($username);
+$templateParams["info"] = $dbh->getUserInfo($username);
+if ($templateParams["info"]["profile_img"] == "") {
+    $templateParams["info"]["profile_img"] = "avatar.png";
+}
+
 $templateParams["username"] = $username;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
