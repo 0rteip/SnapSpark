@@ -12,7 +12,7 @@ final class DatabaseHelper {
     }
 
     public function getAllUsers() {
-        $query = "SELECT username
+        $query = "SELECT username, profile_img as img
                   FROM utenti WHERE username!=? ";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $_SESSION['username']);
@@ -124,9 +124,9 @@ final class DatabaseHelper {
     }
 
     public function getFollower($username) {
-        $query = "SELECT follower as username
-                  FROM follow
-                  WHERE user=?"; // ? is a placeholder
+        $query = "SELECT follower as username, profile_img as img
+                  FROM follow,utenti
+                  WHERE user=? AND username=follower"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -136,9 +136,9 @@ final class DatabaseHelper {
     }
 
     public function getFollowed($username) {
-        $query = "SELECT user as username
-                  FROM follow
-                  WHERE follower=?"; // ? is a placeholder
+        $query = "SELECT user as username, profile_img as img
+                  FROM follow, utenti
+                  WHERE follower=? AND username=user"; // ? is a placeholder
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -470,7 +470,7 @@ final class DatabaseHelper {
     }
 
     public function getMessages($sender, $reciver) {
-        $query = "SELECT sen_username as sender, testo, data
+        $query = "SELECT sen_username as sender, testo, data, id
                   FROM messaggio
                   WHERE (sen_username=? AND rec_username=?) OR (rec_username=? AND sen_username=? ) ORDER BY data";
         $stmt = $this->db->prepare($query);
@@ -478,7 +478,13 @@ final class DatabaseHelper {
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-
+    public function deleteMessage($id) {
+        $query = "DELETE FROM messaggio
+                      WHERE id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+    }
     public function getChats() {
         $sender = $_SESSION['username'];
         $query = "SELECT sen_username as sender, rec_username as reciver, testo, data
@@ -500,4 +506,26 @@ final class DatabaseHelper {
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
     }
+
+    
+    public function sendNotification($sender, $reciver, $type) {
+        $id = $this->getLastNotficationId();
+        $query = "INSERT INTO notifica(tipo, sen_user, id, username) VALUES (?,?,?,?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssis',$type, $sender, $id, $reciver);
+        $stmt->execute();
+    }
+
+    private function getLastNotficationId() {
+        $query = "SELECT MAX(id) as id FROM notifica";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        if (empty($result)) {
+            return 1;
+        } else {
+            return $result[0]['id'] + 1;
+        }
+    }
 }
+
