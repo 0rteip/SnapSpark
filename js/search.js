@@ -1,4 +1,3 @@
-console.log('search load');
 function addUsers(result, type) {
     let users = ""
     result.users.forEach(user => {
@@ -23,11 +22,9 @@ function addUsers(result, type) {
                 <img src="${result.avatar}${img}" class="me-2" alt="" id="avatar">
                 ${user.username}
             </a>
-        </header>
     </div>
     `
     });
-    //console.log(users);
     document.getElementsByClassName('search')[0].innerHTML = users;
 }
 

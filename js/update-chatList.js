@@ -1,5 +1,5 @@
 function showElenco(result) {
-    let chats =""
+    let chats = ""
     result.chats.forEach(chat => {
         let img = 'avatar.png';
         if (chat.img.length > 0) {
@@ -35,7 +35,7 @@ function getCurrentChats() {
 }
 
 function chatsUpdate() {
-    
+
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/search.php");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -50,6 +50,7 @@ function chatsUpdate() {
     }
     xhr.send("string=" + "&type=3");
     //setTimeout('chatsUpdate()',1000);
+    setTimeout('chatsUpdate()', 1000);
 }
 
 function chatSearch(string, type) {
@@ -61,7 +62,7 @@ function chatSearch(string, type) {
         let result = JSON.parse(this.responseText);
         showElenco(result);
     }
-    xhr.send("string=" + string + "&type=" + type );
+    xhr.send("string=" + string + "&type=" + type);
 }
 
 chatsUpdate();

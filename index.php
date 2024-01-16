@@ -8,7 +8,15 @@ if (!isUserLoggedIn()) {
 $posts = [];
 
 foreach ($dbh->getFollowed($_SESSION["username"]) as $value) {
-    $posts += $dbh->getPostsByAuthor($value["username"]);
+    $post_user = $dbh->getPostsByAuthor($value["username"]);
+    foreach ($post_user as $key => $post) {
+        if ($dbh->checkPostLike($_SESSION["username"], $post["id"])) {
+            $post_user[$key]["liked"] = true;
+        } else {
+            $post_user[$key]["liked"] = false;
+        }
+    }
+    $posts += $post_user;
 }
 
 usort($posts, function ($a, $b) {
@@ -20,7 +28,7 @@ usort($posts, function ($a, $b) {
     return $dataB <=> $dataA;
 });
 
-
+$templateParams["userImage"] = $dbh->getUserInfo($_SESSION["username"])["profile_img"];
 $templateParams["titolo"] = "SnapSpark - Home";
 $templateParams["hashtag"] = $dbh->getDailyHashtag();
 $templateParams["nome"] = "template/lista-post.php";

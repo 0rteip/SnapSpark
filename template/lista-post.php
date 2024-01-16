@@ -1,35 +1,25 @@
 <?php foreach ($templateParams["posts"] as $post) : ?>
     <article class="card mb-3">
-
         <header class="card-header pt-3">
+            <div class="row row-cols-2 px-md-3">
+                <div class="col-6 text-start align-middle">
+                    <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
+                        <?php if ($post["profile_img"] == "") : ?>
+                            <img alt="Go to <?php echo $post['username']; ?> profile" class="mx-auto post-img me-3" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" />
+                        <?php else : ?>
+                            <img alt="Go to <?php echo $post['username']; ?> profile" class="mx-auto post-img me-3" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>" />
+                        <?php endif; ?>
+                        <h2 class="post-header m-0 fs-5"><?php echo $post["username"]; ?></h2>
+                    </a>
+                </div>
 
-            <div class="container col-">
-                <div class="row row-cols-2">
-                    <div class="col text-start align-middle">
-                        <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
-                            <?php if ($post["profile_img"] == "") : ?>
-                                <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
-                            <?php else : ?>
-                                <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>">
-                            <?php endif; ?>
-                            <?php echo $post["username"]; ?>
-                        </a>
-                    </div>
-                    <div class="col text-end">
-                        <?php echo $post["data"] ?>
-                    </div>
+                <div class="d-flex col-6 align-middle justify-content-end">
+                    <p class="my-auto"><?php echo $post["data"] ?></p>
                 </div>
             </div>
-
-            <!--
-            <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
-                <img alt="" class="me-2" id="avatar" src="<?php echo AVATAR_FOLDER . 'avatar.png'; ?>">
-                <?php echo $post["username"]; ?> - <?php echo $post["data"] ?>
-            </a> -->
-
         </header>
 
-        <img alt="" class="card-img rounded-0" src="<?php echo POST_FOLDER . $post['file']; ?>">
+        <img alt="" class="card-img rounded-0" src="<?php echo POST_FOLDER . $post['file']; ?>" />
 
         <div class="card-body">
             <p class="card-text">
@@ -37,15 +27,12 @@
             </p>
         </div>
 
-        <footer class="card-footer">
-
-            <!-- <div class="container text-center p-0 m-0"> -->
-            <div class="row">
-
+        <footer class="card-footer py-3">
+            <div class="row px-md-3">
                 <div class="col-10 text-start">
                     <div class="row">
                         <div class="col-auto">
-                            <span onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)" tabindex="0" user="<?php echo $post['username']; ?>" post_id="<?php echo $post['id']; ?>" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-regular fa-star"></span>
+                            <span onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)" tabindex="0" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-star <?php echo $post['liked'] ? 'liked-star fa-solid' : 'fa-regular'; ?>"></span>
 
                             <span class="visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
                         </div>
@@ -67,24 +54,21 @@
                 </div>
             </div>
 
-
-
-
         </footer>
     </article>
 <?php endforeach; ?>
 
 <!-- Modal -->
-<div class=" modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <section class="modal-content">
 
             <header class="modal-header">
-                <h1 class="modal-title fs-5" id="postModalLabel">Comments</h1>
+                <h2 class="modal-title fs-3" id="postModalLabel">Comments</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </header>
 
-            <div class="modal-body">
+            <div class="modal-body" id="message-modal-body">
             </div>
 
             <footer class="modal-footer">
@@ -93,15 +77,15 @@
                     <div class="row align-items-center justify-content-center">
 
                         <div class="col-1 p-0">
-                            <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
+                            <img alt="" class="mx-auto comment-profile-img" src="<?php echo AVATAR_FOLDER . $templateParams['userImage']; ?>" />
                         </div>
 
                         <div class="col-11">
-                            <form aria-label="comments form" method="get" action="index.php" role="form" class="row align-items-center justify-content-center">
+                            <form aria-label="comments form" method="get" action="index.php" class="row align-items-center justify-content-center">
                                 <label for="commentArea" class="form-label visually-hidden">Comment</label>
 
                                 <div class="col-10 col-sm-10">
-                                    <textarea class="form-control" id="commentArea" placeholder="Add a comment..." onkeyup="enablePost()"></textarea>
+                                    <textarea class="form-control" id="commentArea" placeholder="Add a comment..." onkeyup="enablePost()" required></textarea>
                                 </div>
                                 <button id="postButton" type="button" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" onclick="postComment()" disabled>Post</button>
 

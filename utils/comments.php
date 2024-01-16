@@ -3,7 +3,6 @@ function getComments() {
     require_once '../bootstrap.php';
 
     if (isset($_POST["u"]) && isset($_POST["i"])) {
-
         $response = array('comments' => $dbh->getComments($_POST["u"], $_POST["i"]));
         echo json_encode($response);
     }

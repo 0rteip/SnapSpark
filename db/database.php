@@ -148,9 +148,10 @@ final class DatabaseHelper {
     }
 
     public function getComments($user, $postId) {
-        $query = "SELECT *
-                  FROM commenti
-                  WHERE post_user=? AND post_id=?";
+        $query = "SELECT c.*, u.profile_img
+                  FROM commenti AS c, utenti AS u
+                  WHERE c.post_user=? AND c.post_id=?
+                  AND c.user = u.username";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("si", $user, $postId);
         $stmt->execute();
@@ -505,6 +506,19 @@ final class DatabaseHelper {
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+    }
+
+    public function updateUserPicture($username, $profileImg) {
+        $query = "UPDATE utenti
+                  SET profile_img=?
+                  WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            "ss",
+            $profileImg,
+            $username
+        );
+        $stmt->execute();
     }
 
     

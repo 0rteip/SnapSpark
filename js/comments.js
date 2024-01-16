@@ -8,7 +8,8 @@ function getComments(user, post_id) {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.responseText);
             if (response.comments.length == 0) {
-                document.getElementsByClassName("modal-body")[0].innerHTML =
+                console.log("No comments yet.");
+                document.getElementById("message-modal-body").innerHTML =
                     `<div class="container text-center">
                     <h2>No comments yet.</h2>
                     <p>Be the first to comment!</p>
@@ -20,11 +21,11 @@ function getComments(user, post_id) {
                 response.comments.forEach(comment => {
                     comments +=
                         `
-                        <div class="container text-center m-0 mb-1">
+                        <div class="container text-center m-0 mb-2 pb-2 single-comment">
                             <div class="row align-items-center justify-content-center">
 
                                 <div class="col-1 p-0">
-                                    <img alt="" id="av" class="mx-auto" src="img/avatar/avatar.png">
+                                    <img alt="" class="mx-auto comment-profile-img" src="img/avatar/${comment.profile_img == '' ? 'avatar.png' : comment.profile_img}" />
                                 </div>
 
                                 <div class="col-11">
@@ -45,7 +46,7 @@ function getComments(user, post_id) {
                     `;
                     i += 1;
                 });
-                document.getElementsByClassName("modal-body")[0].innerHTML = comments;
+                document.getElementById("message-modal-body").innerHTML = comments;
             }
         }
     };

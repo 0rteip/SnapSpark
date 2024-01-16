@@ -1,11 +1,12 @@
-const newImg = document.createElement("img");
+const imgInputHelper = document.querySelector("img");
+const imgInput = document.getElementById("profile-img");
 const bs_modal = $('#cropper-modal');
-const image = document.getElementById('image');
+
 let cropper, reader, file;
 
-const imgInputHelper = document.getElementById("profile-img");
-const imgInputHelperLabel = document.getElementById("profile-img-label");
-const imgContainer = document.querySelector(".image-container");
+imgInputHelper.addEventListener("click", () => {
+    imgInput.click();
+});
 
 bs_modal.on('shown.bs.modal', function () {
     cropper = new Cropper(image, {
@@ -32,10 +33,10 @@ $("#crop").click(function () {
             type: "image/jpeg"
         })
 
-        const formData = new FormData();
-        formData.append("action", "upload");
+        let formData = new FormData();
+        formData.append("action", "change-picture");
         formData.append("upfile", file);
-        formData.append("filename", imgInputHelper.value);
+        formData.append("filename", imgInput.value);
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "utils/profile.php", true);
@@ -47,12 +48,7 @@ $("#crop").click(function () {
                 const response = JSON.parse(this.responseText);
                 if (response.success) {
                     bs_modal.modal('hide');
-                    newImg.src = URL.createObjectURL(file);
-                    imgContainer.insertBefore(newImg, imgInputHelperLabel);
-                    imgInputHelperLabel.style.display = "none";
-                    newImg.addEventListener("click", () => {
-                        imgInputHelperLabel.click();
-                    });
+                    imgInputHelper.src = URL.createObjectURL(file);
                 }
             }
         };
@@ -61,22 +57,7 @@ $("#crop").click(function () {
     });
 });
 
-// newImg.setAttribute("data-bs-toggle", "tooltip");
-// newImg.setAttribute("data-bs-title", "Click to change image");
-// new bootstrap.Tooltip(newImg);
-
-// const tooltipTriggerLis = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-// const tooltipLis = [...tooltipTriggerLis].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-// document.getElementById('profile-img').addEventListener('focusin', function () {
-//     document.getElementById('profile-img-label').style.outline = '2px solid #007bff';
-// });
-
-// document.getElementById('profile-img').addEventListener('focusout', function () {
-//     document.getElementById('profile-img-label').style.outline = ''; // Stile di default quando l'input perde il focus
-// });
-
-imgInputHelper.addEventListener("change", event => {
+imgInput.addEventListener("change", event => {
     const files = event.target.files;
 
     function done(url) {
