@@ -1,4 +1,4 @@
-<div class="container text-center mb-4 pb-4" id="new-chat-div">
+<div class="container text-center mb-4 pb-4 px-0" id="new-chat-div">
     <div class="row row-cols-2 justify-content-center">
         <div class="col-sm-10">
             <label for="search-bar-chats" class="visually-hidden">Search chats</label>
@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="container chat-container" id="chat-container">
+<div class="container chat-container px-0" id="chat-container">
 </div>
 
 <script src="js/update-chatList.js"></script>
