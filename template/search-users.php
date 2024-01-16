@@ -1,4 +1,4 @@
-<input class="form-control bg-main-color-subtle" name="search" type="search" placeholder="Search" aria-label="Search" onkeyup="normalSearch(this.value, 1)">
+<input id="search-bar:-1" class="search-bar bg-main-color-subtle" name="search" type="search" placeholder="Search" aria-label="Search" >
 
 <div class="search"></div>
 

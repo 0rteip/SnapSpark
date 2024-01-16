@@ -102,6 +102,12 @@ function displayMessages() {
     xhr.send("sender=" + container[2] + "&reciver=" + container[3] + "&action=update");
     setTimeout('displayMessages()', 1000)
 }
+const sendBt = document.getElementById('send-message-button');
+if (sendBt != null) {
+    sendBt.addEventListener("click", function() {
+        sendMessage();
+    })
+}
 displayMessages();
 
 

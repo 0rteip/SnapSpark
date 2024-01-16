@@ -2,10 +2,10 @@
     <div class="row row-cols-2 justify-content-center">
         <div class="col-sm-10">
             <label for="search-bar-chats" class="visually-hidden">Search chats</label>
-            <input id="search-bar-chats" class="form-control bg-main-color-subtle" type="search" placeholder="Search chat" aria-label="Search" onkeyup="chatSearch(this.value, 3)">
+            <input id="search-bar:-3" class="search-bar bg-main-color-subtle" type="search" placeholder="Search chat" aria-label="Search">
         </div>
         <div class="col-sm-2 text-end">
-            <button type="button" class="btn btn-primary" onclick="location.href='new-chat.php'">New Chat</button>
+            <button type="button" id="newChatBt" class="btn btn-primary">New Chat</button>
         </div>
     </div>
 </div>

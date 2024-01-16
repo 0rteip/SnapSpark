@@ -53,3 +53,16 @@ function followerSearch(string, type, courrent, action) {
     }
     xhr.send("string=" + string + "&type=" + type + "&courrent=" + courrent + "&action=" + action);
 }
+
+const search = document.getElementsByClassName('search-bar')
+if (search.length >0) {
+    search[0].addEventListener("keyup", function() {
+        
+        if (search[0].getAttribute('id').indexOf('follower')) {
+            let data = search[0].getAttribute('id').split(":-");
+            followerSearch(search[0].value, data[1], data[2], data[3])
+        } else {
+            normalSearch(search[0].value, search[0].getAttribute('id').split(":-")[1])
+        }
+    })
+}
