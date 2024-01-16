@@ -1,9 +1,9 @@
 <div class="container text-center">
     <div class="row justify-content-center">
-        <div class="col-2">
+        <div class="col-sm-6">
             <button type="button" class="btn btn-primary" onclick="location.href='new-chat.php'">Create New Chat</button>
         </div>
-        <div class="col-3">
+        <div class="col-sm-6">
             <input id="search-bar-chats" class="form-control bg-main-color-subtle" type="search" placeholder="Search" aria-label="Search" onkeyup="chatSearch(this.value, 3)">
         </div>
     </div>

@@ -1,11 +1,11 @@
 function showElenco(result) {
-    let chats =""
+    let chats = ""
     result.chats.forEach(chat => {
-        chats += 
-        `
+        chats +=
+            `
         <a href="chat.php?reciver=${chat.user}">
             <div class="user-card">
-                    <img alt="" class="avatar" id="chat-avatar" src="${result.avatar}avatar.png">
+                    <img alt="" class="avatar me-3" id="chat-avatar" src="${result.avatar}avatar.png">
                     <div class="card custom-card borderless-card" id="chat-c">
                     <div class="info-chat">
                         <div class="user-name">${chat.user}</div>
@@ -24,14 +24,14 @@ function getCurrentChats() {
     chats.forEach(chat => {
         let user = chat.querySelector('div.user-name').innerHTML;
         let info = chat.querySelector('div.card-text');
-        let tmp = {user:user, testo:info.innerHTML, data:info.getAttribute('data')};
-        result.push({user:user, testo:info.innerHTML, data:info.getAttribute('data')});
+        let tmp = { user: user, testo: info.innerHTML, data: info.getAttribute('data') };
+        result.push({ user: user, testo: info.innerHTML, data: info.getAttribute('data') });
     })
     return result;
 }
 
 function chatsUpdate() {
-    
+
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/search.php");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -44,7 +44,7 @@ function chatsUpdate() {
         }
     }
     xhr.send("string=" + "&type=3");
-    setTimeout('chatsUpdate()',1000);
+    setTimeout('chatsUpdate()', 1000);
 }
 
 function chatSearch(string, type) {
@@ -56,7 +56,7 @@ function chatSearch(string, type) {
         let result = JSON.parse(this.responseText);
         showElenco(result);
     }
-    xhr.send("string=" + string + "&type=" + type );
+    xhr.send("string=" + string + "&type=" + type);
 }
 
 chatsUpdate();

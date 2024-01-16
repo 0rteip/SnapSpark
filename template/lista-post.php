@@ -2,31 +2,21 @@
     <article class="card mb-3">
 
         <header class="card-header pt-3">
-
-            <div class="container col-">
-                <div class="row row-cols-2">
-                    <div class="col text-start align-middle">
-                        <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
-                            <?php if ($post["profile_img"] == "") : ?>
-                                <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
-                            <?php else : ?>
-                                <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>">
-                            <?php endif; ?>
-                            <?php echo $post["username"]; ?>
-                        </a>
-                    </div>
-                    <div class="col text-end">
-                        <?php echo $post["data"] ?>
-                    </div>
+            <div class="row row-cols-2">
+                <div class="col-6 text-start align-middle">
+                    <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
+                        <?php if ($post["profile_img"] == "") : ?>
+                            <img alt="" class="mx-auto post-img" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
+                        <?php else : ?>
+                            <img alt="" class="mx-auto post-img" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>">
+                        <?php endif; ?>
+                        <?php echo $post["username"]; ?>
+                    </a>
+                </div>
+                <div class="col-6 text-end align-middle">
+                    <?php echo $post["data"] ?>
                 </div>
             </div>
-
-            <!--
-            <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
-                <img alt="" class="me-2" id="avatar" src="<?php echo AVATAR_FOLDER . 'avatar.png'; ?>">
-                <?php echo $post["username"]; ?> - <?php echo $post["data"] ?>
-            </a> -->
-
         </header>
 
         <img alt="" class="card-img rounded-0" src="<?php echo POST_FOLDER . $post['file']; ?>">
@@ -38,10 +28,7 @@
         </div>
 
         <footer class="card-footer">
-
-            <!-- <div class="container text-center p-0 m-0"> -->
             <div class="row">
-
                 <div class="col-10 text-start">
                     <div class="row">
                         <div class="col-auto">
@@ -67,9 +54,6 @@
                 </div>
             </div>
 
-
-
-
         </footer>
     </article>
 <?php endforeach; ?>
@@ -93,7 +77,7 @@
                     <div class="row align-items-center justify-content-center">
 
                         <div class="col-1 p-0">
-                            <img alt="" id="av" class="mx-auto" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>">
+                            <img alt="" class="mx-auto comment-profile-img" src="<?php echo AVATAR_FOLDER . $templateParams['userImage']; ?>">
                         </div>
 
                         <div class="col-11">

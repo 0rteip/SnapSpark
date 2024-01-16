@@ -24,7 +24,7 @@ function getComments(user, post_id) {
                             <div class="row align-items-center justify-content-center">
 
                                 <div class="col-1 p-0">
-                                    <img alt="" id="av" class="mx-auto" src="img/avatar/avatar.png">
+                                    <img alt="" class="mx-auto comment-profile-img" src="img/avatar/avatar.png">
                                 </div>
 
                                 <div class="col-11">

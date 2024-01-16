@@ -2,12 +2,26 @@ body {
     background-color: #070707;
 }
 
+#user-info a {
+    display: inline-block;
+    width: 100px;
+}
+
+#user-info {
+    border-top: 1px solid #ddd;
+}
+
 .bg-main-color {
     background-color: #F4E04D;
 }
 
-.card img#avatar {
+.avatar {
+    max-height: 4rem;
+}
+
+.comment-profile-img {
     max-height: 2rem;
+    border-radius: 50%;
 }
 
 div#profile {
@@ -155,8 +169,10 @@ a:visited {
     cursor: pointer;
 }
 
-img#av {
-    max-height: 2rem !important;
+
+.post-img {
+    max-height: 2.5rem !important;
+    border-radius: 50%;
 }
 
 
@@ -166,8 +182,9 @@ img#av {
     gap: 0.5rem;
 } */
 
-.image-container input {
+#profile-img {
     /* visibility: hidden; */
+    display: none;
     height: 0;
     width: 0;
 }

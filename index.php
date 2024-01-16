@@ -20,7 +20,7 @@ usort($posts, function ($a, $b) {
     return $dataB <=> $dataA;
 });
 
-
+$templateParams["userImage"] = $dbh->getUserInfo($_SESSION["username"])["profile_img"];
 $templateParams["titolo"] = "SnapSpark - Home";
 $templateParams["hashtag"] = $dbh->getDailyHashtag();
 $templateParams["nome"] = "template/lista-post.php";
