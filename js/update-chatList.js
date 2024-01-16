@@ -1,11 +1,15 @@
 function showElenco(result) {
     let chats =""
     result.chats.forEach(chat => {
+        let img = 'avatar.png';
+        if (chat.img.length > 0) {
+            img = chat.img;
+        }
         chats += 
         `
         <a href="chat.php?reciver=${chat.user}">
             <div class="user-card">
-                    <img alt="" class="avatar" id="chat-avatar" src="${result.avatar}avatar.png">
+                    <img alt="" class="avatar" id="av" img='${img}' src="${result.avatar}${img}">
                     <div class="card custom-card borderless-card" id="chat-c">
                     <div class="info-chat">
                         <div class="user-name">${chat.user}</div>
@@ -24,8 +28,8 @@ function getCurrentChats() {
     chats.forEach(chat => {
         let user = chat.querySelector('div.user-name').innerHTML;
         let info = chat.querySelector('div.card-text');
-        let tmp = {user:user, testo:info.innerHTML, data:info.getAttribute('data')};
-        result.push({user:user, testo:info.innerHTML, data:info.getAttribute('data')});
+        let img = chat.querySelector('chat-avatar').getAttribute('img');
+        result.push({user:user, testo:info.innerHTML, data:info.getAttribute('data'), img:img});
     })
     return result;
 }
@@ -37,6 +41,7 @@ function chatsUpdate() {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
+        console.log(this.responseText)
         let result = JSON.parse(this.responseText);
         if (JSON.stringify(result.chats) !== JSON.stringify(getCurrentChats()) && document.getElementById('search-bar-chats').value.length === 0) {
             console.log('aggiorno')
@@ -44,7 +49,7 @@ function chatsUpdate() {
         }
     }
     xhr.send("string=" + "&type=3");
-    setTimeout('chatsUpdate()',1000);
+    //setTimeout('chatsUpdate()',1000);
 }
 
 function chatSearch(string, type) {

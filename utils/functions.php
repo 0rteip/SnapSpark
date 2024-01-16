@@ -46,7 +46,7 @@ function checkFollow($name, $array) {
     return true;
 }
 
-function getChats($messages) {
+function getExistingChat($messages) {
     $chats = array();
     foreach($messages as $message) :
         $user = "";
@@ -76,7 +76,7 @@ function checkPresence($chats, $user) {
 }
 
 function getNewChatSug($follows, $messages) {
-    $existingChats = getChats($messages);
+    $existingChats = getExistingChat($messages);
     $result = array();
     foreach($follows as $follow) {
         if (checkPresence($existingChats, $follow['username']) === false) {

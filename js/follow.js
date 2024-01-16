@@ -10,8 +10,15 @@ function segui() {
             init(info.followed, document.getElementById('current-user').innerHTML)
         }
     };
-
-    xhr.send();
+    if (bt.getAttribute('value') === 'Follow') {
+        bt.setAttribute('value', 'Unfollow');
+        xhr.send("action=Follow" + "&follow=" + document.getElementById('current-user').innerHTML);
+    } else if(bt.getAttribute('value') === 'Unfollow') {
+        bt.setAttribute('value', 'Follow');
+        xhr.send("action=Unfollow" + "&follow=" + document.getElementById('current-user').innerHTML);
+    } else {
+        xhr.send();
+    }
 }
 
 function init(array, username) {
@@ -25,11 +32,7 @@ function init(array, username) {
 const bt = document.getElementById("follow-bt");
 
 bt.addEventListener("click", function () {
-    if (bt.getAttribute('value') === 'Follow') {
-        bt.setAttribute('value', 'Unfollow');
-    } else {
-        bt.setAttribute('value', 'Follow');
-    }
+    segui();
 });
 
 segui();

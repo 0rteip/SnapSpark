@@ -11,12 +11,16 @@ function addUsers(result, type) {
             case 2: link = "user.php?username=" + user.username;
                 break;
         }
+        let img = 'avatar.png';
+        if (user.img.length > 0) {
+            img = user.img;
+        }
         users +=
             `
     <div class="card" style="width: 18rem;">
         <header class="card-header">
-            <a href=${link} class="reciver" sender="${result.currentUser}" reciver="${user.username}") >
-                <img src="${result.avatar}avatar.png" class="me-2" alt="" id="avatar">
+            <a href=${link} class="reciver") >
+                <img src="${result.avatar}${img}" class="me-2" alt="" id="avatar">
                 ${user.username}
             </a>
         </header>
@@ -51,15 +55,4 @@ function followerSearch(string, type, courrent, action) {
         addUsers(result, type);
     }
     xhr.send("string=" + string + "&type=" + type + "&courrent=" + courrent + "&action=" + action);
-}
-
-function s() {
-    if (location.hash.indexOf("create-chat")) {
-        let links = document.getElementsByClassName("reciver");
-        for (let i = 0; i<links.length; i++) {
-            links[i].addEventListener("click", function() {
-                sendDataChat(links[i].getAttribute("sender"), links[i].getAttribute("reciver"))
-            })
-        }
-    }
 }
