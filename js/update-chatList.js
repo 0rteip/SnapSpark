@@ -5,11 +5,11 @@ function showElenco(result) {
         if (chat.img.length > 0) {
             img = chat.img;
         }
-        chats += 
-        `
+        chats +=
+            `
         <a href="chat.php?reciver=${chat.user}">
-            <div class="user-card">
-                    <img alt="" class="avatar" id="av" img='${img}' src="${result.avatar}${img}">
+            <div class="user-card mb-3">
+                    <img alt="" class="avatar me-3" img='${img}' src="${result.avatar}${img}">
                     <div class="card custom-card borderless-card" id="chat-c">
                     <div class="info-chat">
                         <div class="user-name">${chat.user}</div>
@@ -29,7 +29,7 @@ function getCurrentChats() {
         let user = chat.querySelector('div.user-name').innerHTML;
         let info = chat.querySelector('div.card-text');
         let img = chat.querySelector('chat-avatar').getAttribute('img');
-        result.push({user:user, testo:info.innerHTML, data:info.getAttribute('data'), img:img});
+        result.push({ user: user, testo: info.innerHTML, data: info.getAttribute('data'), img: img });
     })
     return result;
 }

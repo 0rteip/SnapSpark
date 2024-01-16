@@ -25,7 +25,7 @@ function getComments(user, post_id) {
                             <div class="row align-items-center justify-content-center">
 
                                 <div class="col-1 p-0">
-                                    <img alt="" class="mx-auto comment-profile-img" src="img/avatar/${comment.profile_img == '' ? 'avatar.png' : comment.profile_img}" />
+                                    <img alt="" class="mx-auto comment-profile-avatar" src="img/avatar/${comment.profile_img == '' ? 'avatar.png' : comment.profile_img}" />
                                 </div>
 
                                 <div class="col-11">

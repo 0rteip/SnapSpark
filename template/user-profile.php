@@ -58,7 +58,7 @@
                 <button class="btn btn-primary" type="button" value="" name="follow" id="follow-bt"></button>
             </div>
             <div class="col">
-                <button class="btn btn-primary"  value="" name="message" id="message-bt">Messaggia</button>
+                <button class="btn btn-primary" value="" name="message" id="message-bt">Messaggia</button>
             </div>
             <script src="js/follow.js"></script>
         </div>
