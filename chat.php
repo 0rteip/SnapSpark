@@ -11,9 +11,9 @@ $templateParams["hashtag"] = $dbh->getDailyHashtag();
 if (isset($_GET['reciver'])) {
     $templateParams['nome'] = 'messages.php';
     $templateParams['reciver'] = $_GET['reciver'];
+    $templateParams['img'] = $dbh->getUserInfo($templateParams['reciver'])['profile_img'];
 } else {
     $templateParams['nome'] = 'chat-v.php';
-    $templateParams['chats'] = getChats($dbh->getChats());
 }
 
 $templateParams["showNavBar"] = true;
