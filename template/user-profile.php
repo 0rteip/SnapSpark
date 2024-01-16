@@ -55,14 +55,10 @@
     <div class="container text-center mb-3">
         <div class="row row-cols-2">
             <div class="col" id="follow-button">
-                <?php if (!checkFollow($_SESSION["username"], $templateParams['follower'])) : ?>
-                    <button class="btn btn-primary" type="submit" value="Unfollow" name="follow" id="follow-bt" onclick=segui("<?php echo $templateParams['username']; ?>")>Unfollow</button>
-                <?php else : ?>
-                    <button class="btn btn-primary" type="submit" value="Follow" name="follow" id="follow-bt" onclick=segui("<?php echo $templateParams['username']; ?>")>Follow</button>
-                <?php endif; ?>
+                <button class="btn btn-primary" type="button" value="" name="follow" id="follow-bt"></button>
             </div>
             <div class="col">
-                <button class="btn btn-primary" onclick="location.href='chat.php?reciver=<?php echo $templateParams['username'] ?>'" value="" name="message" id="message-bt">Messaggia</button>
+                <button class="btn btn-primary"  value="" name="message" id="message-bt">Messaggia</button>
             </div>
             <script src="js/follow.js"></script>
         </div>

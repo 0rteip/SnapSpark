@@ -2,6 +2,7 @@ function sendMessage() {
     if (document.getElementById('message-text').value.length === 0) {
         return;
     }
+    let container = document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-")
     document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-")
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/messages.php")
@@ -30,15 +31,15 @@ function getCurrentMessages() {
     messages.forEach(msg => {
         text = msg.getElementsByClassName('text-message')[0].innerHTML;
         date = msg.getElementsByClassName('date-message')[0].getAttribute('class').split(",")[1];
-        id = parseInt(msg.getAttribute('class').split("-")[2]) ;
-        let tmp = {sender:msg.getAttribute('class').split("-")[3],testo:text, data:date, id:id};
+        id = parseInt(msg.getAttribute('class').split("-")[2]);
+        let tmp = { sender: msg.getAttribute('class').split("-")[3], testo: text, data: date, id: id };
         result.push(tmp)
     })
     return result;
 }
 
 function displayMessages() {
-    let container = document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-")
+    let container = document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/messages.php");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -48,8 +49,8 @@ function displayMessages() {
         if (this.readyState === 4 && this.status === 200) {
             const info = JSON.parse(this.responseText);
             let messages = info.messages;
-            let msgs= "";
-            
+            let msgs = "";
+
             if (JSON.stringify(messages) !== JSON.stringify(getCurrentMessages())) {
                 console.log(JSON.stringify(messages))
                 console.log(JSON.stringify(getCurrentMessages()))
@@ -61,16 +62,16 @@ function displayMessages() {
                     } else {
                         class_extra = "reciver-msg msg";
                     }
-                    console.log(msg.data.substring(0,10))
-                    if (data !== msg.data.substring(0,10)) {
-                        data =  msg.data.substring(0,10);
+                    console.log(msg.data.substring(0, 10))
+                    if (data !== msg.data.substring(0, 10)) {
+                        data = msg.data.substring(0, 10);
                         msgs +=
-                        `
-                        <div class="new-day">${msg.data.substring(0,10)}</div>
+                            `
+                        <div class="new-day">${msg.data.substring(0, 10)}</div>
                         `
                     }
-                    msgs += 
-                    `
+                    msgs +=
+                        `
                     <div class="message-box -${msg.id}-${msg.sender}">
                         <div class="${class_extra}">
                             <div class="text-message">${msg.testo}</div>
@@ -85,12 +86,13 @@ function displayMessages() {
                 chatMessages.scrollTop = chatMessages.scrollHeight;
                 console.log("entro");
                 msgs = document.querySelectorAll('div.message-box').forEach(msg => {
-                    if (container[2] == msg.getAttribute('sender')) {
-                        msg.addEventListener('contextmenu', function(event){
+                    console.log("cont: " + container[2] + " msg:" + msg.getAttribute('class').split("-")[3])
+                    if (container[2] == msg.getAttribute('class').split("-")[3]) {
+                        msg.addEventListener('contextmenu', function (event) {
                             event.preventDefault();
                             if (confirm("Press a button!") == true) {
-                                removeMessage(msg.getAttribute('num'));
-                              }
+                                removeMessage(msg.getAttribute('class').split("-")[2]);
+                            }
                         }, false);
                     }
                 })
