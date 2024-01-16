@@ -1,6 +1,5 @@
 <input class="form-control bg-main-color-subtle" name="search" type="search" placeholder="Search" aria-label="Search" onkeyup="normalSearch(this.value, 1)">
 
-
-<section class="search"></section>
+<div class="search"></div>
 
 <script src="js/search.js"></script>

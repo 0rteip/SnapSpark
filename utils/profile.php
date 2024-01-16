@@ -1,11 +1,8 @@
 <?php
-function uploadProfileImage() {
-    require_once '../bootstrap.php';
-    require_once '../utils/exception.php';
-
+function validateImage() {
+    // Undefined | Multiple Files | $_FILES Corruption Attack
+    // If this request falls under any of them, treat it invalid.
     try {
-        // Undefined | Multiple Files | $_FILES Corruption Attack
-        // If this request falls under any of them, treat it invalid.
         if (
             !isset($_FILES['upfile']['error']) ||
             is_array($_FILES['upfile']['error']) ||
@@ -33,17 +30,53 @@ function uploadProfileImage() {
         }
 
         // Name it uniquely
-        $dest_folder = $_SERVER['DOCUMENT_ROOT'] . '/SnapSpark/' . AVATAR_FOLDER;
-        $filename = sha1($_POST['filename']) . '.png';
+        $vals = [];
+        $vals[0] = $_SERVER['DOCUMENT_ROOT'] . '/SnapSpark/' . AVATAR_FOLDER;
+        $vals[1] = sha1($_POST['filename']) . '.png';
+
+        return $vals;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+function uploadProfileImage() {
+    require_once '../bootstrap.php';
+    require_once '../utils/exception.php';
+
+    try {
+        $vals = validateImage();
 
         if (!move_uploaded_file(
             $_FILES['upfile']['tmp_name'],
-            $dest_folder . $filename
+            $vals[0] . $vals[1]
         )) {
             throw new FileUploadSuccessException('Failed to move uploaded file.');
         }
 
-        echo json_encode(array("success" => true, "filename" => $filename));
+        echo json_encode(array("success" => true));
+    } catch (RuntimeException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function changePicture() {
+    require_once '../bootstrap.php';
+    require_once '../utils/exception.php';
+
+    try {
+        $vals = validateImage();
+
+        if (!move_uploaded_file(
+            $_FILES['upfile']['tmp_name'],
+            $vals[0] . $vals[1]
+        )) {
+            throw new FileUploadSuccessException('Failed to move uploaded file.');
+        } else {
+            $dbh->updateUserPicture($_SESSION['username'], $vals[1]);
+        }
+
+        echo json_encode(array("success" => true));
     } catch (RuntimeException $e) {
         echo $e->getMessage();
     }
@@ -59,7 +92,9 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             case 'upload':
                 uploadProfileImage();
                 break;
-
+            case "change-picture":
+                changePicture();
+                break;
             default:
                 break;
         }

@@ -5,7 +5,7 @@
         <div class="card" style="width: 18rem;">
             <header class="card-header">
                 <a href="chat.php?reciver=<?php echo $sug['username'] ?>" class="reciver" sender="<?php echo $_SESSION['username'] ?>" reciver="<?php echo $sug['username'] ?>">
-                    <img src="<?php echo AVATAR_FOLDER . 'avatar.png' ?>" class="me-2" alt="" id="avatar">
+                    <img src="<?php echo AVATAR_FOLDER . 'avatar.png' ?>" class="me-3" alt="" id="avatar" />
                     <?php echo $sug['username'] ?>
                 </a>
             </header>

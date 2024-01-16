@@ -7,15 +7,6 @@ function likePost() {
     }
 }
 
-function checkLike() {
-    require_once '../bootstrap.php';
-
-    if (isset($_POST["u"]) && isset($_POST["id"])) {
-        $likes = $dbh->checkPostLike($_POST["u"], $_POST["id"]);
-        print json_encode(array("liked" => $likes));
-    }
-}
-
 
 function sharePost() {
     require_once '../bootstrap.php';
@@ -93,9 +84,6 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
             case 'like_post':
                 likePost();
-                break;
-            case 'check_like':
-                checkLike();
                 break;
             case 'share_post':
                 sharePost();

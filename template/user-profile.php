@@ -2,12 +2,13 @@
     <div class="row row-cols-2">
         <div class="col-sm-3 col-md-2 text-middle align-middle">
             <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" required />
+            <label for="profile-img" class="visually-hidden">Change Image</label>
             <img src="<?php echo AVATAR_FOLDER . $templateParams["info"]["profile_img"]; ?>" class="profile-avatar" alt="" style="<?php echo $templateParams['username'] === $_SESSION['username'] ? 'cursor: pointer;' : ''; ?>" />
         </div>
         <div class="col-sm-9 col-md-10 my-auto">
             <div class="container text-center">
                 <div class="row row-cols-1">
-                    <h2 id="current-user" class="col fw-bolder"><?php echo $templateParams["username"]; ?></h2>
+                    <h1 id="current-user" class="col fw-bolder mb-3 fs-3"><?php echo $templateParams["username"]; ?></h1>
                     <div class="col"><?php echo $templateParams['info']["biografia"]; ?></div>
                 </div>
             </div>
@@ -28,7 +29,7 @@
         </div>
         <div class="col">
             <div class="container text-center">
-                <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=follower">
+                <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=follower" target="_self">
                     <div class="row row-cols-1">
                         <div class="col mb-1" id="followers-number"><?php echo count($templateParams["follower"]); ?></div>
                         <div class="col">Follower</div>
@@ -38,7 +39,7 @@
         </div>
         <div class="col">
             <div class="container text-center">
-                <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=followed">
+                <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=followed" target="_self">
 
                     <div class="row row-cols-1">
                         <div class="col mb-1"><?php echo count($templateParams["followed"]); ?></div>

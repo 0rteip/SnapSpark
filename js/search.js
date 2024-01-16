@@ -1,4 +1,3 @@
-console.log('search load');
 function addUsers(result, type) {
     let users = ""
     result.users.forEach(user => {
@@ -13,17 +12,15 @@ function addUsers(result, type) {
         }
         users +=
             `
-    <div class="card" style="width: 18rem;">
-        <header class="card-header">
+    <div class="user-card mb-3 pb-3">
+
             <a href=${link} class="reciver" sender="${result.currentUser}" reciver="${user.username}") >
-                <img src="${result.avatar}avatar.png" class="me-2" alt="" id="avatar">
+                <img src="${result.avatar}avatar.png" class="avatar me-3" alt="" id="avatar" />
                 ${user.username}
             </a>
-        </header>
     </div>
     `
     });
-    //console.log(users);
     document.getElementsByClassName('search')[0].innerHTML = users;
 }
 
@@ -56,8 +53,8 @@ function followerSearch(string, type, courrent, action) {
 function s() {
     if (location.hash.indexOf("create-chat")) {
         let links = document.getElementsByClassName("reciver");
-        for (let i = 0; i<links.length; i++) {
-            links[i].addEventListener("click", function() {
+        for (let i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function () {
                 sendDataChat(links[i].getAttribute("sender"), links[i].getAttribute("reciver"))
             })
         }

@@ -1,5 +1,5 @@
 const newImg = document.createElement("img");
-const bs_modal = $('#modal');
+const bs_modal = $('#cropper-modal');
 const image = document.getElementById('image');
 let cropper, reader, file;
 

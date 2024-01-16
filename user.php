@@ -16,7 +16,16 @@ if (isset($_GET['username'])) {
     $templateParams["requireCropper"] = true;
 }
 
-$templateParams["posts"] = $dbh->getPostsByAuthor($username);
+$posts = $dbh->getPostsByAuthor($username);
+foreach ($posts as $key => $post) {
+    if ($dbh->checkPostLike($_SESSION["username"], $post["id"])) {
+        $posts[$key]["liked"] = true;
+    } else {
+        $posts[$key]["liked"] = false;
+    }
+}
+
+$templateParams["posts"] = $posts;
 $templateParams["follower"] = $dbh->getFollower($username);
 $templateParams["followed"] = $dbh->getFollowed($username);
 $templateParams["info"] = $dbh->getUserInfo($username);

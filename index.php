@@ -8,7 +8,15 @@ if (!isUserLoggedIn()) {
 $posts = [];
 
 foreach ($dbh->getFollowed($_SESSION["username"]) as $value) {
-    $posts += $dbh->getPostsByAuthor($value["username"]);
+    $post_user = $dbh->getPostsByAuthor($value["username"]);
+    foreach ($post_user as $key => $post) {
+        if ($dbh->checkPostLike($_SESSION["username"], $post["id"])) {
+            $post_user[$key]["liked"] = true;
+        } else {
+            $post_user[$key]["liked"] = false;
+        }
+    }
+    $posts += $post_user;
 }
 
 usort($posts, function ($a, $b) {

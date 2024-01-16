@@ -1,6 +1,6 @@
 const imgInputHelper = document.querySelector("img");
 const imgInput = document.getElementById("profile-img");
-const bs_modal = $('#modal');
+const bs_modal = $('#cropper-modal');
 
 let cropper, reader, file;
 
