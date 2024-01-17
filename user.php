@@ -8,13 +8,14 @@ if (!isUserLoggedIn()) {
 $templateParams["titolo"] = "SnapSpark - Profile";
 $templateParams["hashtag"] = $dbh->getDailyHashtag();
 $templateParams["nome"] = "template/user-profile.php";
-
 $username = $_SESSION['username'];
+
 if (isset($_GET['username'])) {
     $username = $_GET['username'];
 } else {
     $templateParams["requireCropper"] = true;
 }
+
 $posts = $dbh->getPostsByAuthor($username);
 foreach ($posts as $key => $post) {
     if ($dbh->checkPostLike($_SESSION["username"], $post["id"])) {

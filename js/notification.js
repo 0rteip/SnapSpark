@@ -2,6 +2,8 @@ function returnText(type) {
     switch(type) {
         case 'send' : return " ti ha inviato un messaggio";
         case 'removeMessage' : return " ha eliminato un messaggio";
+        case 'Follow' : return  " ha iniziato a seguirti";
+        case 'Unfollow' : return  " ha smesso di seguirti";
     }
 }
 function showNotification() {

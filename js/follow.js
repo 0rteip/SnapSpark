@@ -1,8 +1,16 @@
 console.log("follow load");
+function notify(reciver, type) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/notification.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        console.log(this.responseText)
+    }
+    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
+}
+
 function segui() {
-    /* const formData = new FormData();
-    formData.append("follow", bt.getAttribute('value'));
-    formData.append("username", username); */
     console.log("follow load");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/segui.php");
@@ -12,20 +20,17 @@ function segui() {
         if (this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
             const info = JSON.parse(this.responseText);
-            //document.getElementById('followers-number').innerHTML = info.followers_number;
             init(info.followed, document.getElementById('current-user').innerHTML)
+            document.getElementById('followers-number').innerHTML = info.follower.length;
         }
     };
     if (bt.getAttribute('value') === 'Follow') {
-        console.log('follow')
         xhr.send("action=Follow" + "&follow=" + document.getElementById('current-user').innerHTML);
     } else if(bt.getAttribute('value') === 'Unfollow') {
-        console.log('unfollow')
-        console.log(document.getElementById('current-user').innerHTML)
         xhr.send("action=Unfollow" + "&follow=" + document.getElementById('current-user').innerHTML);
     } else {
         console.log("send vuota");
-        xhr.send();
+        xhr.send("follow=" + document.getElementById('current-user').innerHTML);
     }
 }
 
@@ -37,12 +42,12 @@ function init(array, username) {
         bt.setAttribute('value', 'Follow');
         bt.innerHTML = "Follow";
     }
-    document.getElementById('followers-number').innerHTML = array.length;
 }
 
 const bt = document.getElementById("follow-bt");
 if (bt !== null) {
     bt.addEventListener("click", function () {
+        notify(document.getElementById('current-user').innerHTML, this.innerHTML)
         segui();
     });
 }

@@ -7,7 +7,6 @@ function notify(reciver, type) {
         console.log(this.responseText)
     }
     xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
-
 }
 
 function sendMessage() {
