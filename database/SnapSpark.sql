@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Gen 14, 2024 alle 00:03
+-- Creato il: Gen 17, 2024 alle 02:44
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -60,8 +60,9 @@ CREATE TABLE `follow` (
 --
 
 INSERT INTO `follow` (`follower`, `user`) VALUES
+('alex_smith', 'mary_jones'),
 ('alex_smith', 'olivia_taylor'),
-('alex_smith', 'will_miller'),
+('daniel_carter', 'alex_smith'),
 ('daniel_carter', 'ryan_nguyen'),
 ('daniel_carter', 'sophia_garcia'),
 ('emily_wang', 'alex_smith'),
@@ -171,35 +172,80 @@ CREATE TABLE `messaggio` (
 INSERT INTO `messaggio` (`sen_username`, `rec_username`, `testo`, `id`, `data`) VALUES
 ('alex_smith', 'daniel_carter', 'aaaa', 1, '2024-01-13 17:59:22.0'),
 ('alex_smith', 'daniel_carter', 'aaaa', 2, '2024-01-13 17:59:27.0'),
-('alex_smith', 'daniel_carter', 's', 11, '2024-01-13 18:14:41.0'),
-('alex_smith', 'daniel_carter', 'aaa', 13, '2024-01-13 18:51:20.0'),
-('alex_smith', 'daniel_carter', 'aaa', 14, '2024-01-13 18:53:13.0'),
-('alex_smith', 'daniel_carter', 'aa', 15, '2024-01-13 18:53:19.0'),
-('alex_smith', 'daniel_carter', 'aaaa', 16, '2024-01-13 18:53:22.0'),
-('alex_smith', 'daniel_carter', 'sssjsjs', 18, '2024-01-13 19:38:24.0'),
-('alex_smith', 'daniel_carter', 'aaa', 20, '2024-01-13 19:41:17.0'),
-('alex_smith', 'daniel_carter', 'jxsjxnjsnx', 22, '2024-01-13 19:42:07.0'),
-('alex_smith', 'daniel_carter', 'ssjnsjw', 26, '2024-01-13 20:24:48.0'),
-('alex_smith', 'daniel_carter', 'ciao', 28, '2024-01-13 20:32:50.0'),
-('alex_smith', 'emily_wang', 'dddd', 17, '2024-01-13 19:35:33.0'),
-('alex_smith', 'emily_wang', 'xxxx', 19, '2024-01-13 19:38:46.0'),
-('alex_smith', 'emily_wang', 'jcdndjcdjcn', 21, '2024-01-13 19:42:00.0'),
-('alex_smith', 'emily_wang', 'eeeeje', 27, '2024-01-13 20:26:50.0'),
-('alex_smith', 'mary_jones', 'marrr', 23, '2024-01-13 19:42:23.0'),
-('alex_smith', 'mary_jones', 'aaa', 24, '2024-01-13 20:23:22.0'),
-('alex_smith', 'mary_jones', 'sss', 31, '2024-01-13 23:59:43.0'),
-('alex_smith', 'olivia_taylor', 'aaa', 30, '2024-01-13 20:33:13.0'),
-('daniel_carter', 'alex_smith', 'nooo', 3, '2024-01-13 18:08:24.0'),
-('daniel_carter', 'alex_smith', 'haha', 4, '2024-01-13 18:08:29.0'),
-('daniel_carter', 'alex_smith', 'dedked', 5, '2024-01-13 18:08:39.0'),
-('daniel_carter', 'alex_smith', 'd', 6, '2024-01-13 18:08:42.0'),
-('daniel_carter', 'alex_smith', 'd', 7, '2024-01-13 18:08:45.0'),
-('daniel_carter', 'alex_smith', 'd', 8, '2024-01-13 18:08:48.0'),
-('daniel_carter', 'alex_smith', 'd', 9, '2024-01-13 18:08:53.0'),
-('daniel_carter', 'alex_smith', 'd', 10, '2024-01-13 18:08:55.0'),
-('daniel_carter', 'alex_smith', 'xx', 12, '2024-01-13 18:14:56.0'),
-('daniel_carter', 'alex_smith', 'aaaaa', 25, '2024-01-13 20:24:40.0'),
-('daniel_carter', 'alex_smith', 'ciao', 29, '2024-01-13 20:32:57.0');
+('alex_smith', 'daniel_carter', 's', 9, '2024-01-13 18:14:41.0'),
+('alex_smith', 'daniel_carter', 'aaa', 11, '2024-01-13 18:51:20.0'),
+('alex_smith', 'daniel_carter', 'aaa', 12, '2024-01-13 18:53:13.0'),
+('alex_smith', 'daniel_carter', 'aa', 13, '2024-01-13 18:53:19.0'),
+('alex_smith', 'daniel_carter', 'aaaa', 14, '2024-01-13 18:53:22.0'),
+('alex_smith', 'daniel_carter', 'sssjsjs', 16, '2024-01-13 19:38:24.0'),
+('alex_smith', 'daniel_carter', 'jxsjxnjsnx', 20, '2024-01-13 19:42:07.0'),
+('alex_smith', 'daniel_carter', 'ssjnsjw', 24, '2024-01-13 20:24:48.0'),
+('alex_smith', 'daniel_carter', 'ciao', 26, '2024-01-13 20:32:50.0'),
+('alex_smith', 'daniel_carter', 'ciao', 61, '2024-01-17 00:05:23.0'),
+('alex_smith', 'daniel_carter', 'ciao', 62, '2024-01-17 00:06:52.0'),
+('alex_smith', 'daniel_carter', 'ciao', 63, '2024-01-17 00:07:17.0'),
+('alex_smith', 'daniel_carter', 'ciao', 65, '2024-01-17 00:12:28.0'),
+('alex_smith', 'emily_wang', 'dddd', 15, '2024-01-13 19:35:33.0'),
+('alex_smith', 'emily_wang', 'xxxx', 17, '2024-01-13 19:38:46.0'),
+('alex_smith', 'emily_wang', 'jcdndjcdjcn', 19, '2024-01-13 19:42:00.0'),
+('alex_smith', 'emily_wang', 'eeeeje', 25, '2024-01-13 20:26:50.0'),
+('alex_smith', 'mary_jones', 'marrr', 21, '2024-01-13 19:42:23.0'),
+('alex_smith', 'olivia_taylor', 'ciaoo', 58, '2024-01-16 21:03:58.0'),
+('daniel_carter', 'alex_smith', 'dedked', 3, '2024-01-13 18:08:39.0'),
+('daniel_carter', 'alex_smith', 'd', 4, '2024-01-13 18:08:42.0'),
+('daniel_carter', 'alex_smith', 'd', 5, '2024-01-13 18:08:45.0'),
+('daniel_carter', 'alex_smith', 'd', 6, '2024-01-13 18:08:48.0'),
+('daniel_carter', 'alex_smith', 'd', 7, '2024-01-13 18:08:53.0'),
+('daniel_carter', 'alex_smith', 'd', 8, '2024-01-13 18:08:55.0'),
+('daniel_carter', 'alex_smith', 'xx', 10, '2024-01-13 18:14:56.0'),
+('daniel_carter', 'alex_smith', 'ciao', 27, '2024-01-13 20:32:57.0'),
+('daniel_carter', 'alex_smith', 'ciaoo', 54, '2024-01-15 21:22:02.0'),
+('daniel_carter', 'alex_smith', 'ciao', 59, '2024-01-16 23:51:58.0'),
+('daniel_carter', 'alex_smith', 'ciao', 60, '2024-01-17 00:05:14.0'),
+('daniel_carter', 'alex_smith', 'ciao', 64, '2024-01-17 00:12:22.0'),
+('daniel_carter', 'alex_smith', 'ciao', 66, '2024-01-17 01:27:49.0'),
+('daniel_carter', 'alex_smith', 'ciao', 67, '2024-01-17 01:36:29.0'),
+('ryan_nguyen', 'alex_smith', 'ciaooo', 35, '2024-01-14 03:29:30.0'),
+('ryan_nguyen', 'alex_smith', 'ciaooo', 37, '2024-01-14 03:29:46.0'),
+('ryan_nguyen', 'alex_smith', 'ciaooo', 41, '2024-01-15 16:02:49.0');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `notifica`
+--
+
+CREATE TABLE `notifica` (
+  `tipo` char(50) NOT NULL,
+  `sen_user` char(30) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `username` char(30) NOT NULL,
+  `data` datetime(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dump dei dati per la tabella `notifica`
+--
+
+INSERT INTO `notifica` (`tipo`, `sen_user`, `id`, `username`, `data`) VALUES
+('send', 'daniel_carter', 1, 'alex_smith', '2024-01-17 01:27:49.0'),
+('send', 'daniel_carter', 2, 'alex_smith', '2024-01-17 01:36:29.0'),
+('send', 'daniel_carter', 3, 'alex_smith', '2024-01-17 01:36:34.0'),
+('removeMessage', 'daniel_carter', 4, 'alex_smith', '2024-01-17 01:44:32.0'),
+('Follow', 'daniel_carter', 5, 'alex_smith', '2024-01-17 02:11:04.0'),
+('Follow', 'daniel_carter', 6, 'alex_smith', '2024-01-17 02:11:19.0'),
+('Follow', 'daniel_carter', 7, 'alex_smith', '2024-01-17 02:12:45.0'),
+('', 'daniel_carter', 8, 'alex_smith', '2024-01-17 02:12:46.0'),
+('Unfollow', 'daniel_carter', 9, 'alex_smith', '2024-01-17 02:12:52.0'),
+('Follow', 'daniel_carter', 10, 'alex_smith', '2024-01-17 02:12:55.0'),
+('Unfollow', 'daniel_carter', 11, 'alex_smith', '2024-01-17 02:12:56.0'),
+('Follow', 'daniel_carter', 12, 'alex_smith', '2024-01-17 02:12:56.0'),
+('Unfollow', 'daniel_carter', 13, 'alex_smith', '2024-01-17 02:12:56.0'),
+('Follow', 'daniel_carter', 14, 'alex_smith', '2024-01-17 02:13:01.0'),
+('Unfollow', 'daniel_carter', 15, 'alex_smith', '2024-01-17 02:15:38.0'),
+('Follow', 'daniel_carter', 16, 'alex_smith', '2024-01-17 02:15:40.0'),
+('Follow', 'alex_smith', 17, 'john_doe', '2024-01-17 02:34:49.0'),
+('Unfollow', 'alex_smith', 18, 'john_doe', '2024-01-17 02:34:51.0');
 
 -- --------------------------------------------------------
 
@@ -277,18 +323,18 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`username`, `nome`, `cognome`, `sesso`, `password`, `data_nascita`, `mail`, `numero`, `biografia`, `nome_social`, `profile_img`) VALUES
-('alex_smith', 'Alex', 'Smith', 'M', 'alexpass', '1997-05-18', 'alex.smith@example.com', 4567788990, 'Exploring the world one photo at a time.', 'SnapSpark', ''),
-('daniel_carter', 'Daniel', 'Carter', 'M', 'danielpass', '1985-11-08', 'daniel.carter@example.com', 5566778899, 'Photography enthusiast and positivity spreader.', 'SnapSpark', ''),
-('emily_wang', 'Emily', 'Wang', 'F', 'emilypass', '1992-12-05', 'emily.wang@example.com', 1234455667, 'Chasing dreams and capturing moments.', 'SnapSpark', ''),
-('grace_anderson', 'Grace', 'Anderson', 'F', 'gracepass', '1996-07-25', 'grace.anderson@example.com', 3344556677, 'Every day is a gift.', 'SnapSpark', ''),
-('jane_smith', 'Jane', 'Smith', 'F', 'pass123', '1988-05-15', 'jane.smith@example.com', 9876543210, 'Enjoying life one moment at a time.', 'SnapSpark', ''),
-('john_doe', 'John', 'Doe', 'M', 'password123', '1990-01-01', 'john.doe@example.com', 1234567890, 'I love sharing positive moments!', 'SnapSpark', ''),
-('mary_jones', 'Mary', 'Jones', 'F', 'marypass', '1995-03-10', 'mary.jones@example.com', 5551112233, 'Spreading happiness every day!', 'SnapSpark', ''),
-('olivia_taylor', 'Olivia', 'Taylor', 'F', 'oliviapass', '1989-09-30', 'olivia.taylor@example.com', 7890011223, 'Making memories and sharing joy!', 'SnapSpark', ''),
-('ryan_nguyen', 'Ryan', 'Nguyen', 'M', 'ryanpass', '1991-06-03', 'ryan.nguyen@example.com', 1122334455, 'Living the dream and inspiring others.', 'SnapSpark', ''),
-('sam_wilson', 'Sam', 'Wilson', 'M', 'samuelpass', '1983-08-22', 'sam.wilson@example.com', 9871122334, 'Living life to the fullest!', 'SnapSpark', ''),
-('sophia_garcia', 'Sophia', 'Garcia', 'F', 'sophiapass', '1994-02-14', 'sophia.garcia@example.com', 8899001122, 'Believe in the beauty of every moment.', 'SnapSpark', ''),
-('will_miller', 'Will', 'Miller', 'M', 'willpass', '1993-04-12', 'will.miller@example.com', 1122334455, 'Life is an adventure!', 'SnapSpark', '');
+('alex_smith', 'Alex', 'Smith', 'M', 'alexpass', '1997-05-18', 'alex.smith@example.com', 4567788990, 'Exploring the world one photo at a time.', 'SnapSpark', 'sample2.png'),
+('daniel_carter', 'Daniel', 'Carter', 'M', 'danielpass', '1985-11-08', 'daniel.carter@example.com', 5566778899, 'Photography enthusiast and positivity spreader.', 'SnapSpark', 'avatar.png'),
+('emily_wang', 'Emily', 'Wang', 'F', 'emilypass', '1992-12-05', 'emily.wang@example.com', 1234455667, 'Chasing dreams and capturing moments.', 'SnapSpark', 'avatar.png'),
+('grace_anderson', 'Grace', 'Anderson', 'F', 'gracepass', '1996-07-25', 'grace.anderson@example.com', 3344556677, 'Every day is a gift.', 'SnapSpark', 'avatar.png'),
+('jane_smith', 'Jane', 'Smith', 'F', 'pass123', '1988-05-15', 'jane.smith@example.com', 9876543210, 'Enjoying life one moment at a time.', 'SnapSpark', 'avatar.png'),
+('john_doe', 'John', 'Doe', 'M', 'password123', '1990-01-01', 'john.doe@example.com', 1234567890, 'I love sharing positive moments!', 'SnapSpark', 'avatar.png'),
+('mary_jones', 'Mary', 'Jones', 'F', 'marypass', '1995-03-10', 'mary.jones@example.com', 5551112233, 'Spreading happiness every day!', 'SnapSpark', 'avatar.png'),
+('olivia_taylor', 'Olivia', 'Taylor', 'F', 'oliviapass', '1989-09-30', 'olivia.taylor@example.com', 7890011223, 'Making memories and sharing joy!', 'SnapSpark', 'sample.png'),
+('ryan_nguyen', 'Ryan', 'Nguyen', 'M', 'ryanpass', '1991-06-03', 'ryan.nguyen@example.com', 1122334455, 'Living the dream and inspiring others.', 'SnapSpark', 'avatar.png'),
+('sam_wilson', 'Sam', 'Wilson', 'M', 'samuelpass', '1983-08-22', 'sam.wilson@example.com', 9871122334, 'Living life to the fullest!', 'SnapSpark', 'avatar.png'),
+('sophia_garcia', 'Sophia', 'Garcia', 'F', 'sophiapass', '1994-02-14', 'sophia.garcia@example.com', 8899001122, 'Believe in the beauty of every moment.', 'SnapSpark', 'avatar.png'),
+('will_miller', 'Will', 'Miller', 'M', 'willpass', '1993-04-12', 'will.miller@example.com', 1122334455, 'Life is an adventure!', 'SnapSpark', 'avatar.png');
 
 --
 -- Indici per le tabelle scaricate
@@ -343,6 +389,14 @@ ALTER TABLE `messaggio`
   ADD KEY `FKscrive_IND` (`rec_username`);
 
 --
+-- Indici per le tabelle `notifica`
+--
+ALTER TABLE `notifica`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ID_notifica_IND` (`id`),
+  ADD KEY `FKriceve_IND` (`username`);
+
+--
 -- Indici per le tabelle `posts`
 --
 ALTER TABLE `posts`
@@ -394,6 +448,12 @@ ALTER TABLE `hashtags`
 ALTER TABLE `likes`
   ADD CONSTRAINT `FKlik_pos` FOREIGN KEY (`post_username`,`post_id`) REFERENCES `posts` (`username`, `id`),
   ADD CONSTRAINT `FKlik_ute_FK` FOREIGN KEY (`username`) REFERENCES `utenti` (`username`);
+
+--
+-- Limiti per la tabella `notifica`
+--
+ALTER TABLE `notifica`
+  ADD CONSTRAINT `FKriceve_FK` FOREIGN KEY (`username`) REFERENCES `utenti` (`username`);
 
 --
 -- Limiti per la tabella `posts`
