@@ -130,11 +130,11 @@ ul {
     margin-bottom: 2rem !important;
 }
 
-.search .user-card:first-child {
+.search .user-card:first-of-type {
     margin-top: 2rem;
 }
 
-.search .user-card:first-child::before {
+.search .user-card:first-of-type::before {
     content: '';
     position: absolute;
     width: 100%;
