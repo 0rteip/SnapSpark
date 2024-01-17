@@ -21,18 +21,16 @@ function segui() {
             console.log(this.responseText);
             const info = JSON.parse(this.responseText);
             init(info.followed, document.getElementById('current-user').innerHTML)
+            document.getElementById('followers-number').innerHTML = info.follower.length;
         }
     };
     if (bt.getAttribute('value') === 'Follow') {
-        console.log('follow')
         xhr.send("action=Follow" + "&follow=" + document.getElementById('current-user').innerHTML);
     } else if(bt.getAttribute('value') === 'Unfollow') {
-        console.log('unfollow')
-        console.log(document.getElementById('current-user').innerHTML)
         xhr.send("action=Unfollow" + "&follow=" + document.getElementById('current-user').innerHTML);
     } else {
         console.log("send vuota");
-        xhr.send();
+        xhr.send("follow=" + document.getElementById('current-user').innerHTML);
     }
 }
 
@@ -44,13 +42,11 @@ function init(array, username) {
         bt.setAttribute('value', 'Follow');
         bt.innerHTML = "Follow";
     }
-    document.getElementById('followers-number').innerHTML = array.length;
 }
 
 const bt = document.getElementById("follow-bt");
 if (bt !== null) {
     bt.addEventListener("click", function () {
-
         notify(document.getElementById('current-user').innerHTML, this.innerHTML)
         segui();
     });
