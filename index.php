@@ -10,10 +10,11 @@ $posts = [];
 foreach ($dbh->getFollowed($_SESSION["username"]) as $value) {
     $post_user = $dbh->getPostsByAuthor($value["username"]);
     foreach ($post_user as $key => $post) {
-        if ($dbh->checkPostLike($_SESSION["username"], $post["id"])) {
-            $post_user[$key]["liked"] = true;
+
+        if ($dbh->checkPostLike($post["username"], $post["id"])) {
+            $post_user[$key]["liked"] = "true";
         } else {
-            $post_user[$key]["liked"] = false;
+            $post_user[$key]["liked"] = "false";
         }
     }
     $posts = array_merge($posts, $post_user);

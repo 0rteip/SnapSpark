@@ -29,12 +29,11 @@
 
         <footer class="card-footer py-3">
             <div class="row px-md-3">
+
                 <div class="col-10 text-start">
                     <div class="row">
                         <div class="col-auto">
-                            <span tabindex="0" id="post-star¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-star fa-star <?php echo $post['liked'] ? 'liked-star fa-solid' : 'fa-regular'; ?>"></span>
-
-                            <span class="visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
+                            <span tabindex="0" id="post-star¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-star fa-star <?php echo $post['liked'] == "true" ? 'liked-star fa-solid' : 'fa-regular'; ?>"></span>
                         </div>
                         <div id="sparks-num-<?php echo $post['username'] . '-' . $post['id']; ?>" class="col-auto ps-0">
                             <?php if ($post["spark"] > 0) : ?>
@@ -49,9 +48,8 @@
                 <div class="col-2 text-end">
                     <span tabindex="0" class="post-comment fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo $post['username']; ?>" data-bs-id="<?php echo $post['id']; ?>">
                     </span>
-
-                    <span class=" visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
                 </div>
+
             </div>
 
         </footer>
