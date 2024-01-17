@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" aria-label="Notification page" target="_self">
+                <a class="nav-link" href="notification.php" aria-label="Notification page" target="_self">
                     <div class="icon-container px-2 pb-1">
                         <span class="fa fa-heart"></span>
                     </div>

@@ -3,7 +3,7 @@
         <div class="card" style="width: 18rem;">
             <header class="card-header">
                 <a href="user.php?username=<?php echo $user["username"]; ?>">
-                    <img src="<?php echo AVATAR_FOLDER . $user["img"] ?>" class="profile-avatar" alt=""  id="avatar" />
+                    <img src="<?php echo AVATAR_FOLDER . $user["img"] ?>" class="profile-avatar" alt=""   />
                     <?php echo $user["username"]; ?>
                 </a>
             </header>
