@@ -38,7 +38,6 @@ function segui() {
 
 function init(array, username) {
     if (array.includes(username)) {
-        notify(document.getElementById('current-user').innerHTML, bt.innerHTML)
         bt.setAttribute('value', 'Unfollow');
         bt.innerHTML = "Unfollow";
     } else {
@@ -51,6 +50,8 @@ function init(array, username) {
 const bt = document.getElementById("follow-bt");
 if (bt !== null) {
     bt.addEventListener("click", function () {
+
+        notify(document.getElementById('current-user').innerHTML, this.innerHTML)
         segui();
     });
 }
