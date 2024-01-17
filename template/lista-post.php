@@ -32,7 +32,7 @@
                 <div class="col-10 text-start">
                     <div class="row">
                         <div class="col-auto">
-                            <span onclick="likePost(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)" tabindex="0" id="post-star-<?php echo $post['username'] . '-' . $post['id']; ?>" class="fa-star <?php echo $post['liked'] ? 'liked-star fa-solid' : 'fa-regular'; ?>"></span>
+                            <span tabindex="0" id="post-star¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-star fa-star <?php echo $post['liked'] ? 'liked-star fa-solid' : 'fa-regular'; ?>"></span>
 
                             <span class="visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
                         </div>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="col-2 text-end">
-                    <span onclick="getComments(<?php echo  addQuotes($post['username']); ?>, <?php echo $post['id']; ?>)" tabindex="0" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo  addQuotes($post['username']); ?>" data-bs-id="<?php echo $post['id']; ?>">
+                    <span tabindex="0" class="post-comment fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo $post['username']; ?>" data-bs-id="<?php echo $post['id']; ?>">
                     </span>
 
                     <span class=" visually-hidden">Azione</span> <!-- Testo nascosto visivamente, ma accessibile agli screen reader -->
@@ -85,9 +85,9 @@
                                 <label for="commentArea" class="form-label visually-hidden">Comment</label>
 
                                 <div class="col-10 col-sm-10">
-                                    <textarea class="form-control" id="commentArea" placeholder="Add a comment..." onkeyup="enablePost()" required></textarea>
+                                    <textarea class="form-control" id="commentArea" placeholder="Add a comment..." required></textarea>
                                 </div>
-                                <button id="postButton" type="button" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" onclick="postComment()" disabled>Post</button>
+                                <button id="postButton" type="button" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" disabled>Post</button>
 
                             </form>
                         </div>

@@ -35,7 +35,7 @@ function getComments(user, post_id) {
                                             <p class="m-0 text-start"><strong>${comment.user}</strong> ${comment.testo}</p>
                                         </div>
                                         <div class="col-1 col-sm-1 p-0">
-                                            <span id="comment-star-${comment.id}-${comment.user}" class="like-star mx-auto fa-${comment.like ? "solid liked-star" : "regular"} fa-star" onclick="likeComment('${comment.user}','${comment.post_user}',${comment.post_id},${comment.id})"></span>
+                                            <span id="comment-star-${comment.id}-${comment.user}" class="like-star mx-auto fa-${comment.like ? "solid liked-star" : "regular"} fa-star"></span>
                                         </div>
 
                                         </form>
@@ -47,6 +47,9 @@ function getComments(user, post_id) {
                     i += 1;
                 });
                 document.getElementById("message-modal-body").innerHTML = comments;
+                response.comments.forEach(comment => {
+                    document.getElementById("comment-star-" + comment.id + "-" + comment.user).setAttribute("onclick", "likeComment('" + comment.user + "','" + comment.post_user + "'," + comment.post_id + "," + comment.id + ")"); //
+                });
             }
         }
     };
@@ -118,3 +121,6 @@ if (postModal) {
         modalButton.setAttribute("onclick", "postComment(" + username + ", " + id + ")");
     })
 }
+
+const tarea = document.getElementById("commentArea");
+tarea.addEventListener("keyup", enablePost);
