@@ -1,8 +1,16 @@
 console.log("follow load");
+function notify(reciver, type) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/notification.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        console.log(this.responseText)
+    }
+    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
+}
+
 function segui() {
-    /* const formData = new FormData();
-    formData.append("follow", bt.getAttribute('value'));
-    formData.append("username", username); */
     console.log("follow load");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/segui.php");
@@ -12,7 +20,6 @@ function segui() {
         if (this.readyState === 4 && this.status === 200) {
             console.log(this.responseText);
             const info = JSON.parse(this.responseText);
-            //document.getElementById('followers-number').innerHTML = info.followers_number;
             init(info.followed, document.getElementById('current-user').innerHTML)
         }
     };
@@ -31,6 +38,7 @@ function segui() {
 
 function init(array, username) {
     if (array.includes(username)) {
+        notify(document.getElementById('current-user').innerHTML, bt.innerHTML)
         bt.setAttribute('value', 'Unfollow');
         bt.innerHTML = "Unfollow";
     } else {
