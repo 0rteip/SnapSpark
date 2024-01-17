@@ -48,27 +48,26 @@ function checkFollow($name, $array) {
 
 function getExistingChat($messages) {
     $chats = array();
-    foreach($messages as $message) :
+    foreach ($messages as $message) :
         $user = "";
         if ($message['sender'] !== $_SESSION['username']) {
             $user = $message['sender'];
-
-        } else if($message['reciver'] !== $_SESSION['username']) {
-            $user=$message['reciver'];
+        } else if ($message['reciver'] !== $_SESSION['username']) {
+            $user = $message['reciver'];
         }
         $check = checkPresence($chats, $user);
         $newChat = array('user' => $user, 'testo' => $message['testo'], 'data' => $message['data']);
         if ($check !== false) {
             unset($chats[$check]);
         }
-            array_push($chats, $newChat);
+        array_push($chats, $newChat);
     endforeach;
     return array_reverse($chats);
 }
 
 function checkPresence($chats, $user) {
-    foreach($chats as $chat) :
-        if($chat['user'] === $user) {
+    foreach ($chats as $chat) :
+        if ($chat['user'] === $user) {
             return array_search($chat, $chats);
         }
     endforeach;
@@ -78,10 +77,19 @@ function checkPresence($chats, $user) {
 function getNewChatSug($follows, $messages) {
     $existingChats = getExistingChat($messages);
     $result = array();
-    foreach($follows as $follow) {
+    foreach ($follows as $follow) {
         if (checkPresence($existingChats, $follow['username']) === false) {
             array_push($result, $follow);
         }
     }
     return $result;
+}
+
+function defaultAvatar($users) {
+    foreach ($users as $key => $user) {
+        if ($user['img'] === '') {
+            $users[$key]['img'] = 'avatar.png';
+        }
+    }
+    return $users;
 }

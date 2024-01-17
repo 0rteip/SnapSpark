@@ -126,6 +126,10 @@ ul {
     width: 100%;
 }
 
+.follow-tabs {
+    margin-bottom: 2rem !important;
+}
+
 .search .user-card:first-child {
     margin-top: 2rem;
 }
@@ -154,9 +158,9 @@ ul {
     border-radius: 15px;
 }
 
-#chat-c {
+.chat-c {
     max-width: auto;
-    border: none;
+    border: none !important;
 }
 
 .profile-avatar {

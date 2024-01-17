@@ -19,7 +19,7 @@ function addUsers(result, type) {
     <div class="user-card mb-3">
         <header class="card-header">
             <a href=${link} class="reciver") >
-                <img src="${result.avatar}${img}" class="avatar me-3" alt="" id="avatar" />
+                <img src="${result.avatar}${img}" class="avatar me-3" alt="" />
                 ${user.username}
             </a>
     </div>

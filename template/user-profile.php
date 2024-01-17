@@ -1,4 +1,4 @@
-<div class="container text-center mb-3">
+<div class="text-center mb-4">
     <div class="row row-cols-2">
         <div class="col-sm-3 col-md-2 text-middle align-middle">
             <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" required />
@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="container text-center mb-3 p-3" id="user-info" style="<?php echo $templateParams['username'] !== $_SESSION['username'] ? 'border-bottom: 1px solid #ddd' : ''; ?>">
+<div class="text-center mb-3 p-3 pt-4" id="user-info" style="<?php echo $templateParams['username'] !== $_SESSION['username'] ? 'border-bottom: 1px solid #ddd' : ''; ?>">
     <div class="row row-cols-3">
         <div class="col">
             <div class="container text-center">
@@ -52,7 +52,7 @@
 </div>
 
 <?php if ($_SESSION['username'] !== $templateParams['username']) : ?>
-    <div class="container text-center mb-3">
+    <div class="container text-center mb-3 p-3">
         <div class="row row-cols-2">
             <div class="col" id="follow-button">
                 <button class="btn btn-primary" type="button" value="" name="follow" id="follow-bt"></button>
