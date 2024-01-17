@@ -14,8 +14,7 @@ if (isset($_GET['username'])) {
 } else {
     $username = $_SESSION['username'];
     $templateParams["requireCropper"] = true;
-
-
+}
 $posts = $dbh->getPostsByAuthor($username);
 foreach ($posts as $key => $post) {
     if ($dbh->checkPostLike($_SESSION["username"], $post["id"])) {
