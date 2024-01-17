@@ -21,7 +21,7 @@ function addUsers(result, type) {
     <div class="user-card mb-3">
         <header class="card-header">
             <a href="${link}" class="reciver") >
-                <img src="${result.avatar}${img}" class="profile-avatar" alt="" >
+                <img src="${result.avatar}${img}" class="avatar me-3" alt="" />
                 ${user.username}
             </a>
     </div>
@@ -57,9 +57,9 @@ function followerSearch(string, type, courrent, action) {
 }
 
 const search = document.getElementsByClassName('search-bar')
-if (search.length >0) {
-    search[0].addEventListener("keyup", function() {
-        
+if (search.length > 0) {
+    search[0].addEventListener("keyup", function () {
+
         if (search[0].getAttribute('id').indexOf('follower')) {
             let data = search[0].getAttribute('id').split(":-");
             followerSearch(search[0].value, data[1], data[2], data[3])

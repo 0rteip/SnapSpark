@@ -8,9 +8,9 @@ function showElenco(result) {
         chats +=
             `
         <a href="chat.php?reciver=${chat.user}">
-            <div class="user-card">
-                    <img alt="" class="avatar" id="av"  src="${result.avatar}${img}">
-                    <div class="card custom-card borderless-card" id="chat-c">
+            <div class="user-card mb-3">
+                    <img alt="" class="avatar me-3" src="${result.avatar}${img}">
+                    <div class="card custom-card borderless-card chat-c">
                     <div class="info-chat  _${img}_${chat.data}">
                         <div class="user-name">${chat.user}</div>
                         <div class="card-text">${chat.testo}</div>
@@ -30,7 +30,7 @@ function getCurrentChats() {
         let user = chat.querySelector('div.user-name').innerHTML;
         let data = info[2];
         let img = info[1];
-        result.push({user:user, testo:chat.getElementsByClassName('card-text')[0].innerHTML, data:data, img:img});
+        result.push({ user: user, testo: chat.getElementsByClassName('card-text')[0].innerHTML, data: data, img: img });
     })
     return result;
 }
@@ -66,14 +66,14 @@ function chatSearch(string, type) {
 }
 const newChatBt = document.getElementById('newChatBt');
 if (newChatBt != null) {
-    newChatBt.addEventListener("click", function() {
-        location.href='new-chat.php';
+    newChatBt.addEventListener("click", function () {
+        location.href = 'new-chat.php';
     })
 }
 chatsUpdate();
 const search = document.getElementsByClassName('search-bar')
-if (search.length >0) {
-    search[0].addEventListener("keyup", function() {
-            chatSearch(search[0].value, search[0].getAttribute('id').split(":-")[1])
+if (search.length > 0) {
+    search[0].addEventListener("keyup", function () {
+        chatSearch(search[0].value, search[0].getAttribute('id').split(":-")[1])
     })
 }

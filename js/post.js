@@ -18,13 +18,25 @@ function likePost(post_user, post_id) {
             } else {
                 sparks.innerHTML = "";
             }
-            const star = document.getElementById("post-star-" + post_user + "-" + post_id);
+            const star = document.getElementById("post-star¬" + post_user + "¬" + post_id);
 
             star.classList.toggle("liked-star");
             star.classList.toggle("fa-regular");
             star.classList.toggle("fa-solid");
         }
     };
-
     xhr.send("action=like_post" + "&u=" + post_user + "&id=" + post_id);
 }
+
+const posts = document.getElementsByClassName("post-star");
+Array.from(posts).forEach(element => {
+    let els = element.getAttribute("id").split("¬");
+    element.setAttribute("onclick", "likePost('" + els[1] + "'," + els[2] + ")");
+});
+
+const comments = document.getElementsByClassName("post-comment");
+Array.from(comments).forEach(element => {
+    let user = element.getAttribute("data-bs-username");
+    let id = element.getAttribute("data-bs-id");
+    element.setAttribute("onclick", "getComments('" + user + "'," + id + ")");
+});
