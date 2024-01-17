@@ -5,6 +5,7 @@ function isUserLoggedIn() {
 
 function registerLoggedUser($user) {
     $_SESSION["username"] = $user["username"];
+    $_SESSION["last_ver_not"] = 0;
 }
 function setcourrentUser($name) {
     $_SESSION["username"] = $name;
