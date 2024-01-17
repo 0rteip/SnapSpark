@@ -480,10 +480,15 @@ final class DatabaseHelper {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     public function deleteMessage($id) {
+        $id_i = intval($id);
         $query = "DELETE FROM messaggio
                       WHERE id=?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id_i);
+        $stmt->execute();
+        $query = "UPDATE messaggio SET id = id -1 WHERE id>?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $id);
         $stmt->execute();
     }
     public function getChats() {
@@ -521,15 +526,6 @@ final class DatabaseHelper {
         $stmt->execute();
     }
 
-    
-    public function sendNotification($sender, $reciver, $type) {
-        $id = $this->getLastNotficationId();
-        $query = "INSERT INTO notifica(tipo, sen_user, id, username) VALUES (?,?,?,?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssis',$type, $sender, $id, $reciver);
-        $stmt->execute();
-    }
-
     private function getLastNotficationId() {
         $query = "SELECT MAX(id) as id FROM notifica";
         $stmt = $this->db->prepare($query);
@@ -541,5 +537,49 @@ final class DatabaseHelper {
             return $result[0]['id'] + 1;
         }
     }
-}
 
+    public function sendNotification($sender, $reciver, $type) {
+        $id = $this->getLastNotficationId();
+        $date = date('Y-m-d H:i:s');
+        $query = "INSERT INTO notifica(tipo, sen_user, id, username, data) VALUES (?,?,?,?,?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssiss', $type, $sender, $id, $reciver, $date);
+        $stmt->execute();
+    }
+
+    public function getUserNotification() {
+        $reciver = $_SESSION['username'];
+        $query = "SELECT tipo, sen_user as sender , id FROM notifica WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $reciver);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function checkNewNotification($lastCheck) {
+        $reciver = $_SESSION['username'];
+        $query = "SELECT MAX(data) as data FROM notifica WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $reciver);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        if (count($result) == 0) {
+            return false;
+        } else {
+            $date = strtotime($result[0]['data']);
+            $dateL = strtotime($lastCheck);
+            return $date > $dateL;
+        }
+    }
+
+    public function deleteNotification($id) {
+        $query = "DELETE FROM notifica WHERE id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $id);
+        $stmt->execute();
+        $query = "UPDATE notifica SET id = id -1 WHERE id>?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $id);
+        $stmt->execute();
+    }
+}

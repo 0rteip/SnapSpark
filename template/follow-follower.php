@@ -6,9 +6,7 @@
     <a class="nav-link <?php echo checkRadio($templateParams['action'], 'followed') ?>" href="info-follower.php?username=<?php echo $username ?>&action=followed" target="_self">Followed</a>
   </li>
 </ul>
-
-<label for="search-user" class="visually-hidden">Search user</label>
-<input id="search-user" class="form-control bg-main-color-subtle" name="search" type="search" placeholder="Search" onkeyup="followerSearch(this.value, 2,  '<?php print($templateParams['username']); ?>' , '<?php print($templateParams['action']); ?>' )">
+<input id="search-follower:-2:-<?php print($templateParams['username']); ?>:-<?php print($templateParams['action']); ?>" class="search-bar bg-main-color-subtle" name="follower-search" type="search" placeholder="Search" aria-label="Search" >
 
 <div class="search">
   <?php require("list-username.php"); ?>

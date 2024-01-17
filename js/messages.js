@@ -1,3 +1,15 @@
+function notify(reciver, type) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/notification.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        console.log(this.responseText)
+    }
+    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
+
+}
+
 function sendMessage() {
     if (document.getElementById('message-text').value.length === 0) {
         return;
@@ -12,16 +24,24 @@ function sendMessage() {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             document.getElementById('message-text').value = "";
+            notify(container[3], 'send')
             displayMessages();
         }
     };
     xhr.send("message=" + document.getElementById('message-text').value + "&reciver=" + container[3]);
 }
 function removeMessage(id) {
+    let container = document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-")
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/messages.php")
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            document.getElementById('message-text').value = "";
+            notify(container[3], 'removeMessage');
+        }
+    };
     xhr.send("id=" + id + "&action=delete");
 }
 
@@ -52,8 +72,6 @@ function displayMessages() {
             let msgs = "";
 
             if (JSON.stringify(messages) !== JSON.stringify(getCurrentMessages())) {
-                console.log(JSON.stringify(messages))
-                console.log(JSON.stringify(getCurrentMessages()))
                 let data = "";
                 messages.forEach(msg => {
                     let class_extra = "";
@@ -62,7 +80,6 @@ function displayMessages() {
                     } else {
                         class_extra = "reciver-msg msg";
                     }
-                    console.log(msg.data.substring(0, 10))
                     if (data !== msg.data.substring(0, 10)) {
                         data = msg.data.substring(0, 10);
                         msgs +=
@@ -86,11 +103,10 @@ function displayMessages() {
                 chatMessages.scrollTop = chatMessages.scrollHeight;
                 console.log("entro");
                 msgs = document.querySelectorAll('div.message-box').forEach(msg => {
-                    console.log("cont: " + container[2] + " msg:" + msg.getAttribute('class').split("-")[3])
                     if (container[2] == msg.getAttribute('class').split("-")[3]) {
                         msg.addEventListener('contextmenu', function (event) {
                             event.preventDefault();
-                            if (confirm("Press a button!") == true) {
+                            if (confirm("Vuoi eliminare questo messaggio?") == true) {
                                 removeMessage(msg.getAttribute('class').split("-")[2]);
                             }
                         }, false);
@@ -101,6 +117,12 @@ function displayMessages() {
     };
     xhr.send("sender=" + container[2] + "&reciver=" + container[3] + "&action=update");
     setTimeout('displayMessages()', 1000)
+}
+const sendBt = document.getElementById('send-message-button');
+if (sendBt != null) {
+    sendBt.addEventListener("click", function() {
+        sendMessage();
+    })
 }
 displayMessages();
 

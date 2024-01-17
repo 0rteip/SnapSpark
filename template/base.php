@@ -59,6 +59,7 @@
     <script src="https://kit.fontawesome.com/afc94b6b63.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/notification.js"></script>
 </body>
 
 </html>

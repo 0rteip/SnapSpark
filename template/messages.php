@@ -7,7 +7,7 @@
     </div>
     <div class="input-group mb-3 pt-4" id="message-form">
         <input type="text" class="form-control" placeholder="Scrivi il messaggio" id="message-text">
-        <button class="btn btn-primary" type="button" onclick="sendMessage()">Send</button>
+        <button class="btn btn-primary" id="send-message-button" type="button">Send</button>
     </div>
 
 </div>

@@ -1,15 +1,17 @@
 function addUsers(result, type) {
+    type = parseInt(type)
     let users = ""
     result.users.forEach(user => {
         let link = "";
         switch (type) {
-            case 0: link = `chat.php?reciver=${user.username}`;
+            case 0: link = `chat.php?reciver=${user.username}`; console.log(link)
                 break;
-            case 1: link = "user.php?username=" + user.username;
+            case 1: link = `user.php?username=${user.username}`;
                 break;
-            case 2: link = "user.php?username=" + user.username;
+            case 2: link = `user.php?username=${user.username}`;
                 break;
         }
+        console.log(link)
         let img = 'avatar.png';
         if (user.img.length > 0) {
             img = user.img;
@@ -18,7 +20,7 @@ function addUsers(result, type) {
             `
     <div class="user-card mb-3">
         <header class="card-header">
-            <a href=${link} class="reciver") >
+            <a href="${link}" class="reciver") >
                 <img src="${result.avatar}${img}" class="avatar me-3" alt="" />
                 ${user.username}
             </a>
@@ -52,4 +54,17 @@ function followerSearch(string, type, courrent, action) {
         addUsers(result, type);
     }
     xhr.send("string=" + string + "&type=" + type + "&courrent=" + courrent + "&action=" + action);
+}
+
+const search = document.getElementsByClassName('search-bar')
+if (search.length > 0) {
+    search[0].addEventListener("keyup", function () {
+
+        if (search[0].getAttribute('id').indexOf('follower')) {
+            let data = search[0].getAttribute('id').split(":-");
+            followerSearch(search[0].value, data[1], data[2], data[3])
+        } else {
+            normalSearch(search[0].value, search[0].getAttribute('id').split(":-")[1])
+        }
+    })
 }
