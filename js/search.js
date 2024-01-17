@@ -1,15 +1,17 @@
 function addUsers(result, type) {
+    type = parseInt(type)
     let users = ""
     result.users.forEach(user => {
         let link = "";
         switch (type) {
-            case 0: link = `chat.php?reciver=${user.username}`;
+            case 0: link = `chat.php?reciver=${user.username}`; console.log(link)
                 break;
-            case 1: link = "user.php?username=" + user.username;
+            case 1: link = `user.php?username=${user.username}`;
                 break;
-            case 2: link = "user.php?username=" + user.username;
+            case 2: link = `user.php?username=${user.username}`;
                 break;
         }
+        console.log(link)
         let img = 'avatar.png';
         if (user.img.length > 0) {
             img = user.img;
@@ -18,8 +20,8 @@ function addUsers(result, type) {
             `
     <div class="card" style="width: 18rem;">
         <header class="card-header">
-            <a href=${link} class="reciver") >
-                <img src="${result.avatar}${img}" class="profile-avatar" alt="" id="avatar">
+            <a href="${link}" class="reciver") >
+                <img src="${result.avatar}${img}" class="profile-avatar" alt="" >
                 ${user.username}
             </a>
     </div>
