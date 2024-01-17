@@ -8,7 +8,7 @@
 </ul>
 
 <label for="search-user" class="visually-hidden">Search user</label>
-<input id="search-follower:-2:-<?php print($templateParams['username']); ?>:-<?php print($templateParams['action']); ?>" class="search-bar bg-main-color-subtle" name="follower-search" type="search" placeholder="Search" aria-label="Search">
+<input id="search-follower:-2:-<?php print($templateParams['username']); ?>:-<?php print($templateParams['action']); ?>" class="search-bar bg-main-color-subtle form-control" name="follower-search" type="search" placeholder="Search" aria-label="Search">
 
 <div class="search">
   <?php require("list-username.php"); ?>
