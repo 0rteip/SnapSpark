@@ -18,7 +18,7 @@ function addUsers(result, type) {
         }
         users +=
             `
-    <div class="card" style="width: 18rem;">
+    <div class="user-card mb-3">
         <header class="card-header">
             <a href="${link}" class="reciver") >
                 <img src="${result.avatar}${img}" class="profile-avatar" alt="" >

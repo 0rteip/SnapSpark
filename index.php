@@ -16,7 +16,7 @@ foreach ($dbh->getFollowed($_SESSION["username"]) as $value) {
             $post_user[$key]["liked"] = false;
         }
     }
-    $posts += $post_user;
+    $posts = array_merge($posts, $post_user);
 }
 
 usort($posts, function ($a, $b) {

@@ -5,8 +5,8 @@ function showElenco(result) {
         if (chat.img.length > 0) {
             img = chat.img;
         }
-        chats += 
-        `
+        chats +=
+            `
         <a href="chat.php?reciver=${chat.user}">
             <div class="user-card">
                     <img alt="" class="avatar" id="av"  src="${result.avatar}${img}">

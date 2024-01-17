@@ -77,7 +77,7 @@
                     <div class="row align-items-center justify-content-center">
 
                         <div class="col-1 p-0">
-                            <img alt="" class="mx-auto comment-profile-img" src="<?php echo AVATAR_FOLDER . $templateParams['userImage']; ?>" />
+                            <img alt="" class="mx-auto comment-profile-avatar" src="<?php echo AVATAR_FOLDER . $templateParams['userImage']; ?>" />
                         </div>
 
                         <div class="col-11">
