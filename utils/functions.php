@@ -85,12 +85,3 @@ function getNewChatSug($follows, $messages) {
     }
     return $result;
 }
-
-function defaultAvatar($users) {
-    foreach ($users as $key => $user) {
-        if ($user['img'] === '') {
-            $users[$key]['img'] = 'avatar.png';
-        }
-    }
-    return $users;
-}

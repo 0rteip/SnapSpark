@@ -12,16 +12,12 @@ function addUsers(result, type) {
                 break;
         }
         console.log(link)
-        let img = 'avatar.png';
-        if (user.img.length > 0) {
-            img = user.img;
-        }
         users +=
             `
     <div class="user-card mb-3">
         <header class="card-header">
             <a href="${link}" class="reciver") >
-                <img src="${result.avatar}${img}" class="avatar me-3" alt="" />
+                <img src="${result.avatar}${user.img}" class="avatar me-3" alt="" />
                 ${user.username}
             </a>
     </div>

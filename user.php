@@ -29,9 +29,6 @@ $templateParams["posts"] = $posts;
 $templateParams["follower"] = $dbh->getFollower($username);
 $templateParams["followed"] = $dbh->getFollowed($username);
 $templateParams["info"] = $dbh->getUserInfo($username);
-if ($templateParams["info"]["profile_img"] == "") {
-    $templateParams["info"]["profile_img"] = "avatar.png";
-}
 
 $templateParams["userImage"] = $templateParams["info"]["profile_img"];
 $templateParams["username"] = $username;
