@@ -4,11 +4,7 @@
             <div class="row row-cols-2 px-md-3">
                 <div class="col-6 text-start align-middle">
                     <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
-                        <?php if ($post["profile_img"] == "") : ?>
-                            <img alt="Go to <?php echo $post['username']; ?> profile" class="mx-auto post-img me-3" src="<?php echo AVATAR_FOLDER . "avatar.png"; ?>" />
-                        <?php else : ?>
-                            <img alt="Go to <?php echo $post['username']; ?> profile" class="mx-auto post-img me-3" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>" />
-                        <?php endif; ?>
+                        <img alt="Go to <?php echo $post['username']; ?> profile" class="mx-auto post-img me-3" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>" />
                         <h2 class="post-header m-0 fs-5"><?php echo $post["username"]; ?></h2>
                     </a>
                 </div>

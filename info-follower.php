@@ -22,11 +22,9 @@ if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'follower':
             $templateParams["users"] = $dbh->getFollower($username);
-            $templateParams["users"] = defaultAvatar($templateParams["users"]);
             break;
         case 'followed':
             $templateParams["users"] = $dbh->getFollowed($username);
-            $templateParams["users"] = defaultAvatar($templateParams["users"]);
             break;
         default:
             $templateParams["users"] = [];

@@ -11,10 +11,11 @@ if (
     isset($_POST["data_nascita"]) && isset($_POST["mail"]) && isset($_POST["numero"]) &&
     isset($_POST["biografia"])
 ) {
-
-    $img = sha1("C:\\fakepath\\" . $_POST["profile-img"]) . ".png";
-
-    echo $img;
+    if ($_POST["profile-img"] == "") {
+        $img = "avatar.png";
+    } else {
+        $img = sha1("C:\\fakepath\\" . $_POST["profile-img"]) . ".png";
+    }
 
     $id = $dbh->insertNewUser(
         $img,

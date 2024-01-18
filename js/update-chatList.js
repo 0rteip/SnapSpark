@@ -1,17 +1,13 @@
 function showElenco(result) {
     let chats = ""
     result.chats.forEach(chat => {
-        let img = 'avatar.png';
-        if (chat.img.length > 0) {
-            img = chat.img;
-        }
         chats +=
             `
         <a href="chat.php?reciver=${chat.user}">
             <div class="user-card mb-3">
                     <img alt="" class="avatar me-3" src="${result.avatar}${img}">
                     <div class="card custom-card borderless-card chat-c">
-                    <div class="info-chat  _${img}_${chat.data}">
+                    <div class="info-chat  _${chat.img}_${chat.data}">
                         <div class="user-name">${chat.user}</div>
                         <div class="card-text">${chat.testo}</div>
                     </div>
