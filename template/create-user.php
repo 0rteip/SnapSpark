@@ -1,4 +1,4 @@
-<form action="new-account.php" method="POST" class="row g-3">
+<form action="new-account.php" method="POST" class="row g-3 was-validate" novalidate>
     <div class="col-md-2 image-container">
         <label id="profile-img-label" for="profile-img">+
             <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" required />
