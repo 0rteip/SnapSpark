@@ -23,6 +23,14 @@ final class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function validateUsername($username) {
+        $query = "SELECT username FROM utenti WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) == 0;
+        
+    }
     public function getRandomPosts($n) {
         $query = "SELECT username, file, id, descrizione, data, spark
                   FROM posts
