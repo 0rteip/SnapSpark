@@ -51,7 +51,6 @@ function showNotification() {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
-        console.log(this.responseText)
         let result = JSON.parse(this.responseText);
         let notSec = document.getElementById("notication-section");
         let nots = "";
@@ -65,7 +64,6 @@ function showNotification() {
             </div>
             `
         });
-        console.log(nots)
         notSec.innerHTML = nots;
     }
     xhr.send("action=get");
