@@ -126,12 +126,14 @@ function previewFile(file) {
                 <label for="descArea" class="form-label visually-hidden">Description</label>
 
                 <div class="col-10 col-sm-10 ps-0">
-                    <textarea class="form-control" id="descArea" placeholder="Add a description..." onkeyup="enableShare()" required></textarea>
+                    <textarea class="form-control" id="descArea" placeholder="Add a description..." required></textarea>
                 </div>
-                <button id="shareButton" type="button" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" onclick="sharePost()" disabled>Share</button>
+                <button id="shareButton" type="button" value="Submit" class="col-2 col-sm-2 px-2 btn btn-primary" disabled>Share</button>
             </form>
         </div>
         `;
         insertAfter(card_footer, gallery);
+        document.getElementById("descArea").addEventListener("keyup", event => enableShare());
+        document.getElementById("shareButton").addEventListener("click", event => sharePost());
     }
 }

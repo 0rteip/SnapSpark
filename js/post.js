@@ -31,12 +31,12 @@ function likePost(post_user, post_id) {
 const posts = document.getElementsByClassName("post-star");
 Array.from(posts).forEach(element => {
     let els = element.getAttribute("id").split("¬");
-    element.setAttribute("onclick", "likePost('" + els[1] + "'," + els[2] + ")");
+    element.addEventListener("click", event => likePost(els[1], els[2]));
 });
 
 const comments = document.getElementsByClassName("post-comment");
 Array.from(comments).forEach(element => {
     let user = element.getAttribute("data-bs-username");
     let id = element.getAttribute("data-bs-id");
-    element.setAttribute("onclick", "getComments('" + user + "'," + id + ")");
+    element.addEventListener("click", event => getComments(user, id));
 });
