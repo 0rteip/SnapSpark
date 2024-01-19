@@ -8,9 +8,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <label for="nome" class=<form action="new-account.php" method="POST" class="row g-3">
-            <?php require_once 'template/user-info-data.php'; ?>
-            "form-label">Nome</label>
+        <label for="nome" class=<form action="new-account.php" method="POST" class="row g-3">Nome</label>
         <input type="text" class="form-control" id="nome" name="nome" required>
         <div class="valid-feedback">
             Looks good!
