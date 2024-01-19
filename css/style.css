@@ -296,3 +296,13 @@ a:visited {
     border: 1px solid red;
     border-radius: 50%;
 }
+
+.post-trash {
+    color: #070707;
+    font-size: 120%;
+    cursor: pointer;
+}
+
+.post-trash:hover {
+    color: #FF3040;
+}

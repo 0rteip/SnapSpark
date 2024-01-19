@@ -10,7 +10,12 @@
                 </div>
 
                 <div class="d-flex col-6 align-middle justify-content-end">
-                    <p class="my-auto"><?php echo $post["data"] ?></p>
+                    <p class="my-auto"><?php echo $post["data"] ?>
+                        <?php if ($_SESSION["username"] == $post["username"]) : ?>
+                            <span tabindex="0" id="trash-can¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-trash fa-solid fa-trash ms-2">
+                            </span>
+                        <?php endif; ?>
+                    </p>
                 </div>
             </div>
         </header>
