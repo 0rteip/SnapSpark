@@ -7,8 +7,10 @@
             Looks good!
         </div>
     </div>
-    <div class="col-md-4" >
-        <label for="nome" class="form-label">Nome</label>
+    <div class="col-md-4">
+        <label for="nome" class=<form action="new-account.php" method="POST" class="row g-3">
+            <?php require_once 'template/user-info-data.php'; ?>
+            "form-label">Nome</label>
         <input type="text" class="form-control" id="nome" name="nome" required>
         <div class="valid-feedback">
             Looks good!
@@ -31,7 +33,7 @@
         <label for="username" class="form-label">Username</label>
         <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input type="text" class="form-control extra-validation" id="username" name="username" pattern="^[a-zA-Z_]+$" required >
+            <input type="text" class="form-control extra-validation" id="username" name="username" pattern="^[a-zA-Z_]+$" required>
             <div class="invalid-feedback" id="usernameCustomValid">
                 Username mast contains only a-z, A-Z and _
             </div>
