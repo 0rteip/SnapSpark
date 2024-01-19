@@ -48,19 +48,18 @@ article .fa-comment:hover {
     cursor: pointer;
 }
 
+.post-star {
+    font-size: 120%;
+}
+
 .liked-star {
     color: #ffd364;
 }
 
-.like-star:hover {
+.like-star:hover,
+.post-star:hover {
     cursor: pointer;
-    color: #5d5a5a;
-    font-size: 120%;
-}
-
-.liked-star:hover {
-    color: #FF3040;
-    font-size: 120%;
+    color: #f4a94d;
 }
 
 
