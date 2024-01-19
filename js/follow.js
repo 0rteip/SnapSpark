@@ -1,4 +1,3 @@
-console.log("follow load");
 function notify(reciver, type) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/notification.php");
@@ -11,7 +10,6 @@ function notify(reciver, type) {
 }
 
 function segui() {
-    console.log("follow load");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/segui.php");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -26,7 +24,7 @@ function segui() {
     };
     if (bt.getAttribute('value') === 'Follow') {
         xhr.send("action=Follow" + "&follow=" + document.getElementById('current-user').innerHTML);
-    } else if(bt.getAttribute('value') === 'Unfollow') {
+    } else if (bt.getAttribute('value') === 'Unfollow') {
         xhr.send("action=Unfollow" + "&follow=" + document.getElementById('current-user').innerHTML);
     } else {
         console.log("send vuota");
@@ -52,12 +50,11 @@ if (bt !== null) {
     });
 }
 
-
 const chatbt = document.getElementById('message-bt');
 if (chatbt !== null) {
     let courrent_user = document.getElementById('current-user').innerHTML;
-    chatbt.addEventListener("click", function() {
-        location.href=`chat.php?reciver=${courrent_user}`;
+    chatbt.addEventListener("click", function () {
+        location.href = `chat.php?reciver=${courrent_user}`;
     })
 }
 segui();

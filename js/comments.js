@@ -17,7 +17,6 @@ function getComments(user, post_id) {
             }
             else {
                 let comments = "";
-                let i = 1;
                 response.comments.forEach(comment => {
                     comments +=
                         `
@@ -44,11 +43,10 @@ function getComments(user, post_id) {
                             </div>
                         </div>
                     `;
-                    i += 1;
                 });
                 document.getElementById("message-modal-body").innerHTML = comments;
                 response.comments.forEach(comment => {
-                    document.getElementById("comment-star-" + comment.id + "-" + comment.user).setAttribute("onclick", "likeComment('" + comment.user + "','" + comment.post_user + "'," + comment.post_id + "," + comment.id + ")"); //
+                    document.getElementById("comment-star-" + comment.id + "-" + comment.user).addEventListener("click", event => likeComment(comment.user, comment.post_user, comment.post_id, comment.id));
                 });
             }
         }
@@ -118,7 +116,7 @@ if (postModal) {
         const id = button.getAttribute('data-bs-id')
         // Update the modal's content
         const modalButton = postModal.querySelector('#postButton');
-        modalButton.setAttribute("onclick", "postComment(" + username + ", " + id + ")");
+        modalButton.addEventListener("click", event => postComment(username, id));
     })
 }
 

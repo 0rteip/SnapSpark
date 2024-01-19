@@ -75,6 +75,14 @@ function sharePost() {
     }
 }
 
+function deletePost() {
+    require_once '../bootstrap.php';
+
+    if (isset($_POST["u"]) && isset($_POST["id"])) {
+        $dbh->deletePost($_POST["u"], $_POST["id"]);
+    }
+}
+
 // Controlla se la richiesta è una chiamata Ajax
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
     // Chiamata Ajax rilevata, esegui la funzione
@@ -87,6 +95,9 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 break;
             case 'share_post':
                 sharePost();
+                break;
+            case 'delete_post':
+                deletePost();
                 break;
             default:
                 break;

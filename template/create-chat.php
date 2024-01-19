@@ -1,4 +1,4 @@
-<input id="search-bar:-0" class="search-bar bg-main-color-subtle" name="search" type="search" placeholder="Search" aria-label="Search">
+<input id="search-bar:-0" class="form-control search-bar bg-main-color-subtle" name="search" type="search" placeholder="Search" aria-label="Search">
 
 <section class="search">
     <?php foreach ($templateParams['sug'] as $sug) : ?>

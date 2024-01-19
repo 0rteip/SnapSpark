@@ -1,45 +1,51 @@
 <?php
-function sendNotification($reciver, $type)
-{
+function sendNotification() {
     require_once '../bootstrap.php';
+
+    if (isset($_POST['reciver']) && isset($_POST['type'])) {
+        $reciver = $_POST['reciver'];
+        $type = $_POST['type'];
+    }
     $dbh->sendNotification($_SESSION['username'], $reciver, $type);
-    echo "send mes";
 }
 
-function getAllNotifications()
-{
+function getAllNotifications() {
     require_once '../bootstrap.php';
-    $result = [];
+
     $result = $dbh->getUserNotification();
-    echo json_encode(array("notifications" => $result ));
+    if (empty($result)) {
+        echo json_encode(array("news" => "false"));
+    } else {
+        echo json_encode(array("news" => "true", "notifications" => $result));
+    }
 }
 
-function checkNewNotification()
-{
+function checkNewNotification() {
     require_once '../bootstrap.php';
-    //echo json_encode(array("data" => $dbh->checkNewNotification($_SESSION["last_ver_not"]))) ;
-    if ($dbh->checkNewNotification($_SESSION["last_ver_not"])) {
-        $_SESSION["last_ver_not"] = date('Y-m-d H:i:s');
-        echo "true";
+
+    $nots = $dbh->checkNewNotification();
+    $_SESSION["last_ver_not"] = date('Y-m-d H:i:s');
+
+    if (empty($nots)) {
+        echo json_encode(array("news" => "false", "last_ver_not" => $_SESSION["last_ver_not"]));
     } else {
-        echo "false";
+        echo json_encode(array("news" => "true", "notifications" => $nots));
     }
 }
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'send':
-                if (isset($_POST['reciver']) && isset($_POST['type'])) {
-                    sendNotification($_POST['reciver'], $_POST['type']);
-                }
+                sendNotification();
                 break;
             case 'get':
                 getAllNotifications();
                 break;
             case 'check':
                 checkNewNotification();
+                break;
+            default:
                 break;
         }
     }

@@ -1,6 +1,8 @@
 <?php
 final class DatabaseHelper {
     private $db;
+    //create a constant date format
+    private $dateFormat = "Y-m-d H:i:s";
 
     public function __construct($serverName, $userName, $password, $dbName, $port) {
         $this->db = new mysqli($serverName, $userName, $password, $dbName, $port);
@@ -436,7 +438,7 @@ final class DatabaseHelper {
         $zero = 0;
         $username = $_SESSION["username"];
         $nextId = $this->getLastPostId($username) + 1;
-        $date = date("Y-m-d H:i:s");
+        $date = date($this->dateFormat);
         $query = "INSERT INTO posts(username, file, id, descrizione, data, spark)
                   VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
@@ -459,7 +461,7 @@ final class DatabaseHelper {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     public function sendMessage($sender, $reciver, $testo) {
-        $date = date('Y-m-d H:i:s');
+        $date = date($this->dateFormat);
         $id = $this->getLastMessageId();
         $query = "INSERT INTO messaggio(sen_username, rec_username, testo, id, data) VALUES (?,?,?,?,?)";
         $stmt = $this->db->prepare($query);
@@ -548,7 +550,7 @@ final class DatabaseHelper {
 
     public function sendNotification($sender, $reciver, $type) {
         $id = $this->getLastNotficationId();
-        $date = date('Y-m-d H:i:s');
+        $date = date($this->dateFormat);
         $query = "INSERT INTO notifica(tipo, sen_user, id, username, data) VALUES (?,?,?,?,?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssiss', $type, $sender, $id, $reciver, $date);
@@ -564,19 +566,26 @@ final class DatabaseHelper {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkNewNotification($lastCheck) {
+    public function checkNewNotification() {
         $reciver = $_SESSION['username'];
-        $query = "SELECT MAX(data) as data FROM notifica WHERE username=?";
+        $lastCheck = $_SESSION['last_ver_not'];
+        $query = "SELECT * FROM notifica WHERE username=? ORDER BY data ASC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $reciver);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        if (count($result) == 0) {
-            return false;
+
+        $nots = [];
+        if (empty($result)) {
+            return $nots;
         } else {
-            $date = strtotime($result[0]['data']);
-            $dateL = strtotime($lastCheck);
-            return $date > $dateL;
+            //check if bigger
+            foreach ($result as $value) {
+                if ($value['data'] > $lastCheck) {
+                    array_push($nots, $value);
+                }
+            }
+            return $nots;
         }
     }
 
@@ -588,6 +597,28 @@ final class DatabaseHelper {
         $query = "UPDATE notifica SET id = id -1 WHERE id>?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $id);
+        $stmt->execute();
+    }
+
+    public function deletePost($username, $id) {
+        $query = "DELETE FROM like_post WHERE post_username=? AND post_id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id);
+        $stmt->execute();
+
+        $query = "DELETE FROM likes WHERE post_username=? AND post_id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id);
+        $stmt->execute();
+
+        $query = "DELETE FROM commenti WHERE post_user=? AND post_id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id);
+        $stmt->execute();
+
+        $query = "DELETE FROM posts WHERE username=? AND id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id);
         $stmt->execute();
     }
 }

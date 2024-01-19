@@ -28,14 +28,21 @@
         </div>
     </nav>
 
-    <div class="container-xl bd-gutter mt-3 mb-3 my-md-4 bd-layout">
-        <main>
-            <?php if (isset($templateParams["nome"])) : ?>
-                <?php require($templateParams["nome"]); ?>
-            <?php endif; ?>
-        </main>
-    </div>
+    <div class="content-wrapper d-flex flex-column">
+        <div aria-live="polite" aria-atomic="true">
+            <div class="toast-container position-fixed end-0 p-3" id="toast-container">
+                <!-- toasts are created dynamically -->
+            </div>
+        </div>
 
+        <div class="container-xl bd-gutter mt-3 mb-3 my-md-4 bd-layout">
+            <main>
+                <?php if (isset($templateParams["nome"])) : ?>
+                    <?php require($templateParams["nome"]); ?>
+                <?php endif; ?>
+            </main>
+        </div>
+    </div>
     <?php if ($templateParams["showNavBar"]) {
         require("nav-bar.php");
     }
@@ -53,7 +60,6 @@
             </div>
         <script src="js/notification.js"></script>
         <?php endif; ?>
-
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

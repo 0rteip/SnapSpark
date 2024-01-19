@@ -5,7 +5,7 @@ function showElenco(result) {
             `
         <a href="chat.php?reciver=${chat.user}">
             <div class="user-card mb-3">
-                    <img alt="" class="avatar me-3" src="${result.avatar}${img}">
+                    <img alt="" class="avatar me-3" src="${result.avatar}${chat.img}">
                     <div class="card custom-card borderless-card chat-c">
                     <div class="info-chat  _${chat.img}_${chat.data}">
                         <div class="user-name">${chat.user}</div>
