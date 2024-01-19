@@ -144,10 +144,6 @@ ul {
     border-radius: 10px;
 }
 
-#message-form {
-    border-top: 1px solid #ddd;
-}
-
 .user-card {
     display: flex;
     align-items: center;
@@ -155,6 +151,10 @@ ul {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 15px;
+}
+
+.avatar-chat {
+    margin: 1rem;
 }
 
 .chat-c {
@@ -195,11 +195,13 @@ a:visited {
 
 .chat {
     padding: 15px;
-    border: 2px solid black;
+    border: 1px solid #ddd;
+    border-radius: 0 0 15px 15px;
 }
 
 #user-information {
-    border: 2px solid black;
+    border: 1px solid #ddd;
+    border-radius: 15px 15px 0 0;
     border-bottom: 0;
     margin: 0px;
 }
