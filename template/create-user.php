@@ -1,6 +1,6 @@
 <form action="new-account.php" method="POST" class="row g-3 needs-validation" novalidate>
     <div class="col-md-2 image-container">
-        <label id="profile-img-label" for="profile-img">+
+        <label id="profile-img-label" for="profile-img" class="mx-auto">+
             <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" />
         </label>
         <div class="valid-feedback">
