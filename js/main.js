@@ -1,5 +1,3 @@
-console.log("main.js loaded");
-
 $(document).ready(function () {
     let url = window.location;
 

@@ -91,11 +91,7 @@ function sharePost() {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4) {
             if (this.status === 200) {
-                // Gestisci la risposta dal server se necessario
-                console.log(this.responseText);
-
                 window.location.href = "user.php";
-
             } else {
                 // Gestisci eventuali errori
                 console.error("Errore durante la condivisione del post.");

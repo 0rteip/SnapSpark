@@ -8,7 +8,6 @@ function getComments(user, post_id) {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.responseText);
             if (response.comments.length == 0) {
-                console.log("No comments yet.");
                 document.getElementById("message-modal-body").innerHTML =
                     `<div class="container text-center">
                     <h2>No comments yet.</h2>
