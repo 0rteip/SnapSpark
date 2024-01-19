@@ -1,39 +1,44 @@
 function checkUserName(element) {
+    return new Promise(function(resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "utils/login-validation.php");
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send("username=" + element.value);
         xhr.onload = function () {
             let result = JSON.parse(this.responseText);
-            console.log(result);
             if (!result) {
                 document.querySelector('div#usernameCustomValid').innerHTML = 'Nome utente già in uso';
             }
             change(element, result)
-            console.log("ritorno");
+            resolve(result);
         }
-        xhr.send("username=" + element.value);
+        })
 }
 
 function validateOneInput(element) {
-    if (element.getAttribute('name') === 'username') {
-        if (/^[a-zA-Z_]+$/.test(element.value)) {
-            checkUserName(element)
+    switch (element.getAttribute('name')) {
+        case 'username': if (/^[a-zA-Z_]+$/.test(element.value)) {
+            checkUserName(element).then(
+                function(value) {
+                    console.log("fine reale")
+                    return value;
+                }
+            ) ;
+            console.log("fine");
             return;
+        } else {
+            change(element, false);
+            document.querySelector('div#usernameCustomValid').innerHTML = 'Username mast contains only a-z, A-Z and _';
         }
-        change(element, false);
-        document.querySelector('div#usernameCustomValid').innerHTML = 'Username mast contains only a-z, A-Z and _';
-    } else if (element.getAttribute('name') === 'numero') {
-        change(element, element.value.length);
-    }
-}
+        case 'numero': if (element.getAttribute('name') === 'numero') {
+            let check = element.value.length == 10;
+            console.log(check)
+            change(element, check);
+        }
 
-function validateInputs() {
-    var promises = [];
-    document.querySelectorAll('input.extra-validation').forEach(element => {
-        promises.push(validateOneInput(element));
-    });
-    return Promise.all(promises);
+    }
+
 }
 
 function change(element, valid) {
@@ -56,7 +61,7 @@ $(document).ready(function () {
         this.checkValidity(); // Esegue la validazione di Bootstrap
 
         validateInputs()
-            .then(function(results) {
+            .then(function (results) {
                 var isCustomValid = results.every(result => result);
                 if (!isCustomValid) {
                     // Gestisci il caso in cui almeno una validazione personalizzata fallisce
@@ -67,15 +72,15 @@ $(document).ready(function () {
                     this.submit(); // Invia il modulo se tutte le validazioni sono passate
                 }
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.error(error);
             });
     });
 
     document.querySelectorAll('input.extra-validation').forEach(element => {
-            element.addEventListener("input", function() {
-                validateOneInput(element);
-            })
+        element.addEventListener("input", function () {
+            validateOneInput(element);
+        })
     });
-        
+
 });

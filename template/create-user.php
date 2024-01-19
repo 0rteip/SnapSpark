@@ -66,7 +66,7 @@
     </div>
     <div class="col-md-3">
         <label for="numero" class="form-label">telefono</label>
-        <input type="tel" class="form-control" id="numero" name="numero" pattern="[1-9]{10}" required>
+        <input type="tel" class="form-control extra-validation" id="numero" name="numero" pattern="[1-9]{10}" required>
         <div class="invalid-feedback">
             Invalid number
         </div>
