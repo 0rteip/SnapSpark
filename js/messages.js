@@ -100,7 +100,6 @@ function displayMessages() {
                 let chatMessages = document.getElementById("chat-box");
                 // Scrolla automaticamente verso l'ultimo messaggio al caricamento della pagina
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-                console.log("entro");
                 msgs = document.querySelectorAll('div.message-box').forEach(msg => {
                     if (container[2] == msg.getAttribute('class').split("-")[3]) {
                         msg.addEventListener('contextmenu', function (event) {
@@ -119,10 +118,8 @@ function displayMessages() {
 }
 const sendBt = document.getElementById('send-message-button');
 if (sendBt != null) {
-    sendBt.addEventListener("click", function() {
+    sendBt.addEventListener("click", function () {
         sendMessage();
     })
 }
 displayMessages();
-
-
