@@ -1,22 +1,32 @@
 <?php foreach ($templateParams["posts"] as $post) : ?>
     <article class="card mb-3">
-        <header class="card-header pt-3">
-            <div class="row row-cols-2 px-md-3">
-                <div class="col-6 text-start align-middle">
-                    <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
-                        <img alt="Go to <?php echo $post['username']; ?> profile" class="mx-auto post-img me-3" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>" />
-                        <h2 class="post-header m-0 fs-5"><?php echo $post["username"]; ?></h2>
-                    </a>
+        <header class="card-header py-3">
+            <div class="row row-cols-3 px-md-3 px-sm-2">
+
+                <div class="col-auto text-start align-self-center pe-0 me-3">
+                    <img alt="Go to <?php echo $post['username']; ?> profile" class="post-img" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>" />
                 </div>
 
-                <div class="d-flex col-6 align-middle justify-content-end">
-                    <p class="my-auto"><?php echo $post["data"] ?>
-                        <?php if ($_SESSION["username"] == $post["username"]) : ?>
-                            <span tabindex="0" id="trash-can¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-trash fa-solid fa-trash ms-2">
-                            </span>
-                        <?php endif; ?>
-                    </p>
+                <div class="col-md-auto text-start align-self-center ps-0">
+                    <div class="col-md-12">
+                        <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
+                            <h2 class="post-header m-0 fs-5"><?php echo $post["username"]; ?></h2>
+                        </a>
+                    </div>
+
+                    <div class="col-md-12">
+                        <p class="my-auto"><?php echo $post["data"] ?>
+                        </p>
+                    </div>
                 </div>
+
+                <div class="d-flex col-md-auto justify-content-end align-self-center ms-auto">
+                    <?php if ($_SESSION["username"] == $post["username"]) : ?>
+                        <span tabindex="0" id="trash-can¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-trash fa-solid fa-trash ms-2">
+                        </span>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </header>
 
@@ -29,7 +39,7 @@
         </div>
 
         <footer class="card-footer py-3">
-            <div class="row px-md-3">
+            <div class="row px-md-3 px-sm-2">
 
                 <div class="col-10 text-start">
                     <div class="row">
