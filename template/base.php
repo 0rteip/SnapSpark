@@ -51,6 +51,7 @@
             <div class="container py-4 py-md-5 px-4 px-md-3 d-flex justify-content-center">
                 <a class="btn btn-primary" href="login.php" role="button" target="_self">Logout</a>
             </div>
+        <script src="js/notification.js"></script>
         <?php endif; ?>
 
     </footer>
@@ -59,7 +60,6 @@
     <script src="https://kit.fontawesome.com/afc94b6b63.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/notification.js"></script>
 </body>
 
 </html>

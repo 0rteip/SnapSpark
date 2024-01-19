@@ -1,4 +1,4 @@
-<form action="new-account.php" method="POST" class="row g-3 was-validate" novalidate>
+<form action="new-account.php" method="POST" class="row g-3 needs-validation was-validated" novalidate>
     <div class="col-md-2 image-container">
         <label id="profile-img-label" for="profile-img">+
             <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" />
@@ -7,11 +7,14 @@
             Looks good!
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" >
         <label for="nome" class="form-label">Nome</label>
         <input type="text" class="form-control" id="nome" name="nome" required>
         <div class="valid-feedback">
             Looks good!
+        </div>
+        <div class="invalid-feedback">
+            Please provide a valid city.
         </div>
     </div>
     <div class="col-md-4">
@@ -20,14 +23,17 @@
         <div class="valid-feedback">
             Looks good!
         </div>
+        <div class="invalid-feedback">
+            Please provide a valid city.
+        </div>
     </div>
     <div class="col-md-4">
         <label for="username" class="form-label">Username</label>
         <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input type="text" class="form-control" id="username" name="username" required>
-            <div class="invalid-feedback">
-                Please choose a username.
+            <input type="text" class="form-control extra-validation" id="username" name="username" pattern="^[a-zA-Z_]+$" required >
+            <div class="invalid-feedback" id="usernameCustomValid">
+                Username mast contains only a-z, A-Z and _
             </div>
         </div>
     </div>
@@ -60,7 +66,10 @@
     </div>
     <div class="col-md-3">
         <label for="numero" class="form-label">telefono</label>
-        <input type="tel" class="form-control" id="numero" name="numero" required>
+        <input type="tel" class="form-control" id="numero" name="numero" pattern="[1-9]{10}" required>
+        <div class="invalid-feedback">
+            Invalid number
+        </div>
     </div>
     <div class="mb-3">
         <label for="biografia" class="form-label">Biografia</label>
@@ -85,3 +94,4 @@
 <?php require_once 'template/cropper.php'; ?>
 
 <script src="js/create-user.js"></script>
+<script src="js/validate-login.js"></script>
