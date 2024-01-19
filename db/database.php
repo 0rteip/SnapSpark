@@ -558,19 +558,26 @@ final class DatabaseHelper {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkNewNotification($lastCheck) {
+    public function checkNewNotification() {
         $reciver = $_SESSION['username'];
-        $query = "SELECT MAX(data) as data FROM notifica WHERE username=?";
+        $lastCheck = $_SESSION['last_ver_not'];
+        $query = "SELECT * FROM notifica WHERE username=? ORDER BY data ASC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $reciver);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        $nots = [];
         if (empty($result)) {
-            return false;
+            return $nots;
         } else {
-            $date = strtotime($result[0]['data']);
-            $dateL = strtotime($lastCheck);
-            return $date > $dateL;
+            //check if bigger
+            foreach ($result as $value) {
+                if ($value['data'] > $lastCheck) {
+                    array_push($nots, $value);
+                }
+            }
+            return $nots;
         }
     }
 

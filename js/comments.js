@@ -17,7 +17,6 @@ function getComments(user, post_id) {
             }
             else {
                 let comments = "";
-                let i = 1;
                 response.comments.forEach(comment => {
                     comments +=
                         `
@@ -44,7 +43,6 @@ function getComments(user, post_id) {
                             </div>
                         </div>
                     `;
-                    i += 1;
                 });
                 document.getElementById("message-modal-body").innerHTML = comments;
                 response.comments.forEach(comment => {

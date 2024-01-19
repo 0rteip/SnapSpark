@@ -306,3 +306,9 @@ a:visited {
 .post-trash:hover {
     color: #FF3040;
 }
+
+.custom-toast {
+    border-color: #F4E04D !important;
+    border-width: 5px !important;
+    border-spacing: 0cap !important;
+}
