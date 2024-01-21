@@ -3,9 +3,6 @@ function notify(reciver, type) {
     xhr.open("POST", "utils/notification.php");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function () {
-        console.log(this.responseText)
-    }
     xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
 }
 
@@ -39,6 +36,7 @@ function removeMessage(id) {
         if (this.readyState === 4 && this.status === 200) {
             document.getElementById('message-text').value = "";
             notify(container[3], 'removeMessage');
+            displayMessages();
         }
     };
     xhr.send("id=" + id + "&action=delete");
@@ -104,9 +102,15 @@ function displayMessages() {
                     if (container[2] == msg.getAttribute('class').split("-")[3]) {
                         msg.addEventListener('contextmenu', function (event) {
                             event.preventDefault();
-                            if (confirm("Vuoi eliminare questo messaggio?") == true) {
-                                removeMessage(msg.getAttribute('class').split("-")[2]);
+                            console.log("click");
+                            $('#message-modal').modal('show');
+                            const remove_bt = document.getElementById('remove-msg');
+                            if (remove_bt !== null) {
+                                remove_bt.addEventListener("click", function() {
+                                    removeMessage(msg.getAttribute('class').split("-")[2]);
+                                })
                             }
+                            
                         }, false);
                     }
                 })
