@@ -57,14 +57,31 @@ function showNotification() {
         result.notifications.forEach(not => {
             nots +=
                 `
-            <div class="card" style="width: 18rem;">
-                <header class="card-header">
-                    ${not.sender}${returnText(not.tipo)}
-                </header>
-            </div>
-            `
+                <div class="card" style="width: 18rem;">
+                    <header class="card-header">
+                        ${not.sender}${returnText(not.tipo)}
+                    </header>
+                    <div class="d-flex col-md-auto justify-content-end align-self-center ms-auto">
+                            <span tabindex="0" id="trash-can:-${not.id}" class="not-trash fa-solid fa-trash ms-2"></span>
+                    </div>
+                </div>
+                `
         });
+
         notSec.innerHTML = nots;
+        Array.from(deleteNot).forEach(not => {
+            not.addEventListener("click", function () {
+                console.log("click")
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "utils/notification.php");
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function () {
+                    showNotification();
+                }
+                xhr.send("action=del" + "&id=" + not.getAttribute('id').split(':-')[1]);
+            })
+        })
     }
     xhr.send("action=get");
 }
@@ -95,3 +112,5 @@ const notSec = document.getElementById("notication-section");
 if (notSec !== null) {
     showNotification();
 }
+
+const deleteNot = document.getElementsByClassName("not-trash");

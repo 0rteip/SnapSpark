@@ -297,13 +297,13 @@ a:visited {
     border-radius: 50%;
 }
 
-.post-trash {
+.post-trash, .not-trash {
     color: #070707;
     font-size: 120%;
     cursor: pointer;
 }
 
-.post-trash:hover {
+.post-trash:hover, .not-trash:hover{
     color: #FF3040;
 }
 
