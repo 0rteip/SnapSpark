@@ -10,74 +10,84 @@ function checkUserName(element) {
             if (!result) {
                 document.querySelector('div#usernameCustomValid').innerHTML = 'Nome utente già in uso';
             }
-            change(element, result)
             resolve(result);
         }
         })
 }
 
-function validateOneInput(element) {
+async function validateOneInput(element) {
+    let check = true;
     switch (element.getAttribute('name')) {
-        case 'username': if (/^[a-zA-Z_]+$/.test(element.value)) {
-            checkUserName(element).then(
-                function(value) {
-                    console.log("fine reale")
-                    return value;
-                }
-            ) ;
-            console.log("fine");
-            return;
+        case 'username': if (/^[a-zA-Z_]+$/.test(element.value) && element.value.length <= 30) {
+            try {
+                const result = await checkUserName(element);
+                check = result;
+            } catch (error) {
+                console.error(error);
+            }
         } else {
-            change(element, false);
+            check = false;
             document.querySelector('div#usernameCustomValid').innerHTML = 'Username mast contains only a-z, A-Z and _';
         }
-        case 'numero': if (element.getAttribute('name') === 'numero') {
-            let check = element.value.length == 10;
-            console.log(check)
-            change(element, check);
-        }
-
+        break;
+        case 'numero': check = element.value.length == 10;
+            break;
+        case 'mail' : check = element.value.indexOf('@') >= 0 && element.value.length <= 40
+            break;
+        case 'nome' :
+        case 'cognome' : check = element.value.length <= 20 && element.value.length > 0;
+            break;
+        case 'data_nascita' : let data = new Date();
+            check = element.value.split('-')[0] <= data.getFullYear();
+            if (!check) {
+                element.value = "";
+            }
+            break;
+        case 'password' : check = (element.value.length >= 8 && element.value.length <= 30)
+            break;
+        case 'biografia' : check = element.value.length <=100;
     }
-
+        change(element, check);
+        return check;
 }
 
 function change(element, valid) {
     if (!valid) {
-        console.log('invalid');
         element.classList.remove("is-valid")
         element.classList.add("is-invalid");
     } else {
-        console.log("valid")
         element.classList.remove("is-invalid")
         element.classList.add("is-valid");
     }
 }
 
+async function validateAllInputs(event) {
+    let elements = document.querySelectorAll('.extra-validation');
+    for (let i = 0; i < elements.length; i++) {
+        const res = await validateOneInput(elements[i]);
+        if (!res) {
+            console.log("blocco");
+            return false;
+        }
+    }
+    return true;
+}
+
+
 $(document).ready(function () {
-    $("form").submit(function (event) {
-        event.preventDefault();
-        event.stopPropagation();
 
-        this.checkValidity(); // Esegue la validazione di Bootstrap
+    $("form").submit(async function (event) {
+        event.preventDefault();  // Evita la presentazione del modulo di default
 
-        validateInputs()
-            .then(function (results) {
-                var isCustomValid = results.every(result => result);
-                if (!isCustomValid) {
-                    // Gestisci il caso in cui almeno una validazione personalizzata fallisce
-                    console.log('Almeno una validazione personalizzata ha fallito');
-                } else {
-                    // Tutte le validazioni personalizzate sono passate
-                    console.log('Tutte le validazioni personalizzate sono passate');
-                    this.submit(); // Invia il modulo se tutte le validazioni sono passate
-                }
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
+        let validationSuccessful = await validateAllInputs(event);
+
+        if (validationSuccessful && this.checkValidity()) {
+            this.submit();  // Invia manualmente il modulo se la validazione è riuscita
+        }
     });
+    
 
-    document.querySelectorAll('input.extra-validation').forEach(element => {
+    document.querySelectorAll('.extra-validation').forEach(element => {
         element.addEventListener("input", function () {
             validateOneInput(element);
         })
