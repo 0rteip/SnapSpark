@@ -1,10 +1,10 @@
-<div class="text-center mb-4 pb-4 px-0" id="new-chat-div">
+<div class="text-center px-0">
     <div class="row row-cols-2 justify-content-center">
-        <div class="col-sm-10">
+        <div class="col-md-10 col-12 mb-3 mb-md-0">
             <label for="search-bar:-3" class="visually-hidden">Search chats</label>
             <input id="search-bar:-3" class="form-control search-bar bg-main-color-subtle" type="search" placeholder="Search chat" aria-label="Search">
         </div>
-        <div class="col-sm-2 text-end">
+        <div class="col-md-2 col-12 text-md-end text-center">
             <button type="button" id="newChatBt" class="btn btn-primary">New Chat</button>
         </div>
     </div>

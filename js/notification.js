@@ -52,17 +52,21 @@ function showNotification() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
         let result = JSON.parse(this.responseText);
-        let notSec = document.getElementById("notication-section");
+        let notSec = document.getElementById("notification-section");
         let nots = "";
         result.notifications.forEach(not => {
             nots +=
                 `
-                <div class="card" style="width: 18rem;">
-                    <header class="card-header">
-                        ${not.sender}${returnText(not.tipo)}
-                    </header>
-                    <div class="d-flex col-md-auto justify-content-end align-self-center ms-auto">
-                            <span tabindex="0" id="trash-can:-${not.id}" class="not-trash fa-solid fa-trash ms-2"></span>
+                <div class="user-card mb-3">
+                    <div class="container-fluid p-0">
+                        <div class="row row-cols-2 px-md-3 px-sm-2">
+                            <div class="col-auto text-start align-self-center me-auto">
+                                <p class="m-0"><strong>${not.sender}</strong>${returnText(not.tipo)}</p>
+                            </div>
+                            <div class="col-auto d-flex justify-content-end align-self-center ms-auto">
+                                <span tabindex="0" id="trash-can:-${not.id}" class="not-trash fa-solid fa-trash ms-2"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 `
@@ -94,7 +98,7 @@ function checkNewNotification() {
     xhr.onload = function () {
         const result = JSON.parse(this.responseText);
         if (result.news === "true") {
-            const notSec = document.getElementById("notication-section");
+            const notSec = document.getElementById("notification-section");
             if (notSec) {
                 showNotification();
             } else {
@@ -108,7 +112,7 @@ function checkNewNotification() {
 
 checkNewNotification();
 
-const notSec = document.getElementById("notication-section");
+const notSec = document.getElementById("notification-section");
 if (notSec !== null) {
     showNotification();
 }
