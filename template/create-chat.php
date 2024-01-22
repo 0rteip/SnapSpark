@@ -3,7 +3,6 @@
 
 <div class="search">
     <?php foreach ($templateParams['sug'] as $sug) : ?>
-
         <a href="chat.php?reciver=<?php echo $sug['username'] ?>" class="reciver" sender="<?php echo $_SESSION['username'] ?>" reciver="<?php echo $sug['username'] ?>">
             <div class="user-card mb-3">
                 <img src="<?php echo AVATAR_FOLDER . $sug['img'] ?>" class="avatar me-3" alt="" />
