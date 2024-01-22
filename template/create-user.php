@@ -14,7 +14,7 @@
             Looks good!
         </div>
         <div class="invalid-feedback">
-            Please provide a valid city.
+            Nome troppo lungo o vuoto.
         </div>
     </div>
     <div class="col-md-4">
@@ -24,7 +24,7 @@
             Looks good!
         </div>
         <div class="invalid-feedback">
-            Please provide a valid city.
+            Cognome troppo lungo o vuoto.
         </div>
     </div>
     <div class="col-md-4">
@@ -41,7 +41,7 @@
         <label for="data_nascita" class="form-label">Data di nascita</label>
         <input type="date" class="form-control  extra-validation" id="data_nascita" name="data_nascita" required>
         <div class="invalid-feedback">
-            Please provide a valid city.
+            Data obbligatoria.
         </div>
     </div>
     <div class="col-md-3">
@@ -59,6 +59,9 @@
     <div class="col-md-3">
         <label for="mail" class="form-label">email</label>
         <input type="email" class="form-control extra-validation" id="mail" name="mail" required>
+        <div class="invalid-feedback" id="mailCustomValid">
+                L'email deve avere la @ e  al massimo 40 caratteri
+        </div>
     </div>
     <div class="col-md-3">
         <label for="password" class="form-label">password</label>

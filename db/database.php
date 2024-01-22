@@ -31,6 +31,14 @@ final class DatabaseHelper {
         return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) == 0;
         
     }
+    public function validateMail($mail) {
+        $query = "SELECT mail FROM utenti WHERE mail=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $mail);
+        $stmt->execute();
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) == 0;
+        
+    }
     public function getRandomPosts($n) {
         $query = "SELECT username, file, id, descrizione, data, spark
                   FROM posts
