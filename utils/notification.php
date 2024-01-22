@@ -1,5 +1,6 @@
 <?php
-function sendNotification() {
+function sendNotification()
+{
     require_once '../bootstrap.php';
 
     if (isset($_POST['reciver']) && isset($_POST['type'])) {
@@ -10,13 +11,22 @@ function sendNotification() {
 }
 
 
-function deleteNotification($id) {
+function deleteNotification($id)
+{
     require_once '../bootstrap.php';
 
     $dbh->deleteNotification($id);
 }
 
-function getAllNotifications() {
+function deleteAllNotification()
+{
+    require_once '../bootstrap.php';
+
+    $dbh->removeAllNotification();
+}
+
+function getAllNotifications()
+{
     require_once '../bootstrap.php';
 
     $result = $dbh->getUserNotification();
@@ -27,7 +37,8 @@ function getAllNotifications() {
     }
 }
 
-function checkNewNotification() {
+function checkNewNotification()
+{
     require_once '../bootstrap.php';
 
     $nots = $dbh->checkNewNotification();
@@ -52,9 +63,13 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             case 'check':
                 checkNewNotification();
                 break;
-            case 'del' : if (isset($_POST['id'])) {
-                deleteNotification($_POST['id']);
-            }
+            case 'del':
+                if (isset($_POST['id'])) {
+                    deleteNotification($_POST['id']);
+                }
+                break;
+            case 'delAll':
+                deleteAllNotification();
             default:
                 break;
         }

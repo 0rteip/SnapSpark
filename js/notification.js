@@ -52,7 +52,7 @@ function showNotification() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
         let result = JSON.parse(this.responseText);
-        let notSec = document.getElementById("notification-section");
+        let notSec = document.getElementById("show-section");
         let nots = "";
         result.notifications.forEach(not => {
             nots +=
@@ -115,6 +115,19 @@ checkNewNotification();
 const notSec = document.getElementById("notification-section");
 if (notSec !== null) {
     showNotification();
+    let deleteAllBt = document.getElementById('deleteAllNotBt');
+    if (deleteAllBt !== null) {
+        deleteAllBt.addEventListener("click", function() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "utils/notification.php");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                showNotification();
+            }
+            xhr.send("action=delAll");
+        })
+    }
 }
 
 const deleteNot = document.getElementsByClassName("not-trash");
