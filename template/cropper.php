@@ -3,13 +3,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="modalLabel">Crop image</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="cropper-modal" aria-label="Close">
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
-                <div class="img-container">
+                <div class="img-container px-3 rounded-border">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-8 p-0">
                             <!--  default image where we will set the src via jquery-->
                             <img class="cropper-img" id="image" alt="profile image" />
                         </div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <footer class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="cropper-modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="crop">Crop</button>
             </footer>
         </div>
