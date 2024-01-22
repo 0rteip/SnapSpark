@@ -30,6 +30,14 @@ final class DatabaseHelper {
         $stmt->execute();
         return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) == 0;
     }
+    public function validateMail($mail) {
+        $query = "SELECT mail FROM utenti WHERE mail=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $mail);
+        $stmt->execute();
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) == 0;
+        
+    }
     public function getRandomPosts($n) {
         $query = "SELECT username, file, id, descrizione, data, spark
                   FROM posts
@@ -554,11 +562,12 @@ final class DatabaseHelper {
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssiss', $type, $sender, $id, $reciver, $date);
         $stmt->execute();
+        return $id;
     }
 
     public function getUserNotification() {
         $reciver = $_SESSION['username'];
-        $query = "SELECT tipo, sen_user as sender , id FROM notifica WHERE username=?";
+        $query = "SELECT tipo, sen_user as sender ,id, utenti.profile_img FROM notifica, utenti WHERE notifica.username=? AND utenti.username=sen_user ORDER BY data DESC ";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $reciver);
         $stmt->execute();
@@ -597,6 +606,19 @@ final class DatabaseHelper {
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $id);
         $stmt->execute();
+    }
+
+    public function removeAllNotification() {
+        $user = $_SESSION['username'];
+        $query = "SELECT id FROM notifica WHERE username=? ORDER BY data DESC";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $user);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        foreach($result as $not) :
+            $this->deleteNotification($not['id']);
+        endforeach;
+        
     }
 
     public function deletePost($username, $id) {

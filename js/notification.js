@@ -52,7 +52,7 @@ function showNotification() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
         let result = JSON.parse(this.responseText);
-        let notSec = document.getElementById("notification-section");
+        let notSec = document.getElementById("show-section");
         let nots = "";
         result.notifications.forEach(not => {
             nots +=
@@ -60,7 +60,10 @@ function showNotification() {
                 <div class="user-card mb-3">
                     <div class="container-fluid p-0">
                         <div class="row row-cols-2 px-md-3 px-sm-2">
-                            <div class="col-auto text-start align-self-center me-auto">
+                        <div class="col-1 p-0">
+                            <img alt="" class="mx-auto comment-profile-avatar" src="img/avatar/${not.profile_img}" />
+                        </div>
+                        <div class="col-auto text-start align-self-center me-auto">
                                 <p class="m-0"><strong>${not.sender}</strong>${returnText(not.tipo)}</p>
                             </div>
                             <div class="col-auto d-flex justify-content-end align-self-center ms-auto">
@@ -115,6 +118,19 @@ checkNewNotification();
 const notSec = document.getElementById("notification-section");
 if (notSec !== null) {
     showNotification();
+    let deleteAllBt = document.getElementById('deleteAllNotBt');
+    if (deleteAllBt !== null) {
+        deleteAllBt.addEventListener("click", function() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "utils/notification.php");
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                showNotification();
+            }
+            xhr.send("action=delAll");
+        })
+    }
 }
 
 const deleteNot = document.getElementsByClassName("not-trash");
