@@ -14,8 +14,8 @@
   </div>
 
   <div class="col-12">
-    <button class="btn btn-primary" type="submit">Login</button>
-    <a href="new-account.php">Iscriviti</a>
+    <button class="btn btn-primary me-2" type="submit">Login</button>
+    <a href="new-account.php">Subscribe</a>
   </div>
 
 </form>
