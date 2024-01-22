@@ -3,7 +3,7 @@ function getComments() {
     require_once '../bootstrap.php';
 
     if (isset($_POST["u"]) && isset($_POST["i"])) {
-        $response = array('comments' => $dbh->getComments($_POST["u"], $_POST["i"]));
+        $response = array('comments' => $dbh->getComments($_POST["u"], $_POST["i"]), "user" => $_SESSION["username"]);
         echo json_encode($response);
     }
 }
@@ -26,6 +26,15 @@ function likeComment() {
     }
 }
 
+function deleteComment() {
+    require_once '../bootstrap.php';
+
+    if (isset($_POST["cu"]) && isset($_POST["pu"]) && isset($_POST["pid"]) && isset($_POST["cid"])) {
+        $dbh->deleteComment($_POST["cu"], $_POST["pu"], $_POST["pid"], $_POST["cid"]);
+        echo json_encode(array('success' => true));
+    }
+}
+
 // Controlla se la richiesta è una chiamata Ajax
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
     // Chiamata Ajax rilevata, esegui la funzione
@@ -40,6 +49,9 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 break;
             case 'like_comment':
                 likeComment();
+                break;
+            case 'delete_comment':
+                deleteComment();
                 break;
             default:
                 break;
