@@ -6,11 +6,11 @@ function showElenco(result) {
         <a href="chat.php?reciver=${chat.user}">
             <div class="user-card mb-3">
                     <img alt="" class="avatar me-3" src="${result.avatar}${chat.img}">
-                    <div class="card custom-card borderless-card chat-c">
-                    <div class="info-chat  _${chat.img}_${chat.data}">
-                        <div class="user-name">${chat.user}</div>
-                        <div class="card-text">${chat.testo}</div>
-                    </div>
+                    <div class="custom-card">
+                        <div class="info-chat  _${chat.img}_${chat.data}">
+                            <p class="user-name mb-1 fw-bold">${chat.user}</p>
+                            <p class="chat-message mb-0">${chat.testo}</p>
+                        </div>
                     </div>
             </div>
         </a>
@@ -23,10 +23,10 @@ function getCurrentChats() {
     let result = [];
     chats.forEach(chat => {
         let info = chat.getAttribute("class").split("_");
-        let user = chat.querySelector('div.user-name').innerHTML;
+        let user = chat.querySelector('p.user-name').innerHTML;
         let data = info[2];
         let img = info[1];
-        result.push({ user: user, testo: chat.getElementsByClassName('card-text')[0].innerHTML, data: data, img: img });
+        result.push({ user: user, testo: chat.getElementsByClassName('chat-message')[0].innerHTML, data: data, img: img });
     })
     return result;
 }
@@ -46,7 +46,7 @@ function chatsUpdate() {
         }
     }
     xhr.send("string=" + "&type=3");
-    setTimeout('chatsUpdate()', 1000);
+    setTimeout('chatsUpdate()', 10000);
 }
 
 function chatSearch(string, type) {

@@ -114,11 +114,9 @@ ul {
     margin-bottom: 0 !important;
 }
 
-#new-chat-div {
-    border-bottom: 1px solid #ddd;
-}
-
-.search {
+.search,
+#notification-section,
+#chat-container {
     margin-top: 2rem;
     position: relative;
     display: inline-block;
@@ -129,10 +127,14 @@ ul {
     margin-bottom: 2rem !important;
 }
 
+#chat-container .user-card:first-of-type,
+#notification-section .user-card:first-of-type,
 .search .user-card:first-of-type {
     margin-top: 2rem;
 }
 
+#chat-container .user-card:first-of-type::before,
+#notification-section .user-card:first-of-type::before,
 .search .user-card:first-of-type::before {
     content: '';
     position: absolute;
@@ -157,11 +159,6 @@ ul {
     margin: 1rem;
 }
 
-.chat-c {
-    max-width: auto;
-    border: none !important;
-}
-
 .profile-avatar {
     width: 8rem;
     height: 8rem;
@@ -170,13 +167,7 @@ ul {
     object-fit: cover;
 }
 
-.user-name {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.custom-card .card-text {
-    color: black;
+.custom-card {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -298,13 +289,15 @@ a:visited {
     border-radius: 50%;
 }
 
-.post-trash, .not-trash {
+.post-trash,
+.not-trash {
     color: #070707;
     font-size: 120%;
     cursor: pointer;
 }
 
-.post-trash:hover, .not-trash:hover{
+.post-trash:hover,
+.not-trash:hover {
     color: #FF3040;
 }
 

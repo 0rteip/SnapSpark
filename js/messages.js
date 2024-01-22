@@ -106,11 +106,15 @@ function displayMessages() {
                             $('#message-modal').modal('show');
                             const remove_bt = document.getElementById('remove-msg');
                             if (remove_bt !== null) {
-                                remove_bt.addEventListener("click", function() {
+                                // Clona l'elemento senza copiare gli event listener
+                                const clonedElement = remove_bt.cloneNode(true);
+                                // Sostituisci l'elemento originale con la sua copia
+                                remove_bt.replaceWith(clonedElement);
+                                clonedElement.addEventListener("click", function () {
                                     removeMessage(msg.getAttribute('class').split("-")[2]);
                                 })
                             }
-                            
+
                         }, false);
                     }
                 })
@@ -120,10 +124,12 @@ function displayMessages() {
     xhr.send("sender=" + container[2] + "&reciver=" + container[3] + "&action=update");
     setTimeout('displayMessages()', 1000)
 }
+
 const sendBt = document.getElementById('send-message-button');
 if (sendBt != null) {
     sendBt.addEventListener("click", function () {
         sendMessage();
     })
 }
+
 displayMessages();
