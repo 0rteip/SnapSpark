@@ -60,7 +60,8 @@ function showNotification() {
                 <div class="user-card mb-3">
                     <div class="container-fluid p-0">
                         <div class="row row-cols-2 px-md-3 px-sm-2">
-                            <div class="col-auto text-start align-self-center me-auto">
+                        <div class="col-auto text-start align-self-center me-auto">
+                                <img alt="" class="mx-auto comment-profile-avatar" src="img/avatar/${not.profile_img}" />
                                 <p class="m-0"><strong>${not.sender}</strong>${returnText(not.tipo)}</p>
                             </div>
                             <div class="col-auto d-flex justify-content-end align-self-center ms-auto">
