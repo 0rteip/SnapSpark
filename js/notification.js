@@ -59,17 +59,17 @@ function showNotification() {
                 `
                 <div class="user-card mb-3">
                     <div class="container-fluid p-0">
-                        <div class="row row-cols-2 px-md-3 px-sm-2">
-                        <div class="col-1 p-0">
-                            <img alt="" class="mx-auto comment-profile-avatar" src="img/avatar/${not.profile_img}" />
-                        </div>
-                        <div class="col-auto text-start align-self-center me-auto">
-                                <p class="m-0"><strong>${not.sender}</strong>${returnText(not.tipo)}</p>
+                        <div class="row row-cols-3 px-md-3 px-sm-2">
+                            <div class="col-auto d-flex justify-content-start align-self-center">
+                                <img alt="" class="mx-auto comment-profile-avatar" src="img/avatar/${not.profile_img}" />
                             </div>
-                            <div class="col-auto d-flex justify-content-end align-self-center ms-auto">
-                                <span tabindex="0" id="trash-can:-${not.id}" class="not-trash fa-solid fa-trash ms-2"></span>
+                            <div class="col-auto text-start align-self-center me-auto">
+                                    <p class="m-0"><strong>${not.sender}</strong>${returnText(not.tipo)}</p>
+                                </div>
+                                <div class="col-auto d-flex justify-content-end align-self-center ms-auto">
+                                    <span tabindex="0" id="trash-can:-${not.id}" class="not-trash fa-solid fa-trash ms-2"></span>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
                 `
@@ -120,7 +120,7 @@ if (notSec !== null) {
     showNotification();
     let deleteAllBt = document.getElementById('deleteAllNotBt');
     if (deleteAllBt !== null) {
-        deleteAllBt.addEventListener("click", function() {
+        deleteAllBt.addEventListener("click", function () {
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "utils/notification.php");
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
