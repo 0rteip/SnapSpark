@@ -203,9 +203,10 @@ a:visited {
     overflow-y: auto;
 }
 
-button {
+.btn-primary:not(.btn-close) {
     background-color: #1934A4 !important;
     border-color: #1934A4 !important;
+    color: #fff !important;
 }
 
 .msg {
