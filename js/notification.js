@@ -1,11 +1,11 @@
-function showToast(toastBody) {
+function showToast(username, toastBody) {
     const delay = 3000;
     let html =
         `
         <div class="toast align-items-center text-black bg-white custom-toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
-                    ${toastBody}
+                    <strong>${username}</strong>${toastBody}
                 </div>
                 <button type="button" class="btn-close btn-close-black me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -41,7 +41,7 @@ function showNotificationMessage(messages) {
         if (user && user.innerHTML === not.username && (not.tipo === "Follow" || not.tipo === "Unfollow")) {
             // todo: aggiornare il numero di follower
         }
-        showToast(not.sen_user + returnText(not.tipo));
+        showToast(not.sen_user, returnText(not.tipo));
     });
 }
 
