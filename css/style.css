@@ -105,6 +105,7 @@ ul {
     height: 1rem;
 }
 
+.bottom-line,
 .single-comment:not(:last-child) {
     border-bottom: 1px solid #ddd;
 }

@@ -10,16 +10,6 @@ function registerLoggedUser($user) {
 function setcourrentUser($name) {
     $_SESSION["username"] = $name;
 }
-function addQuotes($text) {
-    return "'" . addslashes($text) . "'";
-}
-
-function hideSection($action, $class) {
-    if ($action !== $class) {
-        return 'style="display: none;"';
-    }
-    return "";
-}
 
 function checkRadio($action, $id) {
     if ($action === $id) {
@@ -53,7 +43,7 @@ function getExistingChat($messages) {
         $user = "";
         if ($message['sender'] !== $_SESSION['username']) {
             $user = $message['sender'];
-        } else if ($message['reciver'] !== $_SESSION['username']) {
+        } elseif ($message['reciver'] !== $_SESSION['username']) {
             $user = $message['reciver'];
         }
         $check = checkPresence($chats, $user);

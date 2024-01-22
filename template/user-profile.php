@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="text-center mb-3 p-3 pt-4" id="user-info" style="<?php echo $templateParams['username'] !== $_SESSION['username'] ? 'border-bottom: 1px solid #ddd' : ''; ?>">
+<div class="text-center mb-3 p-3 pt-4 <?php echo $templateParams['username'] !== $_SESSION['username'] ? 'bottom-line' : ''; ?>" id="user-info">
     <div class="row row-cols-3">
         <div class="col">
             <div class="container text-center">
