@@ -46,7 +46,7 @@
                         <div class="col-auto">
                             <span tabindex="0" id="post-star¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-star fa-star <?php echo $post['liked'] == "true" ? 'liked-star fa-solid' : 'fa-regular'; ?>"></span>
                         </div>
-                        <div id="sparks-num-<?php echo $post['username'] . '-' . $post['id']; ?>" class="col-auto ps-0">
+                        <div id="sparks-num-<?php echo $post['username'] . '-' . $post['id']; ?>" class="col-auto ps-0 d-flex align-items-center">
                             <?php if ($post["spark"] > 0) : ?>
                                 <p id="sparks-<?php echo $post['username'] . '-' . $post['id']; ?>" class="card-text mx-auto text-start">
                                     <?php echo $post["spark"]; ?> <?php echo ($post["spark"] == 1) ? "spark" : "sparks"; ?>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-2 text-end">
-                    <span tabindex="0" class="post-comment fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo $post['username']; ?>" data-bs-id="<?php echo $post['id']; ?>">
+                    <span tabindex="0" class="post-comment fa-solid fa-comment" data-bs-toggle="modal" data-bs-target="#postModal" data-bs-username="<?php echo $post['username']; ?>" data-bs-id="<?php echo $post['id']; ?>">
                     </span>
                 </div>
 

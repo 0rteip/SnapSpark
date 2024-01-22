@@ -1,4 +1,4 @@
-<div class="container text-center chat-container" id="chat-container-<?php echo $_SESSION['username']; ?>-<?php echo $templateParams['reciver']; ?>">
+<div class="container text-center chat-container px-0" id="chat-container-<?php echo $_SESSION['username']; ?>-<?php echo $templateParams['reciver']; ?>">
   <div class="row" id="user-information">
     <div class="col text-align-center">
       <img src="<?php echo AVATAR_FOLDER . $templateParams["img"] ?>" class="avatar avatar-chat" alt="" />

@@ -29,7 +29,6 @@ final class DatabaseHelper {
         $stmt->bind_param('s', $username);
         $stmt->execute();
         return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) == 0;
-        
     }
     public function validateMail($mail) {
         $query = "SELECT mail FROM utenti WHERE mail=?";
@@ -643,6 +642,20 @@ final class DatabaseHelper {
         $query = "DELETE FROM posts WHERE username=? AND id=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('si', $username, $id);
+        $stmt->execute();
+    }
+
+    public function deleteComment($commentUser, $postUser, $postId, $commentId) {
+        $query = "DELETE FROM like_post
+                  WHERE comment_username=? AND post_username=? AND post_id=? AND comment_id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sisi", $commentUser, $postUser, $postId, $commentId);
+        $stmt->execute();
+
+        $query = "DELETE FROM commenti
+                  WHERE post_user=? AND post_id=? AND user=? AND id=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sisi", $postUser, $postId, $commentUser, $commentId);
         $stmt->execute();
     }
 }

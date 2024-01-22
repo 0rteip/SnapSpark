@@ -15,8 +15,10 @@ function getComments(user, post_id) {
                     </div>`;
             }
             else {
+                const user = response.user;
                 let comments = "";
                 response.comments.forEach(comment => {
+                    let current_user = user == comment.user;
                     comments +=
                         `
                         <div class="container text-center m-0 mb-2 pb-2 single-comment">
@@ -27,16 +29,23 @@ function getComments(user, post_id) {
                                 </div>
 
                                 <div class="col-11">
-                                    <div class="row align-items-center justify-content-center">
-
-                                        <div class="col-11 col-sm-11">
+                                    <div class="row ${current_user ? "row-cols-3" : "row-cols-2"} justify-content-center align-items-center">
+                                        <div class="col-10 mb-3 mb-md-0">
                                             <p class="m-0 text-start"><strong>${comment.user}</strong> ${comment.testo}</p>
                                         </div>
-                                        <div class="col-1 col-sm-1 p-0">
+
+                                        ` + (current_user ? `
+                                        <div class="col-1 text-md-end d-grid px-0">
                                             <span id="comment-star-${comment.id}-${comment.user}" class="like-star mx-auto fa-${comment.like ? "solid liked-star" : "regular"} fa-star"></span>
                                         </div>
-
-                                        </form>
+                                        <div class="col-1 text-md-end d-grid px-0">
+                                            <span id="comment-trash-${comment.id}-${comment.user}" class="mx-auto comment-trash fa-solid fa-trash"></span>
+                                        </div>
+                                        ` : `
+                                        <div class="col-2 text-md-end d-grid px-0">
+                                            <span id="comment-star-${comment.id}-${comment.user}" class="like-star mx-auto fa-${comment.like ? "solid liked-star" : "regular"} fa-star"></span>
+                                        </div>
+                                        `) + `
                                     </div>
                                 </div>
                             </div>
@@ -46,6 +55,10 @@ function getComments(user, post_id) {
                 document.getElementById("message-modal-body").innerHTML = comments;
                 response.comments.forEach(comment => {
                     document.getElementById("comment-star-" + comment.id + "-" + comment.user).addEventListener("click", event => likeComment(comment.user, comment.post_user, comment.post_id, comment.id));
+                    const trash = document.getElementById("comment-trash-" + comment.id + "-" + comment.user)
+                    if (trash) {
+                        trash.addEventListener("click", event => removeComment(comment.user, comment.post_user, comment.post_id, comment.id));
+                    }
                 });
             }
         }
@@ -105,6 +118,21 @@ function likeComment(comment_user, post_user, post_id, comment_id) {
     xhr.send("action=like_comment" + "&cu=" + comment_user + "&pu=" + post_user + "&pid=" + post_id + "&cid=" + comment_id);
 }
 
+function removeComment(comment_user, post_user, post_id, comment_id) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/comments.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            getComments(post_user, post_id);
+        }
+    };
+
+    xhr.send("action=delete_comment" + "&cu=" + comment_user + "&pu=" + post_user + "&pid=" + post_id + "&cid=" + comment_id);
+}
+
 const postModal = document.getElementById('postModal')
 if (postModal) {
     postModal.addEventListener('show.bs.modal', event => {
@@ -115,7 +143,11 @@ if (postModal) {
         const id = button.getAttribute('data-bs-id')
         // Update the modal's content
         const modalButton = postModal.querySelector('#postButton');
-        modalButton.addEventListener("click", event => postComment(username, id));
+        // Clona l'elemento senza copiare gli event listener
+        const clonedElement = modalButton.cloneNode(true);
+        // Sostituisci l'elemento originale con la sua copia
+        modalButton.replaceWith(clonedElement);
+        clonedElement.addEventListener("click", event => postComment(username, id));
     })
 }
 
