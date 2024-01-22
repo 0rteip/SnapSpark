@@ -555,11 +555,12 @@ final class DatabaseHelper {
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssiss', $type, $sender, $id, $reciver, $date);
         $stmt->execute();
+        return $id;
     }
 
     public function getUserNotification() {
         $reciver = $_SESSION['username'];
-        $query = "SELECT tipo, sen_user as sender , id FROM notifica WHERE username=?";
+        $query = "SELECT tipo, sen_user as sender ,id, utenti.profile_img FROM notifica, utenti WHERE notifica.username=? AND utenti.username=sen_user ";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $reciver);
         $stmt->execute();
