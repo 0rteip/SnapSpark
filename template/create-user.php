@@ -1,5 +1,5 @@
 <form method="POST" class="row g-3 needs-validation">
-    <div class="col-md-2 image-container">
+    <div class="col-md-12 image-container mb-2">
         <label id="profile-img-label" for="profile-img" class="mx-auto">+
             <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" />
         </label>
@@ -7,8 +7,8 @@
             Looks good!
         </div>
     </div>
-    <div class="col-md-4">
-        <label for="nome" class="row g-3">Nome</label>
+    <div class="col-md-6">
+        <label for="nome" class="form-label">Nome</label>
         <input type="text" class="form-control extra-validation" id="nome" name="nome" required>
         <div class="valid-feedback">
             Looks good!
@@ -17,7 +17,7 @@
             Please provide a valid city.
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <label for="cognome" class="form-label">Cognome</label>
         <input type="text" class="form-control extra-validation" id="cognome" name="cognome" required>
         <div class="valid-feedback">
@@ -44,7 +44,7 @@
             Please provide a valid city.
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="sesso" class="form-label">Sesso</label>
         <select class="form-select" id="sesso" name="sesso" required>
             <option selected disabled value="">Scegli...</option>
@@ -56,15 +56,15 @@
             Please select a valid state.
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="mail" class="form-label">email</label>
         <input type="email" class="form-control extra-validation" id="mail" name="mail" required>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="password" class="form-label">password</label>
         <input type="password" class="form-control extra-validation" id="password" name="password" required>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="numero" class="form-label">telefono</label>
         <input type="tel" class="form-control extra-validation" id="numero" name="numero" required>
         <div class="invalid-feedback">
@@ -75,7 +75,7 @@
         <label for="biografia" class="form-label">Biografia</label>
         <textarea class="form-control extra-validation" id="biografia" rows="3" name="biografia"></textarea>
     </div>
-    <div class="col-12">
+    <div class="col-12 mb-3">
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
             <label class="form-check-label" for="invalidCheck">
@@ -86,8 +86,8 @@
             </div>
         </div>
     </div>
-    <div class="col-12">
-        <button class="btn btn-primary" type="submit" >Submit form</button>
+    <div class="col-12 d-grid col-md-6  d-md-block">
+        <button class="btn btn-primary" type="submit">Subscribe</button>
     </div>
 </form>
 
