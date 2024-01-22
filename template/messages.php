@@ -1,17 +1,27 @@
 <div class="container text-center chat-container" id="chat-container-<?php echo $_SESSION['username']; ?>-<?php echo $templateParams['reciver']; ?>" sender="" reciver="">
-    <div class="row" id="user-information">
-        <div class="col text-align-center">
-            <img src="<?php echo AVATAR_FOLDER . $templateParams["img"] ?>" class="avatar avatar-chat" alt="" />
-            <?php echo $templateParams['reciver']; ?>
-        </div>
+  <div class="row" id="user-information">
+    <div class="col text-align-center">
+      <img src="<?php echo AVATAR_FOLDER . $templateParams["img"] ?>" class="avatar avatar-chat" alt="" />
+      <?php echo $templateParams['reciver']; ?>
     </div>
-    <div class="chat" id="chat">
-        <div class="chat-box" id="chat-box"></div>
-    </div>
-    <div class="input-group mb-3 pt-4" id="message-form">
-        <input type="text" class="form-control" placeholder="Scrivi il messaggio" id="message-text">
+  </div>
+  <div class="chat" id="chat">
+    <div class="chat-box" id="chat-box"></div>
+  </div>
+
+  <div class="text-center px-0 mb-3 mt-4">
+    <div class="row row-cols-2 justify-content-center">
+      <div class="col-md-10 col-12 mb-3 mb-md-0">
+        <label for="message-text" class="visually-hidden">Write message</label>
+        <input type="text" class="form-control" placeholder="Write a message" id="message-text">
+
+        <!-- <input class="bg-main-color-subtle" -->
+      </div>
+      <div class="col-md-2 col-12 text-md-end text-center d-grid">
         <button class="btn btn-primary" id="send-message-button" type="button">Send</button>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="modal" tabindex="-1" aria-hidden="true" id="message-modal">

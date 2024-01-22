@@ -4,7 +4,7 @@
             <label for="search-bar:-3" class="visually-hidden">Search chats</label>
             <input id="search-bar:-3" class="form-control search-bar bg-main-color-subtle" type="search" placeholder="Search chat" aria-label="Search">
         </div>
-        <div class="col-md-2 col-12 text-md-end text-center">
+        <div class="col-md-2 col-12 text-md-end text-center d-grid">
             <button type="button" id="newChatBt" class="btn btn-primary">New Chat</button>
         </div>
     </div>

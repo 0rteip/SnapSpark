@@ -122,7 +122,7 @@ function displayMessages() {
         }
     };
     xhr.send("sender=" + container[2] + "&reciver=" + container[3] + "&action=update");
-    setTimeout('displayMessages()', 1000)
+    setTimeout('displayMessages()', 2000)
 }
 
 const sendBt = document.getElementById('send-message-button');

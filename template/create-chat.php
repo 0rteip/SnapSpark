@@ -2,14 +2,18 @@
 
 <section class="search">
     <?php foreach ($templateParams['sug'] as $sug) : ?>
-        <div class="card" style="width: 18rem;">
-            <header class="card-header">
-                <a href="chat.php?reciver=<?php echo $sug['username'] ?>" class="reciver" sender="<?php echo $_SESSION['username'] ?>" reciver="<?php echo $sug['username'] ?>">
-                    <img src="<?php echo AVATAR_FOLDER . $sug['img'] ?>" class="avatar" alt="" />
-                    <?php echo $sug['username'] ?>
-                </a>
-            </header>
-        </div>
+
+        <a href="chat.php?reciver=<?php echo $sug['username'] ?>" class="reciver" sender="<?php echo $_SESSION['username'] ?>" reciver="<?php echo $sug['username'] ?>">
+            <div class="user-card mb-3">
+                <img src="<?php echo AVATAR_FOLDER . $sug['img'] ?>" class="avatar me-3" alt="" />
+
+                <div class="custom-card">
+                    <div class="info-chat">
+                        <p class="user-name mb-1 fw-bold"><?php echo $sug['username'] ?></p>
+                    </div>
+                </div>
+            </div>
+        </a>
     <?php endforeach; ?>
 </section>
 <script src="js/search.js"></script>
