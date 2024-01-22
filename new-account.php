@@ -4,6 +4,10 @@ require_once "bootstrap.php";
 $templateParams["titolo"] = "SnapSpark - Create User";
 $templateParams["nome"] = "create-user.php";
 $templateParams["showNavBar"] = false;
+$templateParams["accountInfo"] = getEmptyUser();
+if ($_SESSION['username'] != null) {
+    $templateParams['accountInfo'] = $dbh->getUserInfo($_SESSION['username']);
+}
 
 if (
     isset($_POST["profile-img"]) && isset($_POST["username"]) && isset($_POST["nome"]) &&

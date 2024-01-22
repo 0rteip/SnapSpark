@@ -97,7 +97,7 @@ final class DatabaseHelper {
     public function checkLogin($mail, $pwd) {
         $query = "SELECT username
                   FROM utenti
-                  WHERE mail=? OR username=? AND password=?";
+                  WHERE (mail=? OR username=?) AND password=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sss", $mail, $mail, $pwd);
         $stmt->execute();
@@ -277,9 +277,11 @@ final class DatabaseHelper {
 
         return $result->fetch_all(MYSQLI_ASSOC)[0]["id"];
     }
-
+    public function getUserAccountInfo() {
+        
+    }
     public function getUserInfo($username) {
-        $query = "SELECT biografia, profile_img
+        $query = "SELECT nome, cognome, sesso, password, data_nascita, mail, numero,  biografia, profile_img
                   FROM utenti
                   WHERE username=?";
         $stmt = $this->db->prepare($query);

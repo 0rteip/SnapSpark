@@ -85,3 +85,7 @@ function getNewChatSug($follows, $messages) {
     }
     return $result;
 }
+
+function getEmptyUser() {
+    return array("nome" => "", "cognome"  => "", "sesso" => "", "password" => "", "data_nascita"  => "", "mail"  => "", "numero"  => "",  "biografia" => "", "profile_img" => "");
+}
