@@ -1,27 +1,32 @@
 <?php
 require_once "bootstrap.php";
-if (($_GET['action'] == 1  && isset($_SESSION['username'])) || ($_GET['action'] == 0 && !isset($_SESSION['username']))) {
+if (($_GET['action'] == "update_user"  && isset($_SESSION['username'])) ||
+    ($_GET['action'] == "create_user" && !isset($_SESSION['username']))
+) {
     $templateParams["titolo"] = "SnapSpark - Create User";
     $templateParams["nome"] = "create-user.php";
     $templateParams["showNavBar"] = false;
-    $templateParams["accountInfo"] = getEmptyUser();
+
     if ($_SESSION['username'] != null) {
         $templateParams['accountInfo'] = $dbh->getUserInfo($_SESSION['username']);
         $templateParams["hashtag"] = $dbh->getDailyHashtag();
+    } else {
+        $templateParams["accountInfo"] = getEmptyUser();
     }
+
     if (
         isset($_POST["profile-img"]) && isset($_POST["username"]) && isset($_POST["nome"]) &&
         isset($_POST["cognome"]) && isset($_POST["sesso"]) && isset($_POST["password"]) &&
         isset($_POST["data_nascita"]) && isset($_POST["mail"]) && isset($_POST["numero"]) &&
-        isset($_POST["biografia"] )&& isset($_GET['action'])
+        isset($_POST["biografia"]) && isset($_GET['action'])
     ) {
         if ($_POST["profile-img"] == "") {
             $img = "avatar.png";
         } else {
             $img = sha1("C:\\fakepath\\" . $_POST["profile-img"]) . ".png";
         }
-        if ($_GET['action'] == 0) {
-            $id = $dbh->insertNewUser(
+        if ($_GET['action'] == "create_user") {
+            $dbh->insertNewUser(
                 $img,
                 $_POST["username"],
                 $_POST["nome"],
@@ -33,8 +38,8 @@ if (($_GET['action'] == 1  && isset($_SESSION['username'])) || ($_GET['action'] 
                 intval($_POST["numero"]),
                 $_POST["biografia"]
             );
-        } else if ($_GET['action'] == 1) {
-            $id = $dbh->updateUser(
+        } elseif ($_GET['action'] == "update_user") {
+            $dbh->updateUser(
                 $_SESSION['username'],
                 $img,
                 $_POST["username"],
@@ -48,17 +53,14 @@ if (($_GET['action'] == 1  && isset($_SESSION['username'])) || ($_GET['action'] 
                 $_POST["biografia"]
             );
         }
-        if (!$id) {
-            $msg = "Inserimento completato correttamente!";
-        } else {
-            $msg = "Errore in inserimento!";
-        }
+
+
         $_SESSION['username'] = $_POST['username'];
-        echo "fatto";
         header("location:index.php");
     } else {
         $templateParams["requireCropper"] = true;
     }
+
     require_once "template/base.php";
 } else {
     header("location:index.php");

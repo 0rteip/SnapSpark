@@ -129,13 +129,13 @@ ul {
     margin-bottom: 2rem !important;
 }
 
-#chat-container .user-card:first-of-type,
+.chat-container .user-card:first-of-type,
 #notification-section .user-card:first-of-type,
 .search .user-card:first-of-type {
     margin-top: 2rem;
 }
 
-#chat-container .user-card:first-of-type::before,
+.chat-container .user-card:first-of-type::before,
 #notification-section .user-card:first-of-type::before,
 .search .user-card:first-of-type::before {
     content: '';
@@ -203,6 +203,12 @@ a:visited {
     max-height: 30rem;
     margin-bottom: 1rem;
     overflow-y: auto;
+}
+
+.btn-danger {
+    background-color: #FF3040 !important;
+    border-color: #FF3040 !important;
+    color: #fff !important;
 }
 
 .btn-primary:not(.btn-close) {

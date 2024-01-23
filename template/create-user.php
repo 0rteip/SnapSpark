@@ -1,8 +1,21 @@
-<form method="POST" class="row g-3 needs-validation :-<?php echo $_GET['action']?>" id="mod-new-form">
+<form method="POST" class="row g-3 needs-validation :-<?php echo $_GET['action'] ?>" id="mod-new-form">
     <div class="col-md-12 image-container mb-2">
-        <label id="profile-img-label" for="profile-img" class="mx-auto">+
-            <input name="profile-img" type="file" id="profile-img" accept="image/jpeg"/>
-        </label>
+
+        <!-- <label id="profile-img-label" for="profile-img" class="mx-auto">+
+            <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" />
+        </label> -->
+
+        <?php if ($_GET["action"] == "create_user") : ?>
+            <label id="profile-img-label" for="profile-img" class="mx-auto">+
+                <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" />
+            </label>
+        <?php else : ?>
+            <input name="profile-img" type="file" id="profile-img" accept="image/jpeg" />
+            <label id="profile-img-label" for="profile-img" class="visually-hidden">Change Image</label>
+            <img src="<?php echo AVATAR_FOLDER . $templateParams["accountInfo"]["profile_img"]; ?>" class="profile-avatar mx-auto d-block" alt="" />
+        <?php endif; ?>
+
+
         <div class="valid-feedback">
             Looks good!
         </div>
@@ -31,7 +44,7 @@
         <label for="username" class="form-label">Username</label>
         <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input type="text" class="form-control extra-validation" id="username" name="username" pattern="^[a-zA-Z_]+$" value="<?php echo $templateParams['accountInfo']['username'] ?>"required>
+            <input type="text" class="form-control extra-validation" id="username" name="username" pattern="^[a-zA-Z_]+$" value="<?php echo $templateParams['accountInfo']['username'] ?>" required>
             <div class="invalid-feedback" id="usernameCustomValid">
                 Username mast contains only a-z, A-Z and _
             </div>
@@ -47,9 +60,9 @@
     <div class="col-md-4">
         <label for="sesso" class="form-label">Sesso</label>
         <select class="form-select" id="sesso" name="sesso" value="<?php echo $templateParams['accountInfo']['sesso'] ?>" required>
-        <?php if ($_GET['action'] == 0) : ?>
-            <option selected value="">Scegli...</option>
-        <?php endif; ?>
+            <?php if ($_GET['action'] == "create_user") : ?>
+                <option selected value="">Scegli...</option>
+            <?php endif; ?>
             <option>Maschio</option>
             <option>Femmina</option>
             <option>Altro</option>
@@ -62,7 +75,7 @@
         <label for="mail" class="form-label">email</label>
         <input type="email" class="form-control extra-validation" id="mail" name="mail" value="<?php echo $templateParams['accountInfo']['mail'] ?>" required>
         <div class="invalid-feedback" id="mailCustomValid">
-                L'email deve avere la @ e  al massimo 40 caratteri
+            L'email deve avere la @ e al massimo 40 caratteri
         </div>
     </div>
     <div class="col-md-4">
@@ -91,15 +104,17 @@
             </div>
         </div>
     </div>
-    <div class="col-12 d-grid col-md-6  d-md-block">
-        <?php if ($_GET['action'] == 1) : ?>
-            <button class="btn btn-primary" type="submit">Modifica</button>
-            <button class="btn btn-primary" type="reset" id="reset-valid-bt">Annulla</button>
-            <button class="btn btn-primary" type="button" id="exit-bt">Exit</button>
+
+    <div class="col-12">
+        <?php if ($_GET['action'] == "update_user") : ?>
+            <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 me-md-2 d-md-inline" type="submit">Modifica</button>
+            <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 me-md-2 d-md-inline" type="reset" id="reset-valid-bt">Annulla</button>
+            <button class="btn btn-danger col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 d-md-inline" type="button" id="exit-bt">Exit</button>
         <?php else : ?>
-            <button class="btn btn-primary" type="submit">Subscribe</button>
+            <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid d-md-inline" type="submit">Subscribe</button>
         <?php endif; ?>
     </div>
+
 </form>
 
 <?php require_once 'template/cropper.php'; ?>

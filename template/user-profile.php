@@ -67,7 +67,7 @@
     <div class="text-center mb-3 p-3 px-0 mx-0">
         <div class="row">
             <div class="col-md-auto col-12 mx-md-auto text-center d-grid" id="follow-button">
-                <button class="btn btn-primary" type="button" value="" name="modifica" id="modifica-bt">Edit info</button>
+                <button class="btn btn-primary" type="button" value="" name="modifica" id="edit-info">Edit info</button>
             </div>
         </div>
     </div>

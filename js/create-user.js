@@ -1,4 +1,3 @@
-const newImg = document.createElement("img");
 const bs_modal = $('#cropper-modal');
 const image = document.getElementById('image');
 let cropper, reader, file;
@@ -6,6 +5,15 @@ let cropper, reader, file;
 const imgInputHelper = document.getElementById("profile-img");
 const imgInputHelperLabel = document.getElementById("profile-img-label");
 const imgContainer = document.querySelector(".image-container");
+
+let newImg = document.getElementsByClassName("profile-avatar")[0];
+if (newImg === undefined) {
+    newImg = document.createElement("img");
+} else {
+    newImg.onclick = function () {
+        imgInputHelperLabel.click();
+    };
+}
 
 bs_modal.on('shown.bs.modal', function () {
     cropper = new Cropper(image, {

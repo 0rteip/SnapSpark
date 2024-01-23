@@ -36,7 +36,6 @@ final class DatabaseHelper {
         $stmt->bind_param('s', $mail);
         $stmt->execute();
         return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) == 0;
-        
     }
     public function getRandomPosts($n) {
         $query = "SELECT username, file, id, descrizione, data, spark
@@ -276,7 +275,6 @@ final class DatabaseHelper {
             $profileImg
         );
         $stmt->execute();
-        return $stmt->insert_id;
     }
 
     public function getFollower($username) {
@@ -754,10 +752,9 @@ final class DatabaseHelper {
         $stmt->bind_param('s', $user);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        foreach($result as $not) :
+        foreach ($result as $not) :
             $this->deleteNotification($not['id']);
         endforeach;
-        
     }
 
     public function deletePost($username, $id) {
