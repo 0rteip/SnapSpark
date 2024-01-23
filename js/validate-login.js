@@ -119,7 +119,6 @@ if (exit !== null) {
 const reset = document.getElementById('reset-valid-bt');
 if (reset !== null) {
     reset.addEventListener("click", async function() {
-        console.log("valis")
         await validateAllInputs();
     })
 }
