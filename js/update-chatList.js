@@ -17,6 +17,7 @@ function showElenco(result) {
         `
     })
     document.getElementById('chat-container').innerHTML = chats;
+    document.getElementsByClassName("user-card")[0].classList.add("first-chat");
 }
 function getCurrentChats() {
     let chats = document.querySelectorAll('div.info-chat');
