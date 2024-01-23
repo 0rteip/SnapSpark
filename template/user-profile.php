@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="text-center mb-3 p-3 pt-4 <?php echo $templateParams['username'] !== $_SESSION['username'] ? 'bottom-line' : ''; ?>" id="user-info">
+<div class="text-center mb-3 p-3 pt-4 bottom-line" id="user-info">
     <div class="row row-cols-3">
         <div class="col">
             <div class="container text-center">
@@ -64,10 +64,10 @@
         </div>
     </div>
 <?php else : ?>
-    <div class="container text-center mb-3 p-3">
-        <div class="row row-cols-2">
-            <div class="col" id="follow-button">
-                <button class="btn btn-primary" type="button" value="" name="modifica" id="modifica-bt">Modifica Informazioni</button>
+    <div class="text-center mb-3 p-3 px-0 mx-0">
+        <div class="row">
+            <div class="col-md-auto col-12 mx-md-auto text-center d-grid" id="follow-button">
+                <button class="btn btn-primary" type="button" value="" name="modifica" id="modifica-bt">Edit info</button>
             </div>
         </div>
     </div>
