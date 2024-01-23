@@ -78,3 +78,10 @@ imgInput.addEventListener("change", event => {
         }
     }
 });
+
+const modBt = document.getElementById('modifica-bt');
+if (modBt !== null) {
+    modBt.addEventListener("click", function() {
+        location.href = 'modify-create-account.php?action=1'
+    })
+}
