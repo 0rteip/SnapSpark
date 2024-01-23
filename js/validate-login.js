@@ -75,7 +75,7 @@ function change(element, valid) {
     }
 }
 
-async function validateAllInputs(event) {
+async function validateAllInputs() {
     let elements = document.querySelectorAll('.extra-validation');
     for (let i = 0; i < elements.length; i++) {
         const res = await validateOneInput(elements[i]);
@@ -93,7 +93,7 @@ $(document).ready(function () {
     $("form").submit(async function (event) {
         event.preventDefault();  // Evita la presentazione del modulo di default
 
-        let validationSuccessful = await validateAllInputs(event);
+        let validationSuccessful = await validateAllInputs();
 
         if (validationSuccessful && this.checkValidity()) {
             this.submit();  // Invia manualmente il modulo se la validazione è riuscita
@@ -108,3 +108,18 @@ $(document).ready(function () {
     });
 
 });
+
+const exit = document.getElementById('exit-bt');
+if (exit !== null) {
+    exit.addEventListener("click", function() {
+        location.href = "index.php"
+    })
+}
+
+const reset = document.getElementById('reset-valid-bt');
+if (reset !== null) {
+    reset.addEventListener("click", async function() {
+        console.log("valis")
+        await validateAllInputs();
+    })
+}
