@@ -47,7 +47,9 @@
     <div class="col-md-4">
         <label for="sesso" class="form-label">Sesso</label>
         <select class="form-select" id="sesso" name="sesso" value="<?php echo $templateParams['accountInfo']['sesso'] ?>" required>
-            <option disabled value="">Scegli...</option>
+        <?php if ($_GET['action'] == 0) : ?>
+            <option selected value="">Scegli...</option>
+        <?php endif; ?>
             <option>Maschio</option>
             <option>Femmina</option>
             <option>Altro</option>
