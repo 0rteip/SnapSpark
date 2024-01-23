@@ -6,13 +6,13 @@ function validate($action, $value, $type) {
     require_once "../bootstrap.php";
     $check = false;
     if ($action == 'user') {
-        if ($type == 1 && $value == $_SESSION['username']) {
+        if ($type == 'update_user' && $value == $_SESSION['username']) {
             $check = true;
         } else {
             $check = $dbh->validateUsername($value);
         }
     } else if ($action == 'mail') {
-        if ($type == 1 && $value == $dbh->getUserInfo($_SESSION['username'])['mail']) {
+        if ($type == 'update_user' && $value == $dbh->getUserInfo($_SESSION['username'])['mail']) {
             $check = true;
         } else {
             $check = $dbh->validateMail($value);
