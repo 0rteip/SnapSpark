@@ -100,12 +100,18 @@ function checkNewNotification() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
         const result = JSON.parse(this.responseText);
+        const notSec = document.getElementById("show-section");
         if (result.news === "true") {
-            const notSec = document.getElementById("notification-section");
             if (notSec) {
                 showNotification();
+                document.getElementById('deleteAllNotBt').hidden = false;
             } else {
                 showNotificationMessage(result.notifications);
+            }
+        } else {
+            if (notSec && notSec.innerHTML == "") {
+                notSec.innerHTML = "<p>Nessuna notifica</p>";
+                document.getElementById('deleteAllNotBt').hidden = true;
             }
         }
     }
@@ -113,10 +119,8 @@ function checkNewNotification() {
     setTimeout('checkNewNotification()', 2000);
 }
 
-checkNewNotification();
-
-const notSec = document.getElementById("notification-section");
-if (notSec !== null) {
+const notSec = document.getElementById("show-section");
+if (notSec) {
     showNotification();
     let deleteAllBt = document.getElementById('deleteAllNotBt');
     if (deleteAllBt !== null) {
@@ -127,10 +131,14 @@ if (notSec !== null) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 showNotification();
+                document.getElementById('deleteAllNotBt').hidden = true
+                notSec.innerHTML = "<p>Nessuna notifica</p>";
             }
             xhr.send("action=delAll");
         })
     }
 }
+checkNewNotification();
+
 
 const deleteNot = document.getElementsByClassName("not-trash");

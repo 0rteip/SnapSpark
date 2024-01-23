@@ -1,10 +1,11 @@
 function checkValue(element, action) {
     return new Promise(function(resolve, reject) {
+        let type =  document.getElementById('mod-new-form').getAttribute('class').split(':-')[1];
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "utils/login-validation.php");
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send("value=" + element.value + "&action=" + action);
+        xhr.send("value=" + element.value + "&action=" + action + "&type=" + type);
         xhr.onload = function () {
             console.log(this.responseText)
             let result = JSON.parse(this.responseText);

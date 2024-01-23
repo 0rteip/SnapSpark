@@ -97,3 +97,10 @@ imgInputHelper.addEventListener("change", event => {
         }
     }
 });
+
+const exit = document.getElementById('exit-bt');
+if (exit !== null) {
+    exit.addEventListener("click", function() {
+        location.href = "index.php"
+    })
+}

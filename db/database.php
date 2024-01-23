@@ -96,13 +96,49 @@ final class DatabaseHelper {
     public function checkLogin($mail, $pwd) {
         $query = "SELECT username
                   FROM utenti
-                  WHERE mail=? OR username=? AND password=?";
+                  WHERE (mail=? OR username=?) AND password=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sss", $mail, $mail, $pwd);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    public function updateUser(
+        $oldUser,
+        $profileImg,
+        $username,
+        $nome,
+        $cognome,
+        $sesso,
+        $password,
+        $dataNascita,
+        $mail,
+        $numero,
+        $biografia
+    ) {
+        $nome_social = "SnapSpark";
+        $query = "UPDATE utenti SET
+                  username =?, nome=?, cognome=?, sesso=?, password=?, data_nascita=?, mail=?, numero=?, biografia=?, nome_social=?, profile_img=?
+                  WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param(
+            'sssssssissss',
+            $username,
+            $nome,
+            $cognome,
+            $sesso,
+            $password,
+            $dataNascita,
+            $mail,
+            $numero,
+            $biografia,
+            $nome_social,
+            $profileImg,
+            $oldUser
+        );
+        $stmt->execute();
+        return $stmt->insert_id;
     }
 
     public function insertNewUser(
@@ -278,7 +314,7 @@ final class DatabaseHelper {
     }
 
     public function getUserInfo($username) {
-        $query = "SELECT biografia, profile_img
+        $query = "SELECT nome, cognome, username, sesso, password, data_nascita, mail, numero,  biografia, profile_img
                   FROM utenti
                   WHERE username=?";
         $stmt = $this->db->prepare($query);

@@ -15,7 +15,7 @@
 
   <div class="col-12">
     <button class="btn btn-primary me-2" type="submit">Login</button>
-    <a href="new-account.php">Subscribe</a>
+    <a href="modify-create-account.php?action=0">Subscribe</a>
   </div>
 
 </form>

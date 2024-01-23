@@ -64,6 +64,13 @@
         </div>
     </div>
 <?php else : ?>
+    <div class="container text-center mb-3 p-3">
+        <div class="row row-cols-2">
+            <div class="col" id="follow-button">
+                <button class="btn btn-primary" type="button" value="" name="modifica" id="modifica-bt">Modifica Informazioni</button>
+            </div>
+        </div>
+    </div>
     <?php require_once "template/cropper.php"; ?>
     <script src="js/user-profile-change.js"></script>
 <?php endif; ?>

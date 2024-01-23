@@ -6,7 +6,7 @@
 
     <div id="notification-section">
         <div class="col-md-2 col-12 text-md-end text-center">
-            <button type="button" id="deleteAllNotBt" class="btn btn-primary">Delete All</button>
+            <button type="button" id="deleteAllNotBt" class="btn btn-primary" hidden>Delete All</button>
         </div>
         <div id="show-section">
         </div>
