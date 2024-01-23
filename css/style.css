@@ -45,7 +45,8 @@ article .fa-comment:hover {
 }
 
 .post-star,
-.post-comment {
+.post-comment,
+.post-trash {
     font-size: 2rem;
 }
 
@@ -300,7 +301,6 @@ a:visited {
     color: #FF3040;
 }
 
-.post-trash,
 .not-trash {
     font-size: 120%;
 }

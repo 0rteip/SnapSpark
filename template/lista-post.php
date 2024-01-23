@@ -7,20 +7,20 @@
                     <img alt="Go to <?php echo $post['username']; ?> profile" class="post-img" src="<?php echo AVATAR_FOLDER . $post["profile_img"]; ?>" />
                 </div>
 
-                <div class="col-md-auto text-start align-self-center ps-0">
-                    <div class="col-md-12">
+                <div class="col-auto text-start align-self-center ps-0">
+                    <div class="col-12">
                         <a target="_self" href="user.php?username=<?php echo $post["username"]; ?>">
                             <h2 class="post-header m-0 fs-5"><?php echo $post["username"]; ?></h2>
                         </a>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <p class="my-auto"><?php echo $post["data"] ?>
                         </p>
                     </div>
                 </div>
 
-                <div class="d-flex col-md-auto justify-content-end align-self-center ms-auto">
+                <div class="d-flex col-auto justify-content-end align-self-center ms-auto">
                     <?php if ($_SESSION["username"] == $post["username"]) : ?>
                         <span tabindex="0" id="trash-can¬<?php echo $post['username'] . '¬' . $post['id']; ?>" class="post-trash fa-solid fa-trash ms-2">
                         </span>
