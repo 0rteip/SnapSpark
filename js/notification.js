@@ -74,7 +74,10 @@ function showNotification() {
                 </div>
                 `
         });
-
+        console.log(result.notifications.length)
+        if (result.notifications.length >0 && document.getElementById('deleteAllNotBt').hidden === true) {
+            document.getElementById('deleteAllNotBt').hidden = false;
+        }
         notSec.innerHTML = nots;
         Array.from(deleteNot).forEach(not => {
             not.addEventListener("click", function () {
