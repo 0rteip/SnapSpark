@@ -137,6 +137,109 @@ final class DatabaseHelper {
             $oldUser
         );
         $stmt->execute();
+        if ($username != $oldUser) {
+            $query = "UPDATE commenti
+                SET user =?
+                WHERE user =?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = "UPDATE follow
+            SET follower =?
+            WHERE follower = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = " UPDATE follow
+            SET user = ?
+            WHERE user = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = "UPDATE messaggio
+            SET sen_username = ?
+            WHERE sen_username = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = " UPDATE messaggio
+            SET rec_username = ?
+            WHERE rec_username = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = " UPDATE likes
+            SET username = ?
+            WHERE username = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = "UPDATE like_post
+            SET like_username = ?
+            WHERE like_username = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = "UPDATE notifica
+            SET sen_user = ?
+            WHERE sen_user = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $query = "UPDATE posts
+            SET username = ?
+            WHERE username = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+            $stmt->execute();
+            $query = "UPDATE notifica
+            SET username = 'nuovo_username'
+            WHERE username = 'vecchio_username';";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param(
+                'sssssssissss',
+                $username,
+                $oldUser
+            );
+            $stmt->execute();
+        }
         return $stmt->insert_id;
     }
 
