@@ -94,7 +94,7 @@
     <div class="col-12 d-grid col-md-6  d-md-block">
         <?php if ($_GET['action'] == 1) : ?>
             <button class="btn btn-primary" type="submit">Modifica</button>
-            <button class="btn btn-primary" type="reset">Annulla</button>
+            <button class="btn btn-primary" type="reset" id="reset-valid-bt">Annulla</button>
             <button class="btn btn-primary" type="button" id="exit-bt">Exit</button>
         <?php else : ?>
             <button class="btn btn-primary" type="submit">Subscribe</button>
