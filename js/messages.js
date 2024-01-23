@@ -11,7 +11,6 @@ function sendMessage() {
         return;
     }
     let container = document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-")
-    document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-")
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/messages.php")
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');

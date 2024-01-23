@@ -129,13 +129,13 @@ ul {
     margin-bottom: 2rem !important;
 }
 
-.chat-container .user-card:first-of-type,
+.first-chat:first-of-type,
 #notification-section .user-card:first-of-type,
 .search .user-card:first-of-type {
     margin-top: 2rem;
 }
 
-.chat-container .user-card:first-of-type::before,
+.first-chat::before,
 #notification-section .user-card:first-of-type::before,
 .search .user-card:first-of-type::before {
     content: '';
