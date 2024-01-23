@@ -104,14 +104,14 @@ function checkNewNotification() {
         if (result.news === "true") {
             if (notSec) {
                 showNotification();
-                document.getElementById('deleteAllNotBt').style.display = "block";
+                document.getElementById('deleteAllNotBt').hidden = false;
             } else {
                 showNotificationMessage(result.notifications);
             }
         } else {
             if (notSec && notSec.innerHTML == "") {
                 notSec.innerHTML = "<p>Nessuna notifica</p>";
-                document.getElementById('deleteAllNotBt').style.display = "none";
+                document.getElementById('deleteAllNotBt').hidden = true;
             }
         }
     }
@@ -121,10 +121,6 @@ function checkNewNotification() {
 
 const notSec = document.getElementById("show-section");
 if (notSec) {
-    if ( notSec.innerHTML == "") {
-        document.getElementById('deleteAllNotBt').style.display = "none";
-        notSec.innerHTML = "<p>Nessuna notifica</p>";
-    }
     showNotification();
     let deleteAllBt = document.getElementById('deleteAllNotBt');
     if (deleteAllBt !== null) {
@@ -135,6 +131,8 @@ if (notSec) {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 showNotification();
+                document.getElementById('deleteAllNotBt').hidden = true
+                notSec.innerHTML = "<p>Nessuna notifica</p>";
             }
             xhr.send("action=delAll");
         })
