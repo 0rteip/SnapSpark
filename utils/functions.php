@@ -7,6 +7,7 @@ function registerLoggedUser($user) {
     $_SESSION["username"] = $user["username"];
     $_SESSION["last_ver_not"] = date('Y-m-d H:i:s');
 }
+
 function setcourrentUser($name) {
     $_SESSION["username"] = $name;
 }
