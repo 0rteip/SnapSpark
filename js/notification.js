@@ -100,12 +100,18 @@ function checkNewNotification() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function () {
         const result = JSON.parse(this.responseText);
+        const notSec = document.getElementById("show-section");
         if (result.news === "true") {
-            const notSec = document.getElementById("notification-section");
             if (notSec) {
                 showNotification();
+                document.getElementById('deleteAllNotBt').style.display = "block";
             } else {
                 showNotificationMessage(result.notifications);
+            }
+        } else {
+            if (notSec && notSec.innerHTML == "") {
+                notSec.innerHTML = "<p>Nessuna notifica</p>";
+                document.getElementById('deleteAllNotBt').style.display = "none";
             }
         }
     }
@@ -113,10 +119,12 @@ function checkNewNotification() {
     setTimeout('checkNewNotification()', 2000);
 }
 
-checkNewNotification();
-
-const notSec = document.getElementById("notification-section");
-if (notSec !== null) {
+const notSec = document.getElementById("show-section");
+if (notSec) {
+    if ( notSec.innerHTML == "") {
+        document.getElementById('deleteAllNotBt').style.display = "none";
+        notSec.innerHTML = "<p>Nessuna notifica</p>";
+    }
     showNotification();
     let deleteAllBt = document.getElementById('deleteAllNotBt');
     if (deleteAllBt !== null) {
@@ -132,5 +140,7 @@ if (notSec !== null) {
         })
     }
 }
+checkNewNotification();
+
 
 const deleteNot = document.getElementsByClassName("not-trash");
