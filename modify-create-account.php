@@ -20,9 +20,9 @@ if (($_GET['action'] == "update_user"  && isset($_SESSION['username'])) ||
         isset($_POST["data_nascita"]) && isset($_POST["mail"]) && isset($_POST["numero"]) &&
         isset($_POST["biografia"]) && isset($_GET['action'])
     ) {
-        if ($_POST["profile-img"] == "") {
+        if ($_POST["profile-img"] == "" && $_GET['action'] == "create_user") {
             $img = "avatar.png";
-        } else {
+        } elseif ($_POST["profile-img"] != "") {
             $img = sha1("C:\\fakepath\\" . $_POST["profile-img"]) . ".png";
         }
         if ($_GET['action'] == "create_user") {

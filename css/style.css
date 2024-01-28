@@ -12,7 +12,7 @@
 }
 
 .bg-main-color {
-    background-color: #F4E04D;
+    background-color: #77e0a1;
 }
 
 .avatar {
@@ -66,6 +66,10 @@ article .fa-comment:hover {
 
 footer p {
     text-align: center;
+}
+
+.navbar-text {
+    color: #26312A !important;
 }
 
 /* if class nav-link and active */
@@ -212,8 +216,8 @@ a:visited {
 }
 
 .btn-primary:not(.btn-close) {
-    background-color: #1934A4 !important;
-    border-color: #1934A4 !important;
+    background-color: #005b9b !important;
+    border-color: #005b9b !important;
     color: #fff !important;
 }
 
@@ -227,7 +231,7 @@ a:visited {
 }
 
 .user-msg {
-    background-color: #1934A4;
+    background-color: #0074b6;
     color: #fff;
     margin-left: auto;
 
@@ -312,7 +316,7 @@ a:visited {
 }
 
 .custom-toast {
-    border-color: #F4E04D !important;
+    border-color: #B4EBCA !important;
     border-width: 5px !important;
     border-spacing: 0cap !important;
 }

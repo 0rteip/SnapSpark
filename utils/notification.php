@@ -1,6 +1,5 @@
 <?php
-function sendNotification()
-{
+function sendNotification() {
     require_once '../bootstrap.php';
 
     if (isset($_POST['reciver']) && isset($_POST['type'])) {
@@ -11,22 +10,19 @@ function sendNotification()
 }
 
 
-function deleteNotification($id)
-{
+function deleteNotification($id) {
     require_once '../bootstrap.php';
 
     $dbh->deleteNotification($id);
 }
 
-function deleteAllNotification()
-{
+function deleteAllNotification() {
     require_once '../bootstrap.php';
 
     $dbh->removeAllNotification();
 }
 
-function getAllNotifications()
-{
+function getAllNotifications() {
     require_once '../bootstrap.php';
 
     $result = $dbh->getUserNotification();
@@ -37,15 +33,14 @@ function getAllNotifications()
     }
 }
 
-function checkNewNotification()
-{
+function checkNewNotification() {
     require_once '../bootstrap.php';
 
     $nots = $dbh->checkNewNotification();
     $_SESSION["last_ver_not"] = date('Y-m-d H:i:s');
 
     if (empty($nots)) {
-        echo json_encode(array("news" => "false", "last_ver_not" => $_SESSION["last_ver_not"]));
+        echo json_encode(array("news" => "false"));
     } else {
         echo json_encode(array("news" => "true", "notifications" => $nots));
     }
