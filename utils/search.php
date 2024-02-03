@@ -1,25 +1,5 @@
 <?php
-function getChats($messages) {
-    require '../bootstrap.php';
-    $chats = array();
-    foreach($messages as $message) :
-        $user = "";
-        if ($message['sender'] !== $_SESSION['username']) {
-            $user = $message['sender'];
 
-        } else if($message['reciver'] !== $_SESSION['username']) {
-            $user=$message['reciver'];
-        }
-        $check = checkPresence($chats, $user);
-        $userInfo = $dbh->getUserInfo($user)["profile_img"];
-        $newChat = array('user' => $user, 'testo' => $message['testo'], 'data' => $message['data'], 'img' => $userInfo);
-        if ($check !== false) {
-            unset($chats[$check]);
-        }
-            array_push($chats, $newChat);
-    endforeach;
-    return array_reverse($chats);
-}
 function normalSearch($string, $type)
 {
     require_once '../bootstrap.php';
@@ -58,6 +38,7 @@ function searchUsers($string, $users) {
     endforeach;
     return $result;
 }
+
 function searchChat($string, $chats) {
     $result = [];
     foreach ($chats as $chat) :
@@ -67,22 +48,37 @@ function searchChat($string, $chats) {
     endforeach;
     return $result;
 }
+
 function getChat($string) {
     require_once "../bootstrap.php";
     $result = [];
-    $chats = getChats($dbh->getChats());
-    if (strlen($string) === "") {
+    $messages = $dbh->getChats();
+    $chats = array();
+    foreach($messages as $message) :
+        $user = "";
+        if ($message['sender'] !== $_SESSION['username']) {
+            $user = $message['sender'];
+
+        } else if($message['reciver'] !== $_SESSION['username']) {
+            $user=$message['reciver'];
+        }
+        $check = checkPresence($chats, $user);
+        $userInfo = $dbh->getUserInfo($user)["profile_img"];
+        $newChat = array('user' => $user, 'testo' => $message['testo'], 'data' => $message['data'], 'img' => $userInfo);
+        if ($check !== false) {
+            unset($chats[$check]);
+        }
+            array_push($chats, $newChat);
+    endforeach;
+    $chats = array_reverse($chats);
+    if (strlen($string) == "") {
         $result = $chats;
     } else {
         $result = searchChat($string, $chats);
     }
     echo json_encode(array('chats' => $result , 'avatar' => AVATAR_FOLDER));
 }
-function set($name) {
-    require_once "utils/functions.php";
-    setcourrentUser($name);
-    echo $name;
-}
+
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
 
     if(isset($_POST['string'])) {
