@@ -19,8 +19,8 @@ function sendMessage() {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             document.getElementById('message-text').value = "";
-            notify(container[3], 'send')
             displayMessages();
+            notify(container[3], 'send')
         }
     };
     xhr.send("message=" + document.getElementById('message-text').value + "&reciver=" + container[3]);
@@ -34,8 +34,8 @@ function removeMessage(id) {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             document.getElementById('message-text').value = "";
-            notify(container[3], 'removeMessage');
             displayMessages();
+            notify(container[3], 'removeMessage');
         }
     };
     xhr.send("id=" + id + "&action=delete");
