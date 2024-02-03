@@ -3,9 +3,6 @@ function notify(reciver, type) {
     xhr.open("POST", "utils/notification.php");
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function () {
-        console.log(this.responseText)
-    }
     xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
 }
 
@@ -16,7 +13,6 @@ function segui() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText);
             const info = JSON.parse(this.responseText);
             init(info.followed, document.getElementById('current-user').innerHTML)
             document.getElementById('followers-number').innerHTML = info.follower.length;
@@ -45,8 +41,8 @@ function init(array, username) {
 const bt = document.getElementById("follow-bt");
 if (bt !== null) {
     bt.addEventListener("click", function () {
-        notify(document.getElementById('current-user').innerHTML, this.innerHTML)
         segui();
+        notify(document.getElementById('current-user').innerHTML, this.innerHTML)
     });
 }
 
