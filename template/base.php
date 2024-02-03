@@ -20,7 +20,7 @@
         <div class="container-fluid px-3">
             <a class="navbar-brand fw-bold" href="index.php" target="_self">SnapSpark</a>
 
-            <?php if ($_SESSION["username"] != null) : ?>
+            <?php if (isset($_SESSION["username"])) : ?>
                 <em class="navbar-text p-2 fw-bold fs-5" data-bs-toggle="tooltip" data-bs-title="<?php echo $templateParams["hashtag"]["descrizione"] ?>">
                     <?php echo  "#" . $templateParams["hashtag"]["nome"] ?>
                 </em>
@@ -54,7 +54,7 @@
             <p>Carabini Luca, Ventrucci Pietro</p>
         </div>
 
-        <?php if ($_SESSION["username"] != null) : ?>
+        <?php if (isset($_SESSION["username"])) : ?>
             <div class="container py-4 py-md-5 px-4 px-md-3 d-flex justify-content-center">
                 <a class="btn btn-primary" href="login.php" role="button" target="_self">Logout</a>
             </div>

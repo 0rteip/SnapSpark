@@ -22,5 +22,6 @@ if (isUserLoggedIn()) {
     $templateParams["titolo"] = "Blog TW - Login";
     $templateParams["nome"] = "login-form.php";
 }
+$templateParams["showNavBar"] = false;
 
 require 'template/base.php';
