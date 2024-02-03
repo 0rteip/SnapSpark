@@ -38,6 +38,8 @@ if (($_GET['action'] == "update_user"  && isset($_SESSION['username'])) ||
                 intval($_POST["numero"]),
                 $_POST["biografia"]
             );
+            $_SESSION['username'] = $_POST['username'];
+            //sendEmail($_POST['mail'], "", "New");
         } elseif ($_GET['action'] == "update_user") {
             $dbh->updateUser(
                 $_SESSION['username'],
@@ -52,10 +54,8 @@ if (($_GET['action'] == "update_user"  && isset($_SESSION['username'])) ||
                 intval($_POST["numero"]),
                 $_POST["biografia"]
             );
+            $_SESSION['username'] = $_POST['username'];
         }
-
-
-        $_SESSION['username'] = $_POST['username'];
         header("location:index.php");
     } else {
         $templateParams["requireCropper"] = true;
