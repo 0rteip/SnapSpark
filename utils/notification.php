@@ -1,14 +1,14 @@
 <?php
 function sendNotification() {
     require_once '../bootstrap.php';
-
     if (isset($_POST['reciver']) && isset($_POST['type'])) {
         $reciver = $_POST['reciver'];
         $type = $_POST['type'];
         $dbh->sendNotification($_SESSION['username'], $reciver, $type);
+        //$reciverMail = $dbh->getUserInfo($reciver)['mail'];
+        //sendEmail($reciverMail, $_SESSION['username'], $type);
     }
 }
-
 
 function deleteNotification($id) {
     require_once '../bootstrap.php';
