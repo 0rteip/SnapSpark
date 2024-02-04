@@ -5,6 +5,7 @@ function sendNotification() {
         $reciver = $_POST['reciver'];
         $type = $_POST['type'];
         $dbh->sendNotification($_SESSION['username'], $reciver, $type);
+        /*Mail*/
         //$reciverMail = $dbh->getUserInfo($reciver)['mail'];
         //sendEmail($reciverMail, $_SESSION['username'], $type);
     }
