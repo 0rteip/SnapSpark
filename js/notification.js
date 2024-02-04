@@ -32,14 +32,32 @@ function returnText(type) {
         case 'removeMessage': return " ha eliminato un messaggio";
         case 'Follow': return " ha iniziato a seguirti";
         case 'Unfollow': return " ha smesso di seguirti";
+        case 'like': return " ha messo mi piace ad un tuo post";
+        case 'comment': return " ha commentato un tuo post";
     }
+}
+
+function updateFollowers() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/profile.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const info = JSON.parse(this.responseText);
+
+            document.getElementById('followers-number').innerHTML = info.followers;
+        }
+    };
+
+    xhr.send("action=getFollowers" + "&user=" + document.getElementById('current-user').innerHTML);
 }
 
 function showNotificationMessage(messages) {
     messages.forEach(not => {
         const user = document.getElementById("current-user");
         if (user && user.innerHTML === not.username && (not.tipo === "Follow" || not.tipo === "Unfollow")) {
-            // todo: aggiornare il numero di follower
+            updateFollowers();
         }
         showToast(not.sen_user, returnText(not.tipo));
     });
@@ -75,7 +93,7 @@ function showNotification() {
                 `
         });
         console.log(result.notifications.length)
-        if (result.notifications.length >0 && document.getElementById('deleteAllNotBt').hidden === true) {
+        if (result.notifications.length > 0 && document.getElementById('deleteAllNotBt').hidden === true) {
             document.getElementById('deleteAllNotBt').hidden = false;
         }
         notSec.innerHTML = nots;
@@ -111,11 +129,9 @@ function checkNewNotification() {
             } else {
                 showNotificationMessage(result.notifications);
             }
-        } else {
-            if (notSec && notSec.innerHTML == "") {
-                notSec.innerHTML = "<p>Nessuna notifica</p>";
-                document.getElementById('deleteAllNotBt').hidden = true;
-            }
+        } else if (notSec && notSec.innerHTML == "") {
+            notSec.innerHTML = "<p>Nessuna notifica</p>";
+            document.getElementById('deleteAllNotBt').hidden = true;
         }
     }
     xhr.send("action=check");
@@ -142,6 +158,5 @@ if (notSec) {
     }
 }
 checkNewNotification();
-
 
 const deleteNot = document.getElementsByClassName("not-trash");

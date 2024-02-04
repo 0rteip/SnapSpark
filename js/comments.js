@@ -1,3 +1,11 @@
+function notify(reciver, type) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/notification.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
+}
+
 function getComments(user, post_id) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/comments.php");
@@ -96,6 +104,8 @@ function postComment(user, post_id) {
             btn.setAttribute("disabled", "");
         }
     };
+
+    notify(user, "comment");
 
     xhr.send("action=post_comments" + "&u=" + user + "&i=" + post_id + "&c=" + comment.value);
 }

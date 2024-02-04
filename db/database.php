@@ -640,7 +640,7 @@ final class DatabaseHelper {
         } else {
             //check if bigger
             foreach ($result as $value) {
-                if ($value['data'] > $lastCheck) {
+                if (strtotime($value['data']) > strtotime($lastCheck)) {
                     array_push($nots, $value);
                 }
             }

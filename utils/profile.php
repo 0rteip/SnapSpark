@@ -82,6 +82,15 @@ function changePicture() {
     }
 }
 
+function getFollowers() {
+    require_once '../bootstrap.php';
+
+    if (isset($_POST["user"])) {
+        $followers = count($dbh->getFollower($_POST["user"]));
+    }
+    echo json_encode(array("followers" => $followers));
+}
+
 
 // Controlla se la richiesta è una chiamata Ajax
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
@@ -94,6 +103,9 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 break;
             case "change-picture":
                 changePicture();
+                break;
+            case "getFollowers":
+                getFollowers();
                 break;
             default:
                 break;
