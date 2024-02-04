@@ -38,9 +38,9 @@ if (
     }
     $_SESSION['username'] = $_POST['username'];
     echo "fatto";
+    $templateParams["requireCropper"] = false;
 } else {
     $templateParams["requireCropper"] = true;
 }
-
 
 require_once "template/base.php";

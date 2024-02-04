@@ -39,6 +39,7 @@ if (($_GET['action'] == "update_user"  && isset($_SESSION['username'])) ||
                 $_POST["biografia"]
             );
             $_SESSION['username'] = $_POST['username'];
+            /*Mail*/
             //sendEmail($_POST['mail'], "", "New");
         } elseif ($_GET['action'] == "update_user") {
             $dbh->updateUser(
