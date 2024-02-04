@@ -45,3 +45,4 @@ Join SnapSpark and immerse yourself in a light and optimistic community. Here, y
 To activate mails you need do decomment some lines:
 1. Go in file utils\notification.php and decomment the line after /*Mail*/, this is to receive an email when you receive a notification in your profile.
 2. Go in file modify-create-account.php and deccoment the line after /*Mail*/, this is to receive an email when you create a new profile.
+3. Go in file utils\mail.php and insert your mail in the variable **$from**

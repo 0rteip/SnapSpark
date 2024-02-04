@@ -1,6 +1,6 @@
 <?php 
 function sendEmail($reciver, $sender, $type) {
-    $from = "luca02c2@gmail.com";
+    $from = "luca02c2@gmail.com"; /*You need to insert your mail*/
     $subject = getMailObj($type);
     $message = getMailText($sender, $type);
     $headers = ["From" => $from];
