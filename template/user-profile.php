@@ -19,6 +19,7 @@
 
 <div class="text-center mb-3 p-3 pt-4 bottom-line" id="user-info">
     <div class="row row-cols-3">
+
         <div class="col">
             <div class="container text-center">
                 <div class="row row-cols-1">
@@ -27,25 +28,25 @@
                 </div>
             </div>
         </div>
+
         <div class="col">
             <div class="container text-center">
-                <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=follower" target="_self">
-                    <div class="row row-cols-1">
+                <div class="row row-cols-1 justify-content-center">
+                    <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=follower" target="_self">
                         <div class="col mb-1" id="followers-number"><?php echo count($templateParams["follower"]); ?></div>
                         <div class="col">Follower</div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="col">
             <div class="container text-center">
-                <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=followed" target="_self">
-
-                    <div class="row row-cols-1">
+                <div class="row row-cols-1 justify-content-center">
+                    <a href="info-follower.php?username=<?php echo $templateParams["username"] ?>&action=followed" target="_self">
                         <div class="col mb-1"><?php echo count($templateParams["followed"]); ?></div>
                         <div class="col">Followed</div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
