@@ -9,6 +9,10 @@ const imgContainer = document.querySelector(".image-container");
 let newImg = document.getElementsByClassName("profile-avatar")[0];
 if (newImg === undefined) {
     newImg = document.createElement("img");
+    newImg.classList.add("profile-avatar");
+    newImg.classList.add("mx-auto");
+    newImg.classList.add("d-block");
+    newImg.setAttribute("alt", "Profile image");
 } else {
     newImg.onclick = function () {
         imgInputHelperLabel.click();
