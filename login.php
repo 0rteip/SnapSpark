@@ -5,7 +5,7 @@ session_destroy();
 session_start();
 
 $templateParams["titolo"] = "SnapSpark - Login";
-
+$templateParams["requireCropper"] = false;
 if (isset($_POST["mail"]) && isset($_POST["password"])) {
     $login_result = $dbh->checkLogin($_POST["mail"], $_POST["password"]);
     if (empty($login_result)) {

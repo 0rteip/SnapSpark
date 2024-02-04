@@ -15,6 +15,6 @@ if (isUserLoggedIn()) {
 } else {
     $templateParams["errore"] = "You need logged in";
 }
-
+$templateParams["requireCropper"] = false;
 
 require_once "template/base.php";

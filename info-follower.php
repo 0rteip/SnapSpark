@@ -8,7 +8,7 @@ if (!isUserLoggedIn()) {
 $templateParams["titolo"] = "SnapSpark - Info follower";
 $templateParams["hashtag"] = $dbh->getDailyHashtag();
 $templateParams["nome"] = "follow-follower.php";
-
+$templateParams["requireCropper"] = false;
 if (isset($_GET['username'])) {
     $username = $_GET['username'];
 } else {

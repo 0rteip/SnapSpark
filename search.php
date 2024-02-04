@@ -9,5 +9,5 @@ $templateParams["titolo"] = "SnapSpark - Search users";
 $templateParams["hashtag"] = $dbh->getDailyHashtag();
 $templateParams["nome"] = "search-users.php";
 $templateParams["showNavBar"] = true;
-
+$templateParams["requireCropper"] = false;
 require_once "template/base.php";

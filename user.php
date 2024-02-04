@@ -12,6 +12,7 @@ $username = $_SESSION['username'];
 
 if (isset($_GET['username'])) {
     $username = $_GET['username'];
+    $templateParams["requireCropper"] = false;
 } else {
     $templateParams["requireCropper"] = true;
 }

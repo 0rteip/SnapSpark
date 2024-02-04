@@ -17,5 +17,5 @@ if (isset($_GET['reciver'])) {
 }
 
 $templateParams["showNavBar"] = true;
-
+$templateParams["requireCropper"] = false;
 require_once "template/base.php";

@@ -35,5 +35,5 @@ $templateParams["hashtag"] = $dbh->getDailyHashtag();
 $templateParams["nome"] = "template/lista-post.php";
 $templateParams["posts"] = $posts;
 $templateParams["showNavBar"] = true;
-
+$templateParams["requireCropper"] = false;
 require_once "template/base.php";

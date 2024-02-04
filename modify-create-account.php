@@ -7,7 +7,7 @@ if (($_GET['action'] == "update_user"  && isset($_SESSION['username'])) ||
     $templateParams["nome"] = "create-user.php";
     $templateParams["showNavBar"] = false;
     $templateParams['combobox'] = array('Maschio', 'Femmina', 'Altro');
-    if ($_SESSION['username'] != null) {
+    if (isset($_SESSION['username']) ) {
         $templateParams['accountInfo'] = $dbh->getUserInfo($_SESSION['username']);
         $templateParams["hashtag"] = $dbh->getDailyHashtag();
     } else {
@@ -56,6 +56,7 @@ if (($_GET['action'] == "update_user"  && isset($_SESSION['username'])) ||
             );
             $_SESSION['username'] = $_POST['username'];
         }
+        $templateParams["requireCropper"] = false;
         header("location:index.php");
     } else {
         $templateParams["requireCropper"] = true;
