@@ -79,6 +79,7 @@ footer p {
 
 .nav-link {
     color: #070707 !important;
+    font-size: 120% !important;
 }
 
 .icon-container {
@@ -219,6 +220,12 @@ a:visited {
     background-color: #005b9b !important;
     border-color: #005b9b !important;
     color: #fff !important;
+}
+
+#reset-valid-bt {
+    background-color: #fff !important;
+    border-color: #005b9b !important;
+    color: #005b9b !important;
 }
 
 .msg {

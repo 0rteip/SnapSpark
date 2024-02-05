@@ -113,8 +113,8 @@
 
     <div class="col-12">
         <?php if ($_GET['action'] == "update_user") : ?>
-            <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 me-md-2 d-md-inline" type="submit">Modifica</button>
-            <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 me-md-2 d-md-inline" type="reset" id="reset-valid-bt">Annulla</button>
+            <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 me-md-2 d-md-inline" type="submit">Save</button>
+            <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 me-md-2 d-md-inline" type="reset" id="reset-valid-bt">Cancel</button>
             <button class="btn btn-danger col-md-auto col-12 text-center d-sm-grid mb-3 mb-md-0 d-md-inline" type="button" id="exit-bt">Exit</button>
         <?php else : ?>
             <button class="btn btn-primary col-md-auto col-12 text-center d-sm-grid d-md-inline" type="submit">Subscribe</button>
