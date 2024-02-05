@@ -7,25 +7,11 @@ function notify(reciver, type) {
 }
 
 function segui() {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "utils/segui.php");
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            const info = JSON.parse(this.responseText);
-            init(info.followed, document.getElementById('current-user').innerHTML)
-            document.getElementById('followers-number').innerHTML = info.follower.length;
-        }
-    };
-    if (bt.getAttribute('value') === 'Follow') {
-        xhr.send("action=Follow" + "&follow=" + document.getElementById('current-user').innerHTML);
-    } else if (bt.getAttribute('value') === 'Unfollow') {
-        xhr.send("action=Unfollow" + "&follow=" + document.getElementById('current-user').innerHTML);
-    } else {
-        console.log("send vuota");
-        xhr.send("follow=" + document.getElementById('current-user').innerHTML);
+    let msg = "";
+    if (bt.getAttribute('value') !== "") {
+        msg = "action=" + bt.getAttribute('value') + "&";
     }
+    worker.postMessage(msg + "follow=" + document.getElementById('current-user').innerHTML);
 }
 
 function init(array, username) {
@@ -53,4 +39,13 @@ if (chatbt !== null) {
         location.href = `chat.php?reciver=${courrent_user}`;
     })
 }
+
+const worker = new Worker('js/worker.js');
+
 segui();
+
+worker.addEventListener('message', function (e) {
+    const info = JSON.parse(e.data);
+    init(info.followed, document.getElementById('current-user').innerHTML)
+    document.getElementById('followers-number').innerHTML = info.follower.length;
+});
