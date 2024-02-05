@@ -38,7 +38,7 @@ function getComments(user, post_id) {
 
                                 <div class="col-11">
                                     <div class="row ${current_user ? "row-cols-3" : "row-cols-2"} justify-content-center align-items-center">
-                                        <div class="col-10 mb-3 mb-md-0">
+                                        <div class="col-10">
                                             <p class="m-0 text-start"><strong>${comment.user}</strong> ${comment.testo}</p>
                                         </div>
 

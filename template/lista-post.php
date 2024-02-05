@@ -77,7 +77,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </header>
 
-            <div class="modal-body" id="message-modal-body">
+            <div class="modal-body py-2" id="message-modal-body">
             </div>
 
             <footer class="modal-footer">
