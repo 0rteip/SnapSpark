@@ -1,3 +1,11 @@
+function notify(reciver, type) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/notification.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
+}
+
 function likePost(post_user, post_id) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/post.php");
@@ -19,6 +27,10 @@ function likePost(post_user, post_id) {
                 sparks.innerHTML = "";
             }
             const star = document.getElementById("post-star¬" + post_user + "¬" + post_id);
+
+            if (!star.classList.contains("liked-star")) {
+                notify(post_user, "like");
+            }
 
             star.classList.toggle("liked-star");
             star.classList.toggle("fa-regular");

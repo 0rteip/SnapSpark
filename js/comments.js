@@ -1,3 +1,11 @@
+function notify(reciver, type) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/notification.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
+}
+
 function getComments(user, post_id) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "utils/comments.php");
@@ -30,7 +38,7 @@ function getComments(user, post_id) {
 
                                 <div class="col-11">
                                     <div class="row ${current_user ? "row-cols-3" : "row-cols-2"} justify-content-center align-items-center">
-                                        <div class="col-10 mb-3 mb-md-0">
+                                        <div class="col-10">
                                             <p class="m-0 text-start"><strong>${comment.user}</strong> ${comment.testo}</p>
                                         </div>
 
@@ -96,6 +104,8 @@ function postComment(user, post_id) {
             btn.setAttribute("disabled", "");
         }
     };
+
+    notify(user, "comment");
 
     xhr.send("action=post_comments" + "&u=" + user + "&i=" + post_id + "&c=" + comment.value);
 }
