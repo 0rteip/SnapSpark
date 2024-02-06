@@ -1,11 +1,3 @@
-function notify(reciver, type) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "utils/notification.php");
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
-}
-
 function sendMessage() {
     if (document.getElementById('message-text').value.length === 0) {
         return;
@@ -45,9 +37,9 @@ function getCurrentMessages() {
     let messages = document.querySelectorAll('div.message-box');
     let result = [];
     messages.forEach(msg => {
-        text = msg.getElementsByClassName('text-message')[0].innerHTML;
-        date = msg.getElementsByClassName('date-message')[0].getAttribute('class').split(",")[1];
-        id = parseInt(msg.getAttribute('class').split("-")[2]);
+        let text = msg.getElementsByClassName('text-message')[0].innerHTML;
+        let date = msg.getElementsByClassName('date-message')[0].getAttribute('class').split(",")[1];
+        let id = parseInt(msg.getAttribute('class').split("-")[2]);
         let tmp = { sender: msg.getAttribute('class').split("-")[3], testo: text, data: date, id: id };
         result.push(tmp)
     })

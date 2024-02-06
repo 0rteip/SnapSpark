@@ -58,7 +58,7 @@
             <div class="container py-4 py-md-5 px-4 px-md-3 d-flex justify-content-center">
                 <a class="btn btn-primary" href="login.php" role="button" target="_self">Logout</a>
             </div>
-        <script src="js/notification.js"></script>
+            <script src="js/notification.js"></script>
         <?php endif; ?>
     </footer>
 

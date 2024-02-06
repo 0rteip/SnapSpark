@@ -1,17 +1,21 @@
-function notify(reciver, type) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "utils/notification.php");
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send("action=send" + "&reciver=" + reciver + "&type=" + type);
-}
-
 function segui() {
     let msg = "";
     if (bt.getAttribute('value') !== "") {
         msg = "action=" + bt.getAttribute('value') + "&";
     }
-    worker.postMessage(msg + "follow=" + document.getElementById('current-user').innerHTML);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "utils/segui.php");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const info = JSON.parse(this.responseText);
+            init(info.followed, document.getElementById('current-user').innerHTML)
+            document.getElementById('followers-number').innerHTML = info.follower.length;
+        }
+    };
+
+    xhr.send(msg + "follow=" + document.getElementById('current-user').innerHTML);
 }
 
 function init(array, username) {
@@ -27,8 +31,8 @@ function init(array, username) {
 const bt = document.getElementById("follow-bt");
 if (bt !== null) {
     bt.addEventListener("click", function () {
+        notify(document.getElementById('current-user').innerHTML, this.innerHTML);
         segui();
-        notify(document.getElementById('current-user').innerHTML, this.innerHTML)
     });
 }
 
@@ -40,12 +44,4 @@ if (chatbt !== null) {
     })
 }
 
-const worker = new Worker('js/worker.js');
-
 segui();
-
-worker.addEventListener('message', function (e) {
-    const info = JSON.parse(e.data);
-    init(info.followed, document.getElementById('current-user').innerHTML)
-    document.getElementById('followers-number').innerHTML = info.follower.length;
-});
