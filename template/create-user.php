@@ -86,7 +86,7 @@
     </div>
     <div class="col-md-4">
         <label for="password" class="form-label">password</label>
-        <input type="password" class="form-control extra-validation" id="password" name="password" value="<?php echo $templateParams['accountInfo']['password'] ?>" required>
+        <input type="text" class="form-control extra-validation" id="password" name="password" value="<?php echo $templateParams['accountInfo']['password'] ?>" required>
     </div>
     <div class="col-md-4">
         <label for="numero" class="form-label">telefono</label>

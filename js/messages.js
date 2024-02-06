@@ -17,6 +17,7 @@ function sendMessage() {
     };
     xhr.send("message=" + document.getElementById('message-text').value + "&reciver=" + container[3]);
 }
+
 function removeMessage(id) {
     let container = document.getElementsByClassName('chat-container')[0].getAttribute('id').split("-")
     let xhr = new XMLHttpRequest();
@@ -122,5 +123,4 @@ if (sendBt != null) {
         sendMessage();
     })
 }
-
 displayMessages();
