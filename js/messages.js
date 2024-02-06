@@ -45,9 +45,9 @@ function getCurrentMessages() {
     let messages = document.querySelectorAll('div.message-box');
     let result = [];
     messages.forEach(msg => {
-        text = msg.getElementsByClassName('text-message')[0].innerHTML;
-        date = msg.getElementsByClassName('date-message')[0].getAttribute('class').split(",")[1];
-        id = parseInt(msg.getAttribute('class').split("-")[2]);
+        let text = msg.getElementsByClassName('text-message')[0].innerHTML;
+        let date = msg.getElementsByClassName('date-message')[0].getAttribute('class').split(",")[1];
+        let id = parseInt(msg.getAttribute('class').split("-")[2]);
         let tmp = { sender: msg.getAttribute('class').split("-")[3], testo: text, data: date, id: id };
         result.push(tmp)
     })
