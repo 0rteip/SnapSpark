@@ -86,7 +86,14 @@
     </div>
     <div class="col-md-4">
         <label for="password" class="form-label">password</label>
-        <input type="text" class="form-control extra-validation" id="password" name="password" value="<?php echo $templateParams['accountInfo']['password'] ?>" required>
+
+        <div class="input-group" id="show_hide_password">
+            <input type="password" class="form-control extra-validation" id="password" name="password" value="<?php echo $templateParams['accountInfo']['password'] ?>" required>
+            <div class="input-group-addon">
+                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
     </div>
     <div class="col-md-4">
         <label for="numero" class="form-label">telefono</label>
