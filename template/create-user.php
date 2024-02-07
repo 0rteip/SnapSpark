@@ -44,7 +44,7 @@
         <label for="username" class="form-label">Username</label>
         <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input type="text" class="form-control extra-validation" id="username" name="username" pattern="^[a-zA-Z_]+$" value="<?php echo $templateParams['accountInfo']['username'] ?>" <?php if (isset($_SESSION['username'])) {
+            <input type="text" class="form-control extra-validation" id="username" name="username" value="<?php echo $templateParams['accountInfo']['username'] ?>" <?php if (isset($_SESSION['username'])) {
                                                                                                                                                                                                 echo 'readonly';
                                                                                                                                                                                             } ?> required>
             <div class="invalid-feedback" id="usernameCustomValid">
