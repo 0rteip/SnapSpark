@@ -191,6 +191,10 @@ a:visited {
     color: #434242;
 }
 
+#togglePassword {
+    cursor: pointer;
+}
+
 .chat {
     padding: 1rem;
     border: 1px solid #ddd;
